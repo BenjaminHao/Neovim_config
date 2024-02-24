@@ -1,6 +1,7 @@
 --=====================================================================
 --
 -- File: core/options.lua
+-- Note: Vim default options tweaks
 --
 --=====================================================================
 local options = {
@@ -14,12 +15,15 @@ local options = {
     writebackup = false,            -- If a file is being edited by another program, it is not allowed to be edited
     mouse = "a",                    -- Allow the mouse to be used in neovim
     mousescroll = "ver:2,hor:4",    -- Change the speed of the scroll wheel
+    jumpoptions = "stack",          -- Make Ctrl-o consistent
 
     -- APPEARANCE
     number = true,                  -- Set numbered lines
     relativenumber = true,          -- Set relative numbered lines
-    numberwidth = 2,                -- Set number column width to 2 {default 4}
+    numberwidth = 2,                -- Set number column width to 2 (default 4)
     cursorline = true,              -- Highlight the current line
+    cursorcolumn = false,           -- Highlight the current column (default false)
+    colorcolumn = "120",            -- Set a column ruler
     wrap = false,                   -- no line wrap, display lines as one long line
     showbreak = " ",                -- Set indent of wrapped lines
     fileencoding = "utf-8",         -- The encoding written to a file
@@ -43,8 +47,7 @@ local options = {
     softtabstop = 4,                -- Insert 4 spaces for a tab
     expandtab = true,               -- Convert tabs to spaces
     autoindent = true,              -- Auto indent
-    breakindent = true,             -- Tab wrapped lines
-    linebreak = true,               -- Companion to wrap, don't split words
+    smartindent = true,             -- Smart indent
     backspace = "indent,eol,start", -- Allow backspace on indent, end of line or insert mode start position
 
     -- EDIT
