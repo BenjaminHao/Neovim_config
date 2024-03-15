@@ -1,67 +1,107 @@
---=====================================================================
---
--- File: core/keymaps.lua
---
---=====================================================================
--- For conciseness
-function Map(mode, lhs, rhs, opts)
-    local options = { noremap = true, silent = true }
-    if opts then
-        options = vim.tbl_extend("force", options, opts)
-    end
-    vim.keymap.set(mode, lhs, rhs, options)
+--╭──────────────────────────────────────────────────────────────────────────╮--
+--│                                                                          │--
+--│ File: core/keymaps.lua                                                   │--
+--│ Note: Custom key binds                                                   │--
+--│                                                                          │--
+--╰──────────────────────────────────────────────────────────────────────────╯--
+--━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━--
+--        ┃                        LEADER KEY                         ┃
+--        ┃ PS: Make sure to set before lazy so key binds are correct ┃
+--        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "  -- No use of this now
+--━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━--
+--                     ┃ MAP FUNCTION (for conciseness) ┃
+--                     ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+local function Map(mode, lhs, rhs, opts)
+  local options = { noremap = true, silent = true }
+  if opts then
+    options = vim.tbl_extend("force", options, opts)
+  end
+  vim.keymap.set(mode, lhs, rhs, options)
 end
-
------------------------------------------------------------------------
--- Leader Key
--- Note: Make sure to set before lazy so mappings are correct
------------------------------------------------------------------------
-vim.g.mapleader = " " -- Remap space as leader key
--- vim.g.maplocalleader = " " -- No use of this now
-
------------------------------------------------------------------------
--- General Keymaps 
------------------------------------------------------------------------
--- Unmappings
-Map("n", "<C-z>", "<nop>")    -- Ctrl+z will suspend vim
-
--- Personal Keymaps
-Map("x", "J", [[:m '>+1<CR><CR>gv=gv]], { desc = "Move line down" })
-Map("x", "K", [[:m '<-2<CR><CR>gv=gv]], { desc = "Move line up" })
-
-Map("n", "<S-CR>", "i<CR><ESC>")
-
-Map("n", "<Esc>",":noh<CR>", { desc = "Clear search highlights" })
-
+--━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
+--                           ┃ GENERAL KEY BINDS ┃
+--                           ┗━━━━━━━━━━━━━━━━━━━┛
+-- Unmapping
+Map("n", "<C-z>", "<nop>")  -- <Ctrl-z>: suspend Neovim, "fg" in cmd to get back
+Map('i', '<C-h>', '<nop>')  -- <Ctrl-h> = <delete>, conflict with cmp key bind
+Map('i', '<C-j>', '<nop>')  -- <Ctrl-j> = <enter>, conflict with cmp key bind
+-- Shortcut for <ESC>
+Map("i", "jk", "<ESC>")
+-- Move to beginning/end of the line
+Map({ 'n', 'v', 'x' }, 'gl', '$', { desc = 'End of line' })
+Map({ 'n', 'v', 'x' }, 'gh', '^', { desc = 'Beginning of line' })
+-- Move the line up or down in Visual mode
+Map("x", "<S-j>", [[:m '>+1<CR><CR>gv=gv]], { desc = "Move line down" })
+Map("x", "<S-k>", [[:m '<-2<CR><CR>gv=gv]], { desc = "Move line up" })
+-- Move text to next line
+Map("n", "<S-k>", "i<CR><ESC>")
+Map('n', "<leader>T", "<cmd>terminal<cr>", { desc = "[T]erminal" })
+--━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
+--                             ┃ QOL KEY BINDS ┃
+--                             ┗━━━━━━━━━━━━━━━┛
+-- Clear search highlights
+Map("n", "<ESC>","<ESC><cmd>noh<CR>", { desc = "Clear search highlights" })
 -- Better indenting
 Map("v", "<", "<gv")
 Map("v", ">", ">gv")
-
--- Buffers
-Map("n", "<TAB>", ":bn<CR>")
-Map("n", "<S-TAB>", ":bp<CR>")
-
--- LSP
-Map("n", "<leader>gd", ":lua vim.lsp.buf.definition()<CR>")
-Map("n", "<leader>gi", ":lua vim.lsp.buf.implementation()<CR>")
-Map("n", "K", ":lua vim.lsp.buf.hover()<CR>")
-Map("n", "<leader>rn", ":lua vim.lsp.buf.rename()<CR>")
-Map("n", "<leader>gr", ":lua vim.lsp.buf.references()<CR>")
-
+-- Visual overwrite paste
+Map({ 'v', 'x' }, 'p', '"_dP')
+-- Do not copy on x
+Map({ 'v', 'x' }, 'x', '"_x')
 -- Keep window centered when going up/down
 Map("n", "J", "mzJ`z")
 Map("n", "<C-d>", "<C-d>zz")
 Map("n", "<C-u>", "<C-u>zz")
-Map("n", "n", "nzzzv")
+Map("n", "<C-f>", "<C-f>zz")
+Map("n", "<C-b>", "<C-b>zz")
 Map("n", "N", "Nzzzv")
-
--- Temporary keymaps for plugins
-Map("n", "<leader>e", "<cmd>NvimTreeToggle<cr>")
-Map("n", "<leader>m", "<cmd>NvimTreeFocus<cr>")
-Map("n", "<leader>ff", "<cmd> Telescope find_files <CR>")
-Map("n", "<leader>fa", "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>")
-Map("n", "<leader>fe", "<cmd> Telescope file_browser <CR>")
-Map("n", "<leader>fw", "<cmd> Telescope live_grep <CR>")
-Map("n", "<leader>fb", "<cmd> Telescope buffers <CR>")
-Map("n", "<leader>fh", "<cmd> Telescope help_tags <CR>")
-Map("n", "<leader>fo", "<cmd> Telescope oldfiles <CR>")
+Map("n", "n", "nzzzv")
+-- Add undo breakpoints
+Map('i', ',', ',<c-g>u')
+Map('i', '.', '.<c-g>u')
+Map('i', ';', ';<c-g>u')
+-- TODO: <~> able to toggle true/false, 1/0, +/-. Maybe need to create utils.lua
+--━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
+--                                ┃ BUFFERS ┃
+--                                ┗━━━━━━━━━┛
+-- For other buffer key binds, see plugins/bufferline.lua
+Map("n", "<leader>bn",  "<cmd>bn<CR>", { desc = "[n]ext buffer"})
+Map("n", "<leader>bp", "<cmd>bp<CR>", { desc = "[p]revious buffer"})
+Map("n", "<leader>bd", "<cmd>bd<CR>", { desc = '[d]elete current buffer'})
+--━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
+--                                ┃ WINDOWS ┃
+--                                ┗━━━━━━━━━┛
+Map('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+Map('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+Map('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+Map('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+--━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
+--                                  ┃ LSP ┃
+--                                  ┗━━━━━┛
+Map("n", "<leader>ld", "<cmd>lua vim.lsp.buf.definition()<CR>", { desc = '[d]efinition'})
+Map("n", "<leader>li", "<cmd>lua vim.lsp.buf.implementation()<CR>", { desc = '[i]mplementation'})
+Map("n", "<leader>lI", "<cmd>lua vim.lsp.buf.hover()<CR>", {desc = '[I]nformation'})
+Map("n", "<leader>lr", "<cmd>lua vim.lsp.buf.references()<CR>", { desc = '[r]eferences'})
+Map("n", "<leader>lR", "<cmd>lua vim.lsp.buf.rename()<CR>", { desc = '[R]ename'})
+--━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
+--                              ┃ DIAGNOSTICS ┃
+--                              ┗━━━━━━━━━━━━━┛
+Map('n', ']d', vim.diagnostic.goto_next, { desc = 'Next [d]iagnostic message' })
+Map('n', '[d', vim.diagnostic.goto_prev, { desc = 'Previous [d]iagnostic message' })
+Map('n', '<leader>de', vim.diagnostic.open_float, { desc = 'Show diagnostic [e]rror messages' })
+Map('n', '<leader>dl', vim.diagnostic.setloclist, { desc = 'Open diagnostic quickfix [l]ist' })
+--━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
+--                                ┃ TOGGLES ┃
+--                                ┗━━━━━━━━━┛
+Map("n", "<leader>ts", function() vim.o.spell = not vim.o.spell end, { desc = "[s]pell Check"})
+--━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
+--                                ┃ PLUGINS ┃
+--                                ┗━━━━━━━━━┛
+--┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓--
+--┃ No longer here. Plugin mappings are within plugin settings locally, such ┃--
+--┃ that they appear and disappear whether the plugin is installed or not    ┃--
+--┃ PS: Better not store all your key binds in which-keys, once it breaks or ┃--
+--┃ you no longer want it, all your mappings are gone.                       ┃--
+--┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛--
