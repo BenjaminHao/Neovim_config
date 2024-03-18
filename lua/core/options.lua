@@ -22,7 +22,7 @@ local options = {
 
   -- APPEARANCE
   guifont =
-    "DankMono Nerd Font:h16",     -- Font for GUI NVIM (eg. Neovide)
+    "DankMono Nerd Font:h16",-- Font for GUI NVIM (eg. Neovide)
   number = true,                  -- Set numbered lines
   relativenumber = true,          -- Set relative numbered lines
   numberwidth = 2,                -- Set number column width to 2 (default 4)
@@ -41,16 +41,16 @@ local options = {
   showmode = false,               -- We don't need to see things like -- INSERT -- anymore
   splitbelow = true,              -- Force all horizontal splits to go below current window
   splitright = true,              -- Force all vertical splits to go to the right of current window
-  scrolloff = 10,                  -- Minimal number of screen lines to keep above and below the cursor
-  sidescrolloff = 10,              -- Minimal number of screen columns either side of cursor if wrap is `false`
+  scrolloff = 7,                  -- Minimal number of screen lines to keep above and below the cursor
+  sidescrolloff = 7,              -- Minimal number of screen columns either side of cursor if wrap is `false`
   shortmess = "filnxtToOFc",      -- Which errors to suppress
   list = true,                    -- Display certain whitespace in the editor
   listchars =                     -- Symbols for whitespace
-    { tab = '»·',
-      trail = '·',
-      nbsp = '␣' ,
-      extends = "→",
-      precedes = "←"
+    { tab = '»·',                    -- The characters used to show a tab (need 2 characters)
+      trail = '·',                   -- Character to show for trailing spaces
+      nbsp = '␣' ,                   -- Character to show for non-breaking space
+      extends = "→",                 -- Character to show there's more text to the right (when no line wrap)
+      precedes = "←"                 -- Character to show there's more text to the left
     },
 
   -- INDENT
