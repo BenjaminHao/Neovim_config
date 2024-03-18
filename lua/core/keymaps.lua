@@ -96,6 +96,8 @@ Map('n', '<leader>dl', vim.diagnostic.setloclist, { desc = 'Open diagnostic quic
 --                                ┃ TOGGLES ┃
 --                                ┗━━━━━━━━━┛
 Map("n", "<leader>ts", function() vim.o.spell = not vim.o.spell end, { desc = "[s]pell Check"})
+Map("n", "<leader>tn", function() vim.o.relativenumber = not vim.o.relativenumber end, { desc = "Relative [n]umber"})
+Map("n", "<leader>tN", function() vim.o.number = not vim.o.number end, { desc = "Line [N]umber"})
 --━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 --                                ┃ PLUGINS ┃
 --                                ┗━━━━━━━━━┛
