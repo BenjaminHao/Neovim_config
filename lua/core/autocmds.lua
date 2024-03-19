@@ -26,25 +26,19 @@ autocmd("BufEnter", {
   end,
 })
 
-autocmd("VimEnter", {
-  desc = "Open Nvim-Tree when it's a Directory",
+autocmd("BufWinEnter", {
+  desc = "Open help window in a vertical split to the left",
   group = general,
-  callback = function(data)
-    -- buffer is a directory
-    local directory = vim.fn.isdirectory(data.file) == 1
-    -- change to the directory
-    if directory then
-      vim.cmd.cd(data.file)
-      require("nvim-tree.api").tree.open()
-      -- vim.cmd "Telescope find_files"
+    pattern = { "*.txt" },
+    callback = function()
+        if vim.o.filetype == "help" then vim.cmd.wincmd("H") end --"HJKL"
     end
-  end,
 })
 
 autocmd("FileType", {
   desc = "Close help buffer with <q>",
   group = general,
-  pattern = { "lspinfo", "man", "help", "qf", "vim" },
+  pattern = { "lspinfo", "man", "help", "qf", "vim", "checkhealth" },
   callback = function()
     local opts = { buffer = true, silent = true}
     vim.keymap.set("n", "q", function()
@@ -70,5 +64,20 @@ autocmd("TextYankPost", {
   group = general,
   callback = function()
     vim.highlight.on_yank({ higrou = "Visual", timeout = 200 })
+  end,
+})
+
+autocmd("VimEnter", {
+  desc = "Open Nvim-Tree when it's a Directory",
+  group = general,
+  callback = function(data)
+    -- buffer is a directory
+    local directory = vim.fn.isdirectory(data.file) == 1
+    -- change to the directory
+    if directory then
+      vim.cmd.cd(data.file)
+      require("nvim-tree.api").tree.open()
+      -- vim.cmd "Telescope find_files"
+    end
   end,
 })

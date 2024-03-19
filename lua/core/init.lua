@@ -69,6 +69,7 @@ local options = {             -- for conciseness and readability
         "gzip",
         "matchit",
         "matchparen",
+        "netrw",
         "netrwPlugin",  -- default file explorer
         "rplugin",
         "tarPlugin",
@@ -87,4 +88,4 @@ local options = {             -- for conciseness and readability
 --                             ┗━━━━━━━━━━━━━━━━━┛
 require("lazy").setup(plugin_dir, options)
 -- key bind for Lazy
-vim.keymap.set('n', '<leader>L', '<cmd>Lazy<cr>', { desc = '[L]azy plugin manager' })
+vim.keymap.set('n', '<leader>P', '<cmd>Lazy<cr>', { desc = '[P]lugin Manager (Lazy)' })

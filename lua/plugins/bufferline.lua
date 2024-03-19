@@ -18,11 +18,11 @@ return {
     bufferline.setup({
       options = {
         mode = "buffers",
-        -- style_preset = bufferline.style_preset.no_italic,
+        -- separator_style = "slant",
+        style_preset = bufferline.style_preset.no_italic,
         --[[ numbers = function(opts)
           return string.format('%s', opts.raise(opts.ordinal))
         end, ]]
-        separator_style = "slant",
         diagnostics = false,           -- OR: | "nvim_lsp" 
         diagnostics_update_in_insert = false,
         show_buffer_close_icons = false,

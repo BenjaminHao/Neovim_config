@@ -12,6 +12,7 @@ return {
   --━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
   --                         ┃ Catppuccin Config ┃
   --                         ┗━━━━━━━━━━━━━━━━━━━┛
+  -- TODO: Tweak config
   config = function()
     require("catppuccin").setup({
       flavour = "mocha", -- latte, frappe, macchiato, mocha

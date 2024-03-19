@@ -1,9 +1,10 @@
 --╭──────────────────────────────────────────────────────────────────────────╮--
 --│                                                                          │--
 --│ File: plugins/nvim-lspconfig.lua                                         │--
---│ Note: LSP config file                                                    │--
+--│ Note: LSP config file, including Mason.nvim, Mason-lspconfig.nvim        │--
 --│                                                                          │--
 --╰──────────────────────────────────────────────────────────────────────────╯--
+-- TODO: Restructuring LSP files, add neodev.nvim
 return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },

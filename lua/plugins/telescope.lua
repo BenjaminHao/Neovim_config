@@ -7,7 +7,6 @@
 return {
   "nvim-telescope/telescope.nvim",
   branch = "0.1.x",
-  lazy = false, -- test
   cmd = "Telescope",  -- lazy-load on command
   keys = {  -- lazy-load on key maps
     { '<leader>fb', "<cmd>Telescope buffers<cr>",  desc = '[b]uffers' },
@@ -45,6 +44,7 @@ return {
   --━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
   --                          ┃ Telescope Config ┃
   --                          ┗━━━━━━━━━━━━━━━━━━┛
+  -- TODO: Telescope Style
   config = function()
     local telescope = require("telescope")
     local actions = require("telescope.actions")

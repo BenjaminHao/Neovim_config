@@ -23,12 +23,12 @@ return {
       ["COMMAND"] = " ",
       ["REPLACE"] = "󰑇 ",
       ["SELECT"] = " ",
-      ["SHELL"] = " ",
-      ["V-REPLACE"] = "󰰪 ",
       ["CONFIRM"] = "󰄴 ",
-      ["TERMINAL"] = "󰶳 ",
-      ["MORE"] = "󰫑 ",
-      ["EX"] = " ",
+      ["SHELL"] = "",
+      ["V-REPLACE"] = "󰰪 ",
+      ["TERMINAL"] = "󰰤 ",
+      ["MORE"] = "󰰏 ",
+      ["EX"] = "󰯷 ",
     }
 
     lualine.setup {

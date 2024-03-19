@@ -15,6 +15,7 @@ return {
   --━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
   --                       ┃ Treesitter config ┃
   --                       ┗━━━━━━━━━━━━━━━━━━━┛
+  -- TODO: Treesitter textobject key binds
   config = function()
     require("nvim-treesitter.configs").setup({
       highlight = {

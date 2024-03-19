@@ -8,7 +8,7 @@ return {
   "williamboman/mason.nvim",
   cmd = { "Mason", "MasonUpdate" },
   keys = {  -- lazy-load on keys
-    { "<leader>M", "<cmd>Mason<cr>", desc = "[M]ason LSP Manager" }
+    { "<leader>L", "<cmd>Mason<cr>", desc = "[L]SP Manager (Mason)" }
   },
   dependencies = {
     "williamboman/mason-lspconfig.nvim",

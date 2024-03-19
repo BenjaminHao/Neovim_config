@@ -22,7 +22,7 @@ local options = {
 
   -- APPEARANCE
   guifont =
-    "DankMono Nerd Font:h16",-- Font for GUI NVIM (eg. Neovide)
+    "JetBrainsMono Nerd Font:h16",-- Font for GUI NVIM (eg. Neovide)
   number = true,                  -- Set numbered lines
   relativenumber = true,          -- Set relative numbered lines
   numberwidth = 2,                -- Set number column width to 2 (default 4)

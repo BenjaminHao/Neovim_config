@@ -10,6 +10,7 @@ return {
   dependencies = {
     "hrsh7th/cmp-buffer", -- source for text in buffer
     "hrsh7th/cmp-path", -- source for file system paths
+    "hrsh7th/cmp-cmdline",  -- source for command line
     "saadparwaiz1/cmp_luasnip", -- for autocompletion
     "L3MON4D3/LuaSnip", -- snippet engine
     "rafamadriz/friendly-snippets",  -- some snippets collection
@@ -75,6 +76,7 @@ return {
             luasnip = "[Snippet]",
             nvim_lsp = "[LSP]",
             path = "[Path]",
+            cmdline = "[CMD]"
           })[entry.source.name]
           return vim_item
         end,
@@ -108,6 +110,25 @@ return {
           end
         end, { 'i', 's' }),
       }),
+    })
+  --━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
+  --                          ┃ Cmd-line Config ┃
+  --                          ┗━━━━━━━━━━━━━━━━━┛
+    -- `/` cmdline setup.
+    cmp.setup.cmdline('/', {
+      mapping = cmp.mapping.preset.cmdline(),
+      sources = {
+        {name = 'buffer'}
+      }
+    })
+
+    -- `:` cmdline setup.
+    cmp.setup.cmdline(':', {
+      mapping = cmp.mapping.preset.cmdline(),
+      sources = {
+        {name = 'path'},
+        {name = 'cmdline'}
+      }
     })
   end,
   --━━━━━━━━━━━━━━━━━━━━━━━━━━ Config Ends Here ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
