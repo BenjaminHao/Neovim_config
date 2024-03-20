@@ -1,7 +1,7 @@
 --╭──────────────────────────────────────────────────────────────────────────╮--
 --│                                                                          │--
 --│ File: plugins/nvim-lspconfig.lua                                         │--
---│ Note: LSP config file, including Mason.nvim, Mason-lspconfig.nvim        │--
+--│ Note: LSP config file (npm is required)                                  │--
 --│                                                                          │--
 --╰──────────────────────────────────────────────────────────────────────────╯--
 -- TODO: Restructuring LSP files, add neodev.nvim

@@ -37,7 +37,6 @@ Map("x", "<S-j>", [[:m '>+1<CR><CR>gv=gv]], { desc = "Move line down" })
 Map("x", "<S-k>", [[:m '<-2<CR><CR>gv=gv]], { desc = "Move line up" })
 -- Move text to next line
 Map("n", "<S-k>", "i<CR><ESC>")
-Map('n', "<leader>T", "<cmd>terminal<cr>", { desc = "[T]erminal" })
 --━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 --                             ┃ QOL KEY BINDS ┃
 --                             ┗━━━━━━━━━━━━━━━┛

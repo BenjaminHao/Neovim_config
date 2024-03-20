@@ -1,7 +1,7 @@
 --╭──────────────────────────────────────────────────────────────────────────╮--
 --│                                                                          │--
 --│ File: plugins/nvim-treesitter.lua                                        │--
---│ Note: Syntax highlighting plugin                                         │--
+--│ Note: Syntax highlighting plugin (a C complier is required)              │--
 --│                                                                          │--
 --╰──────────────────────────────────────────────────────────────────────────╯--
 return {

@@ -73,25 +73,25 @@ return {
     wk.register({
       ["<leader>"] = {
         b = {
-          name = "{b}uffer", _ = 'which_key_ignore'
+          name = "[b]uffer", _ = 'which_key_ignore'
         },
         d = {
-          name = "{d}iagnostic", _ = 'which_key_ignore'
+          name = "[d]iagnostic", _ = 'which_key_ignore'
         },
         f = {
-          name = "{f}ind", _ = 'which_key_ignore'
+          name = "[f]ind", _ = 'which_key_ignore'
         },
         g = {
-          name = "{g}it", _ = 'which_key_ignore'
+          name = "[g]it", _ = 'which_key_ignore'
         },
         l = {
-          name = "{l}SP", _ = 'which_key_ignore'
+          name = "[l]SP", _ = 'which_key_ignore'
         },
         m = {
-          name = "{m}essage", _ = 'which_key_ignore'
+          name = "[m]essage", _ = 'which_key_ignore'
         },
         t = {
-          name = "{t}oggle", _ = 'which_key_ignore'
+          name = "[t]oggle", _ = 'which_key_ignore'
         },
       }
     })
