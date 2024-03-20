@@ -6,7 +6,12 @@
 --╰──────────────────────────────────────────────────────────────────────────╯--
 return {
   "nvim-tree/nvim-tree.lua",
-  cmd = { "NvimTreeToggle" },  -- lazy-load on command
+  cmd = {  -- lazy-load on command
+    "NvimTreeToggle",
+    "NvimTreeOpen",
+    "NvimTreeFindFile",
+    "NvimTreeFindFileToggle"
+  },
   keys = {  -- lazy-load on key binds
     { "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "[e]xplorer" }
   },
@@ -25,6 +30,8 @@ return {
       end
       map("n", "?", api.tree.toggle_help, opts "Help")
       map("n", "l", api.node.open.edit, opts "Open")
+      map("n", "<cr>", api.node.open.edit, opts "Open")
+      map('n', '<Tab>', api.node.open.preview, opts('Open Preview'))
       map("n", "s", api.node.open.horizontal, opts("Open With Horizontal Split"))
       map("n", "v", api.node.open.vertical, opts("Open With Vertical Split"))
       map("n", "o", api.node.run.system, opts("System Open"))
@@ -46,6 +53,7 @@ return {
       map("n", "H", api.tree.change_root_to_node, opts("Set Root Directory"))
       map("n", "u", api.tree.change_root_to_parent, opts "Show parent root")
       map("n", "q", api.tree.close, opts("Close"))
+      map("n", "<esc>", api.tree.close, opts("Close"))
       map("n", "R", api.tree.reload, opts("Refresh"))
       map("n", "S", api.tree.search_node, opts("Search"))
     end
@@ -57,6 +65,9 @@ return {
       auto_reload_on_write = true,
       open_on_tab = false,
       hijack_cursor = true,
+      sync_root_with_cwd = true,
+      -- respect_buf_cwd = true,  -- will change cwd every time entering a buffer
+      -- reload_on_bufenter = true,
       actions = {
         use_system_clipboard = true,
         open_file = {

@@ -17,7 +17,7 @@ return {
     { '<leader>fk', "<cmd>Telescope keymaps<cr>",  desc = '[k]eymaps' },
     { '<leader>fr', "<cmd>Telescope oldfiles<cr>",  desc = '[r]ecent files' },
     -- { '<leader>fr', "<cmd>Telescope resume<cr>",  desc = '[r]esume' },
-    { '<leader>ft', "<cmd>Telescope builtin<cr>",  desc = '[t]elescope' },
+    { '<leader>fa', "<cmd>Telescope builtin<cr>",  desc = '[a]ll' },
     { '<leader>fu', "<cmd>Telescope undo<cr>",  desc = '[u]ndo' },
     { '<leader>fw', "<cmd>Telescope grep_string<cr>",  desc = '[w]ord' },
     -- Shortcut for searching your neovim configuration files
@@ -65,7 +65,7 @@ return {
         dynamic_preview_title = true,
         layout_strategy = "horizontal",
         layout_config = {
-          prompt_position = "bottom",
+          -- prompt_position = "bottom",
           horizontal = { preview_width = 0.6, width = 0.95 },
           preview_cutoff = 120,
         },
