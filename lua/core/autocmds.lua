@@ -39,11 +39,9 @@ autocmd("FileType", {
   desc = "Close help buffer with <q>",
   group = general,
   pattern = { "lspinfo", "man", "help", "qf", "vim", "checkhealth" },
-  callback = function()
-    local opts = { buffer = true, silent = true}
-    vim.keymap.set("n", "q", function()
-      vim.cmd.close()
-    end, opts)
+  callback = function(event)
+    vim.bo[event.buf].buflisted = false
+    vim.keymap.set("n", "q", "<cmd>close!<cr>", { buffer = event.buf, silent = true })
   end,
 })
 
