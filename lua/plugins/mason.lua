@@ -13,9 +13,9 @@ return {
   dependencies = {
     "williamboman/mason-lspconfig.nvim",
   },
-  --━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
-  --                           ┃ Mason Config ┃
-  --                           ┗━━━━━━━━━━━━━━┛
+  --━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
+  --                          ┃ Config Function ┃
+  --                          ┗━━━━━━━━━━━━━━━━━┛
   config = function()
     -- import mason
     local mason = require("mason")
@@ -50,5 +50,7 @@ return {
       automatic_installation = true, -- not the same as ensure_installed
     })
   end,
-  --━━━━━━━━━━━━━━━━━━━━━━━━━━ Config Ends Here ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
+  --                            ┏━━━━━━━━━━━━━┓
+  --                            ┃ Config Ends ┃
+  --━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 }

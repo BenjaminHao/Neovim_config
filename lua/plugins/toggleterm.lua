@@ -3,28 +3,41 @@ return {
   version = "*",
   cmd = "ToggleTerm",
   keys = {  -- lazy-load on key binds
-    { "<leader>T", "<cmd>ToggleTerm<cr>", desc = "[T]erminal" }
+    { "<leader>T", "<cmd>ToggleTerm direction=float<cr>", desc = "[T]erminal" },
+    { "<c-`>", "<cmd>ToggleTerm<CR>", mode = "n", desc = "Toggle terminal" },
   },
+  --━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
+  --                          ┃ Config Function ┃
+  --                          ┗━━━━━━━━━━━━━━━━━┛
   config = function()
     require("toggleterm").setup{
-      size = 30,
-      open_mapping = "<leader>T",
-      hide_numbers = true,
+      shell = vim.o.shell,      -- Change the default shell. Can be a string or a function returning a string
+      size = 10,
+      direction = "horizontal", -- direction = 'vertical' | 'horizontal' | 'tab' | 'float',
+      open_mapping = "<C-`>",
+      terminal_mappings = true, -- whether or not the open mapping applies in the opened terminals
+      insert_mappings = true,   -- whether or not the open mapping applies in insert mode
+      start_in_insert = true,
+      hide_numbers = true,      -- hide the number column in toggleterm buffers
+      persist_size = true,
+      persist_mode = false,     -- if set to true (default) the previous terminal mode will be remembered
+      close_on_exit = true,
+      auto_scroll = true,       -- automatically scroll to the bottom on terminal output
       shade_terminals = true,
       shading_factor = 2,
-      start_in_insert = true,
-      insert_mappings = false,
-      persist_size = true,
-      direction = "horizontal", -- direction = 'vertical' | 'horizontal' | 'tab' | 'float',
-      close_on_exit = true,
-      -- shell = 'fish',           -- Change the default shell. Can be a string or a function returning a string
-      float_opts = {
-        border = "curved",      -- 'single' | 'double' | 'shadow' | 'curved' | ... other options supported by win open
-        winblend = 0,
-        highlights = {
-          border = "Normal",
-          background = "Normal",
+      highlights = {
+        NormalFloat = {
+          link = "Normal",
         },
+        FloatBorder = {
+          link = "FloatBorder",
+        },
+      },
+      float_opts = {
+        border = "rounded",      -- 'single' | 'double' | 'shadow' | 'curved' | ... other options supported by win open
+        winblend = 0,
+        --[[ height = math.ceil(vim.o.lines * 1.0 - 4),
+        width = math.ceil(vim.o.columns * 1.0), ]]
       },
       -- on_create = fun(t: Terminal), -- function to run when the terminal is first created
       -- on_open = fun(t: Terminal), -- function to run when the terminal opens
@@ -48,9 +61,6 @@ return {
       --     guibg = "<VALUE-HERE>",
       --   },
       -- },
-      terminal_mappings = true, -- whether or not the open mapping applies in the opened terminals
-      persist_mode = false,     -- if set to true (default) the previous terminal mode will be remembered
-      auto_scroll = true,       -- automatically scroll to the bottom on terminal output
       -- This field is only relevant if direction is set to 'float'
       -- winbar = {
       --   enabled = false,
@@ -60,4 +70,7 @@ return {
       -- },
     }
   end
+  --                            ┏━━━━━━━━━━━━━┓
+  --                            ┃ Config Ends ┃
+  --━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 }

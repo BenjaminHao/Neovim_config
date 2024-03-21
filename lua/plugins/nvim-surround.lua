@@ -8,9 +8,9 @@ return {
   "kylechui/nvim-surround",
   event = { "BufReadPre", "BufNewFile" },
   version = "*", -- Use for stability; omit to use `main` branch for the latest features
-  --━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━--
-  --                       ┃ Nvim-Surround Config ┃
-  --                       ┗━━━━━━━━━━━━━━━━━━━━━━┛
+  --━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
+  --                          ┃ Config Function ┃
+  --                          ┗━━━━━━━━━━━━━━━━━┛
   config = function()
     require("nvim-surround").setup({
       keymaps = {
@@ -35,5 +35,7 @@ return {
       },
     })
   end
-  --━━━━━━━━━━━━━━━━━━━━━━━━━━ Config Ends Here ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
+  --                            ┏━━━━━━━━━━━━━┓
+  --                            ┃ Config Ends ┃
+  --━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 }

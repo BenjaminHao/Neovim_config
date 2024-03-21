@@ -8,7 +8,7 @@ return {
   "stevearc/dressing.nvim",
   event = "VeryLazy",
   --━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
-  --                          ┃ Dressing config ┃
+  --                          ┃ Config Function ┃
   --                          ┗━━━━━━━━━━━━━━━━━┛
   -- FIX: title missing if too long
   config = function()
@@ -167,4 +167,7 @@ return {
       },
     })
   end
+  --                            ┏━━━━━━━━━━━━━┓
+  --                            ┃ Config Ends ┃
+  --━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 }

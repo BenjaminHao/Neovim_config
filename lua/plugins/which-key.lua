@@ -11,9 +11,9 @@ return {
     vim.o.timeout = true
     vim.o.timeoutlen = 300
   end,
-  --━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
-  --                          ┃ Which-key Config ┃
-  --                          ┗━━━━━━━━━━━━━━━━━━┛
+  --━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
+  --                          ┃ Config Function ┃
+  --                          ┗━━━━━━━━━━━━━━━━━┛
   config = function()
     local wk = require('which-key')
     wk.setup({
@@ -66,9 +66,7 @@ return {
       show_keys = true, -- show the currently pressed key on the command line
       triggers = "auto", -- automatically setup triggers
     })
-    --━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
-    --                       ┃ Which-key Labels ┃
-    --                       ┗━━━━━━━━━━━━━━━━━━┛
+    -------------------------- Which-key Labels --------------------------------
     -- Document existing key chains
     wk.register({
       ["<leader>"] = {
@@ -96,5 +94,7 @@ return {
       }
     })
   end,
-  --━━━━━━━━━━━━━━━━━━━━━━━━━━ Config Ends Here ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
+  --                            ┏━━━━━━━━━━━━━┓
+  --                            ┃ Config Ends ┃
+  --━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 }

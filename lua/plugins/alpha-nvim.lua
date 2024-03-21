@@ -10,9 +10,9 @@ return {
   dependencies = {
     "nvim-tree/nvim-web-devicons",
   },
-  --━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
-  --                            ┃ Alpha Config ┃
-  --                            ┗━━━━━━━━━━━━━━┛
+  --━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
+  --                          ┃ Config Function ┃
+  --                          ┗━━━━━━━━━━━━━━━━━┛
   config = function()
     local alpha = require("alpha")
     local dashboard = require("alpha.themes.dashboard")
@@ -45,7 +45,6 @@ return {
     -- █████████████████████████████████████████████████████████████████
     -- }
 
-
     -- Set menu
     -- FIX: resolve conflict with which-key
     dashboard.section.buttons.val = {
@@ -54,7 +53,7 @@ return {
       dashboard.button("f", "󰈞 " .. " Find file", "<cmd>Telescope find_files<cr>"),
       dashboard.button("t", "󰺮 " .. " Find text", "<cmd>Telescope live_grep<cr>"),
       dashboard.button("e", "󰙅 " .. " Explorer", "<cmd>NvimTreeOpen<cr>"),
-      dashboard.button("c", " " .. " Config" , "<cmd>e $MYVIMRC | cd %:p:h | pwd | NvimTreeOpen<CR>"),
+      dashboard.button("c", " " .. " Config" , "<cmd>e $MYVIMRC | cd %:p:h | echo 'Move to ' $PWD | NvimTreeOpen<CR>"),
       dashboard.button("p", "󰦬 " .. " Plugins", "<cmd>Lazy<cr>"),
       dashboard.button("h", "󰗶 " .. " Checkhealth", "<cmd>checkhealth<cr>"),
       dashboard.button("q", " " .. " Quit", "<cmd>qa!<cr>"),
@@ -95,5 +94,7 @@ return {
     vim.cmd([[autocmd FileType alpha setlocal nofoldenable]])
 
   end
-  --━━━━━━━━━━━━━━━━━━━━━━━━━━ Config Ends Here ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
+  --                            ┏━━━━━━━━━━━━━┓
+  --                            ┃ Config Ends ┃
+  --━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 }

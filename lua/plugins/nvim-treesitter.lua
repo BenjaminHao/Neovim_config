@@ -12,9 +12,9 @@ return {
     "nvim-treesitter/nvim-treesitter-textobjects",
     "windwp/nvim-ts-autotag",
   },
-  --━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
-  --                       ┃ Treesitter config ┃
-  --                       ┗━━━━━━━━━━━━━━━━━━━┛
+  --━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
+  --                          ┃ Config Function ┃
+  --                          ┗━━━━━━━━━━━━━━━━━┛
   -- TODO: Treesitter textobject key binds
   config = function()
     require("nvim-treesitter.configs").setup({
@@ -73,5 +73,7 @@ return {
       },
     })
   end,
-  --━━━━━━━━━━━━━━━━━━━━━━━━━━ Config Ends Here ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
+  --                            ┏━━━━━━━━━━━━━┓
+  --                            ┃ Config Ends ┃
+  --━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 }

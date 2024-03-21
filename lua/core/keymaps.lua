@@ -61,7 +61,7 @@ Map("n", "n", "nzzzv")
 Map('i', ',', ',<c-g>u')
 Map('i', '.', '.<c-g>u')
 Map('i', ';', ';<c-g>u')
--- TODO: <~> able to toggle true/false, 1/0, +/-. Maybe need to create utils.lua
+-- TODO: <~> key able to toggle true/false, 1/0, +/-. Maybe need to create utils.lua
 --━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 --                                ┃ BUFFERS ┃
 --                                ┗━━━━━━━━━┛
@@ -103,6 +103,4 @@ Map("n", "<leader>tN", function() vim.o.number = not vim.o.number end, { desc = 
 --┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓--
 --┃ No longer here. Plugin mappings are within plugin settings locally, such ┃--
 --┃ that they appear and disappear whether the plugin is installed or not    ┃--
---┃ PS: Better not store all your key binds in which-keys, once it breaks or ┃--
---┃ you no longer want it, all your mappings are gone.                       ┃--
 --┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛--

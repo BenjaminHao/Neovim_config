@@ -10,9 +10,9 @@ return {
   dependencies = {
     "JoosepAlviste/nvim-ts-context-commentstring",
   },
-  --━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
-  --                          ┃ Comment Config ┃
-  --                          ┗━━━━━━━━━━━━━━━━┛
+  --━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
+  --                          ┃ Config Function ┃
+  --                          ┗━━━━━━━━━━━━━━━━━┛
   config = function()
     -- import comment plugin safely
     local comment = require("Comment")
@@ -37,11 +37,11 @@ return {
       },
     })
 
-    --━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
-    --                       ┃ Comment Key binds ┃
-    --                       ┗━━━━━━━━━━━━━━━━━━━┛
+    -------------------------- comment key binds -------------------------------
     vim.keymap.set('n', '<C-Bslash>', '<Plug>(comment_toggle_linewise_current)', { desc = 'Comment current line' })
     vim.keymap.set('x', '<C-Bslash>', '<Plug>(comment_toggle_blockwise_visual)', { desc = 'Comment selected lines' })
   end,
-  --━━━━━━━━━━━━━━━━━━━━━━━━━━ Config Ends Here ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
+  --                            ┏━━━━━━━━━━━━━┓
+  --                            ┃ Config Ends ┃
+  --━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 }

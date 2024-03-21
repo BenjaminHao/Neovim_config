@@ -14,7 +14,7 @@ return {
     "folke/twilight.nvim",  -- dims inactive portions of the code
   },
   --━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
-  --                          ┃ Zen-Mode config ┃
+  --                          ┃ Config Function ┃
   --                          ┗━━━━━━━━━━━━━━━━━┛
   config = function ()
     local zenmode = require("zen-mode")
@@ -53,15 +53,15 @@ return {
             laststatus = 0, -- turn off the statusline in zen mode
           },
           twilight = { enabled = true }, -- enable to start Twilight when zen mode opens
-          gitsigns = { enabled = false }, -- disables git signs
+          gitsigns = { enabled = true }, -- disable git signs | true as disable?!
           tmux = { enabled = false }, -- disables the tmux statusline
 
           -- this will change the font size on wezterm when in zen mode
           -- Wezterm config is required, see Plugins/Wezterm section in README.md
           wezterm = {
-            enabled = false,
+            enabled = true,
             -- can be either an absolute font size or the number of incremental steps
-            font = "+4", -- (10% increase per step)
+            font = "+2", -- (10% increase per step)
           },
         },
         -- callback where you can add custom code when the Zen window opens
@@ -72,5 +72,7 @@ return {
         -- end,
       })
   end
-  --━━━━━━━━━━━━━━━━━━━━━━━━━━ Config Ends Here ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
+  --                            ┏━━━━━━━━━━━━━┓
+  --                            ┃ Config Ends ┃
+  --━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 }

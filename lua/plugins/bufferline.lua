@@ -9,9 +9,9 @@ return {
   event = "VeryLazy",
   dependencies = { "nvim-tree/nvim-web-devicons" },
   version = "*",
-  --━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
-  --                         ┃ Bufferline Config ┃
-  --                         ┗━━━━━━━━━━━━━━━━━━━┛
+  --━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
+  --                          ┃ Config Function ┃
+  --                          ┗━━━━━━━━━━━━━━━━━┛
   config = function()
     local bufferline = require("bufferline")
 
@@ -44,8 +44,11 @@ return {
         },
       }
     })
+    ------------------------ bufferline key binds ------------------------------
     vim.keymap.set("n", "<leader>bD", "<cmd>BufferLineCloseOthers<cr>",
       { desc = "[D]elete other buffers"})
   end
-  --━━━━━━━━━━━━━━━━━━━━━━━━━━ Config Ends Here ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
+  --                            ┏━━━━━━━━━━━━━┓
+  --                            ┃ Config Ends ┃
+  --━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 }

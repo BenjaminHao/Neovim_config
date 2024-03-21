@@ -8,7 +8,7 @@ return {
   "lewis6991/gitsigns.nvim",
   event = { "BufReadPre", "BufNewFile" },
   --━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
-  --                          ┃ Gitsigns Config ┃
+  --                          ┃ Config Function ┃
   --                          ┗━━━━━━━━━━━━━━━━━┛
   config = function ()
     require("gitsigns").setup({
@@ -57,9 +57,7 @@ return {
       yadm = {
         enable = false,
       },
-      --━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━--
-      --                       ┃ Gitsigns Key binds ┃
-      --                       ┗━━━━━━━━━━━━━━━━━━━━┛
+      -------------------------- Gitsigns Key binds ----------------------------
       on_attach = function(bufnr)
         local gs = package.loaded.gitsigns
 
@@ -114,5 +112,7 @@ return {
       end,
     })
   end
-  --━━━━━━━━━━━━━━━━━━━━━━━━━━ Config Ends Here ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
+  --                            ┏━━━━━━━━━━━━━┓
+  --                            ┃ Config Ends ┃
+  --━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 }

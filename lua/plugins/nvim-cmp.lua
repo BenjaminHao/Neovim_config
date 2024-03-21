@@ -6,7 +6,7 @@
 --╰──────────────────────────────────────────────────────────────────────────╯--
 return {
   "hrsh7th/nvim-cmp",
-  event = "InsertEnter",
+  event = { "InsertEnter", "CmdlineEnter" },
   dependencies = {
     "hrsh7th/cmp-buffer", -- source for text in buffer
     "hrsh7th/cmp-path", -- source for file system paths
@@ -16,7 +16,7 @@ return {
     "rafamadriz/friendly-snippets",  -- some snippets collection
   },
   --━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
-  --                          ┃ Nvim-CMP Config ┃
+  --                          ┃ Config Function ┃
   --                          ┗━━━━━━━━━━━━━━━━━┛
   config = function()
     local kind_icons = {
@@ -52,6 +52,7 @@ return {
 
     require("luasnip/loaders/from_vscode").lazy_load()  -- load snippets collection from plugins
 
+    ------------------------------ cmp setup -----------------------------------
     cmp.setup({
       completion = {
         completeopt = "menu,menuone,preview,noselect", -- see :h completeopt 
@@ -91,14 +92,34 @@ return {
       --                 fetching_timeout = 80,
       --             },
       mapping = cmp.mapping.preset.insert({
-        -- <TAB> <ENTER> are not used to reduce mental overhead
         ["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
         ["<C-h>"] = cmp.mapping.abort(), -- close completion window
         ["<C-l>"] = cmp.mapping.confirm({ select = true }),  -- confirm, no need to select first
         ["<C-j>"] = cmp.mapping.select_next_item(), -- next suggestion
         ["<C-k>"] = cmp.mapping.select_prev_item(), -- previous suggestion
-        ["<C-f>"] = cmp.mapping.scroll_docs(4),  -- scroll down docs(check forwards)
-        ["<C-b>"] = cmp.mapping.scroll_docs(-4),  -- scroll up docs(check backwards)
+        ["<C-d>"] = cmp.mapping.scroll_docs(4),  -- scroll down docs(check backwards)
+        ["<C-u>"] = cmp.mapping.scroll_docs(-4),  -- scroll up docs(check forwards)
+        ["<C-f>"] = cmp.mapping.scroll_docs(8),  -- scroll down docs(check forwards)
+        ["<C-b>"] = cmp.mapping.scroll_docs(-8),  -- scroll up docs(check backwards)
+        ["<CR>"] = cmp.mapping.confirm({ select = false }),
+        ["<S-CR>"] = cmp.mapping.confirm({
+          behavior = cmp.ConfirmBehavior.Replace,
+          select = true,
+        }),
+        ["<Tab>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+          else
+            fallback()
+          end
+          end, { "i", "s" }),
         ['<C-n>'] = cmp.mapping(function()  -- jump to the next part of snippets
           if luasnip.expand_or_locally_jumpable() then
             luasnip.expand_or_jump()
@@ -111,9 +132,8 @@ return {
         end, { 'i', 's' }),
       }),
     })
-  --━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
-  --                          ┃ Cmd-line Config ┃
-  --                          ┗━━━━━━━━━━━━━━━━━┛
+    --------------------------- Cmd-line Config --------------------------------
+    -- TODO: cmdline mapping
     -- `/` cmdline setup.
     cmp.setup.cmdline('/', {
       mapping = cmp.mapping.preset.cmdline(),
@@ -121,7 +141,6 @@ return {
         {name = 'buffer'}
       }
     })
-
     -- `:` cmdline setup.
     cmp.setup.cmdline(':', {
       mapping = cmp.mapping.preset.cmdline(),
@@ -131,5 +150,7 @@ return {
       }
     })
   end,
-  --━━━━━━━━━━━━━━━━━━━━━━━━━━ Config Ends Here ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
+  --                            ┏━━━━━━━━━━━━━┓
+  --                            ┃ Config Ends ┃
+  --━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 }

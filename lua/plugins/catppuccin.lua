@@ -7,19 +7,23 @@
 return {
   "catppuccin/nvim",
   name = "catppuccin",
-  lazy = false,
+  lazy = false, -- do not lazy load colorscheme
   priority = 1000,
-  --━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
-  --                         ┃ Catppuccin Config ┃
-  --                         ┗━━━━━━━━━━━━━━━━━━━┛
-  -- TODO: Tweak config
+  --━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
+  --                          ┃ Config Function ┃
+  --                          ┗━━━━━━━━━━━━━━━━━┛
   config = function()
     require("catppuccin").setup({
       flavour = "mocha", -- latte, frappe, macchiato, mocha
+      background = { -- :h background
+        light = "latte",
+        dark = "mocha",
+      },
+      transparent_background = false, -- disables setting the background color.
       dim_inactive = {
-        enabled = true, -- dims the background color of inactive window
+        enabled = false, -- dims the background color of inactive window
         shade = "dark",
-        percentage = 0.45, -- percentage of the shade to apply to the inactive window
+        percentage = "0.15", -- percentage of the shade to apply to the inactive window
       },
       integrations = {
         cmp = true,
@@ -76,5 +80,7 @@ return {
     })
     vim.cmd.colorscheme("catppuccin")
   end
-  --━━━━━━━━━━━━━━━━━━━━━━━━━━ Config Ends Here ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
+  --                            ┏━━━━━━━━━━━━━┓
+  --                            ┃ Config Ends ┃
+  --━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 }
