@@ -129,7 +129,7 @@ return {
         ERROR = "󰱮 ",
         INFO = "󰱱 ",
         TRACE = "󰱴 ",
-        WARN = "󱃞 "
+        WARN = "󰱶 "
       },
       timeout = 2000,
     })
