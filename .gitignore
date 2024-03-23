@@ -5,3 +5,4 @@ sessions
 undo
 .luarc.json
 *.log
+lazy-lock.json
