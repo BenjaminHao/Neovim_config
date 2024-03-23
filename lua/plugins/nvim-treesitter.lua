@@ -11,13 +11,18 @@ return {
   dependencies = {
     "nvim-treesitter/nvim-treesitter-textobjects",
     "windwp/nvim-ts-autotag",
+    "Wansmer/treesj", -- for splitting/joning blocks of code
   },
   --━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
   --                          ┃ Config Function ┃
   --                          ┗━━━━━━━━━━━━━━━━━┛
   -- TODO: Treesitter textobject key binds
   config = function()
-    require("nvim-treesitter.configs").setup({
+    local treesitter = require("nvim-treesitter.configs")
+    local treesj = require("treesj")
+
+    --------------------------- Treesitter Setup -------------------------------
+    treesitter.setup({
       highlight = {
         enable = true,            -- enable syntax highlighting
         disable = {},             -- list of language that will be disabled
@@ -72,7 +77,15 @@ return {
         },
       },
     })
-  end,
+
+    ---------------------------- Treesj Config ---------------------------------
+    treesj.setup = {
+      use_default_keymaps = false
+    }
+    -- Treesj key bind
+    vim.keymap.set("n", "<C-m>", function () treesj.toggle() end,
+      { desc = "Split/joining blocks of Code", noremap = true, silent = true })
+  end
   --                            ┏━━━━━━━━━━━━━┓
   --                            ┃ Config Ends ┃
   --━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
