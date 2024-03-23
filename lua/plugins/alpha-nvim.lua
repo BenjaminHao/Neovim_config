@@ -54,7 +54,7 @@ return {
       dashboard.button("f", "󰈞 " .. " Find file", "<cmd>Telescope find_files<cr>"),
       dashboard.button("t", "󰺮 " .. " Find text", "<cmd>Telescope live_grep<cr>"),
       dashboard.button("e", "󰙅 " .. " Explorer", "<cmd>NvimTreeOpen<cr>"),
-      dashboard.button("c", " " .. " Config" , "<cmd>e $MYVIMRC | cd %:p:h | echo 'Move to ' $PWD | NvimTreeOpen<CR>"),
+      dashboard.button("c", " " .. " Config" , "<cmd>e $MYVIMRC|cd %:p:h|NvimTreeOpen<CR>"),
       dashboard.button("p", "󰦬 " .. " Plugins", "<cmd>Lazy<cr>"),
       dashboard.button("h", "󰗶 " .. " Checkhealth", "<cmd>checkhealth<cr>"),
       dashboard.button("q", " " .. " Quit", "<cmd>qa!<cr>"),
