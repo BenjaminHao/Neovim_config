@@ -72,7 +72,7 @@ return {
     -- Send config to alpha
     alpha.setup(dashboard.opts)
 
-    ------------------------------ Autocmds ------------------------------------
+    ---------------------------- Alpha Autocmds --------------------------------
     local autocmd = vim.api.nvim_create_autocmd
     local alphaaugroup = vim.api.nvim_create_augroup("Alpha", { clear = true })
 

@@ -46,7 +46,7 @@ return {
     })
     ------------------------ bufferline key binds ------------------------------
     vim.keymap.set("n", "<leader>bD", "<cmd>BufferLineCloseOthers<cr>",
-      { desc = "[D]elete other buffers"})
+      { desc = "[D]elete other buffers", noremap = true, silent = true })
   end
   --                            ┏━━━━━━━━━━━━━┓
   --                            ┃ Config Ends ┃

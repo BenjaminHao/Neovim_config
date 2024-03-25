@@ -37,9 +37,11 @@ return {
       },
     })
 
-    -------------------------- comment key binds -------------------------------
-    vim.keymap.set('n', '<C-Bslash>', '<Plug>(comment_toggle_linewise_current)', { desc = 'Comment current line' })
-    vim.keymap.set('x', '<C-Bslash>', '<Plug>(comment_toggle_blockwise_visual)', { desc = 'Comment selected lines' })
+    -------------------------- Comment Key Binds -------------------------------
+    vim.keymap.set("n", "<C-Bslash>", "<Plug>(comment_toggle_linewise_current)",
+      { desc = "Comment current line", noremap = true, silent = true })
+    vim.keymap.set("x", "<C-Bslash>", "<Plug>(comment_toggle_blockwise_visual)",
+      { desc = "Comment selected lines", noremap = true, silent = true })
   end,
   --                            ┏━━━━━━━━━━━━━┓
   --                            ┃ Config Ends ┃

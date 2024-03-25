@@ -62,7 +62,10 @@ return {
         local gs = package.loaded.gitsigns
 
         local function map(mode, l, r, opts)
-          opts = opts or {}
+          local options = { noremap = true, silent = true }
+          if opts then
+            options = vim.tbl_extend("force", options, opts)
+          end
           opts.buffer = bufnr
           vim.keymap.set(mode, l, r, opts)
         end

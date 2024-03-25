@@ -6,7 +6,7 @@
 --╰──────────────────────────────────────────────────────────────────────────╯--
 return {
   "folke/flash.nvim",
-  event = "CmdlineEnter",
+  event = { "BufReadPre", "BufNewFile" },
   opts = {
     labels = "asdfghjklqwertyuiopzxcvbnm",
     search = {
