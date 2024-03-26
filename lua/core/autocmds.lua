@@ -7,6 +7,16 @@
 local autocmd = vim.api.nvim_create_autocmd
 local general = vim.api.nvim_create_augroup("General Settings", { clear = true })
 
+autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
+  desc = "Reload file when it changed",
+  group = general,
+  callback = function()
+    if vim.o.buftype ~= "nofile" then
+      vim.cmd("checktime")
+    end
+  end,
+})
+
 autocmd("FileType", {
   desc = "Set shiftwidth to 4 in specific filetypes",
   group = general,
@@ -41,7 +51,7 @@ autocmd("FileType", {
   pattern = { "lspinfo", "man", "help", "qf", "vim", "checkhealth", "spectre_panel" },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
-    vim.keymap.set("n", "q", "<cmd>close!<cr>", { buffer = event.buf, silent = true })
+    vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
   end,
 })
 
@@ -77,5 +87,15 @@ autocmd("VimEnter", {
       require("nvim-tree.api").tree.open()
       -- vim.cmd "Telescope find_files"
     end
+  end,
+})
+
+autocmd({ "VimResized" }, {
+  desc = "Resize splits if window got resized",
+  group = general,
+  callback = function()
+    local current_tab = vim.fn.tabpagenr()
+    vim.cmd("tabdo wincmd =")
+    vim.cmd("tabnext " .. current_tab)
   end,
 })
