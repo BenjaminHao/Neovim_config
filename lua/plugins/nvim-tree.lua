@@ -31,7 +31,7 @@ return {
       map("n", "?", api.tree.toggle_help, opts "Help")
       map("n", "l", api.node.open.edit, opts "Open")
       map("n", "<cr>", api.node.open.edit, opts "Open")
-      map('n', '<Tab>', api.node.open.preview, opts('Open Preview'))
+      map("n", "<Tab>", api.node.open.preview, opts("Open Preview"))
       map("n", "s", api.node.open.horizontal, opts("Open With Horizontal Split"))
       map("n", "v", api.node.open.vertical, opts("Open With Vertical Split"))
       map("n", "o", api.node.run.system, opts("System Open"))
@@ -55,7 +55,7 @@ return {
       map("n", "q", api.tree.close, opts("Close"))
       map("n", "<esc>", api.tree.close, opts("Close"))
       map("n", "R", api.tree.reload, opts("Refresh"))
-      map("n", "S", api.tree.search_node, opts("Search"))
+      -- map("n", "S", api.tree.search_node, opts("Search")) -- this sucks, use flash
     end
 
     nvimtree.setup({

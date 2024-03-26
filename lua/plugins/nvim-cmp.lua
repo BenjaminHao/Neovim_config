@@ -120,33 +120,33 @@ return {
             fallback()
           end
           end, { "i", "s" }),
-        ['<C-n>'] = cmp.mapping(function()  -- jump to the next part of snippets
+        ["<C-n>"] = cmp.mapping(function()  -- jump to the next part of snippets
           if luasnip.expand_or_locally_jumpable() then
             luasnip.expand_or_jump()
           end
-        end, { 'i', 's' }),
-        ['<C-p>'] = cmp.mapping(function()  -- jump to the previous part of snippets
+        end, { "i", "s" }),
+        ["<C-p>"] = cmp.mapping(function()  -- jump to the previous part of snippets
           if luasnip.locally_jumpable(-1) then
             luasnip.jump(-1)
           end
-        end, { 'i', 's' }),
+        end, { "i", "s" }),
       }),
     })
     --------------------------- Cmd-line Config --------------------------------
     -- TODO: cmdline mapping
     -- `/` cmdline setup.
-    cmp.setup.cmdline('/', {
+    cmp.setup.cmdline("/", {
       mapping = cmp.mapping.preset.cmdline(),
       sources = {
-        {name = 'buffer'}
+        {name = "buffer"}
       }
     })
     -- `:` cmdline setup.
-    cmp.setup.cmdline(':', {
+    cmp.setup.cmdline(":", {
       mapping = cmp.mapping.preset.cmdline(),
       sources = {
-        {name = 'path'},
-        {name = 'cmdline'}
+        {name = "path"},
+        {name = "cmdline"}
       }
     })
   end,

@@ -36,9 +36,9 @@ autocmd("BufWinEnter", {
 })
 
 autocmd("FileType", {
-  desc = "Close help buffer with <q>",
+  desc = "Close specific buffers with <q>",
   group = general,
-  pattern = { "lspinfo", "man", "help", "qf", "vim", "checkhealth" },
+  pattern = { "lspinfo", "man", "help", "qf", "vim", "checkhealth", "spectre_panel" },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
     vim.keymap.set("n", "q", "<cmd>close!<cr>", { buffer = event.buf, silent = true })

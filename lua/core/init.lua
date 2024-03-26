@@ -88,4 +88,4 @@ local options = {             -- for conciseness and readability
 --                             ┗━━━━━━━━━━━━━━━━━┛
 require("lazy").setup(plugin_dir, options)
 -- key bind for Lazy
-vim.keymap.set('n', '<leader>P', '<cmd>Lazy<cr>', { desc = '[P]lugin Manager (Lazy)' })
+vim.keymap.set("n", "<leader>P", "<cmd>Lazy<cr>", { desc = "[P]lugin Manager (Lazy)" })

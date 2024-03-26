@@ -21,7 +21,7 @@ return {
         -- separator_style = "slant",
         style_preset = bufferline.style_preset.no_italic,
         --[[ numbers = function(opts)
-          return string.format('%s', opts.raise(opts.ordinal))
+          return string.format("%s", opts.raise(opts.ordinal))
         end, ]]
         diagnostics = false,           -- OR: | "nvim_lsp" 
         diagnostics_update_in_insert = false,
@@ -34,7 +34,7 @@ return {
             filetype = "NvimTree",
             text = "NvimTree",
             --[[ text = function()
-              return vim.fn.fnamemodify('.', ':p:h:t')
+              return vim.fn.fnamemodify(".", ":p:h:t")
               -- return vim.fn.getcwd()
             end, ]]
             highlight = "Directory",

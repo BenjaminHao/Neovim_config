@@ -46,11 +46,11 @@ local options = {
   shortmess = "filnxtToOFc",      -- Which errors to suppress
   list = true,                    -- Display certain whitespace in the editor
   listchars =                     -- Symbols for whitespace
-    { tab = '»·',                    -- The characters used to show a tab (need 2 characters)
-      trail = '·',                   -- Character to show for trailing spaces
-      nbsp = '␣' ,                   -- Character to show for non-breaking space
-      extends = "→",                 -- Character to show there's more text to the right (when no line wrap)
-      precedes = "←"                 -- Character to show there's more text to the left
+    { tab = "»·",                    -- The characters used to show a tab (need 2 characters)
+      trail = "·",                   -- Character to show for trailing spaces
+      nbsp = "␣" ,                   -- Character to show for non-breaking space
+      extends = "→",                 -- Character to show there"s more text to the right (when no line wrap)
+      precedes = "←"                 -- Character to show there"s more text to the left
     },
 
   -- INDENT
@@ -64,11 +64,11 @@ local options = {
 
   -- EDIT
   spell = false,                  -- Spellchecker
-  spelllang = { 'en_us' },        -- Sets spelling dictionary
+  spelllang = { "en_us" },        -- Sets spelling dictionary
   clipboard = "unnamedplus",      -- Allows neovim to access the system clipboard
   ignorecase = true,              -- Ignore case in search patterns
   smartcase = true,               -- Smart case
-  virtualedit = "block",          -- Vitualblock mode doesn't get stuck at the end of line
+  virtualedit = "block",          -- Vitualblock mode doesn"t get stuck at the end of line
   inccommand = "split",           -- Shows all inline replacements in split
 }
 --━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━--

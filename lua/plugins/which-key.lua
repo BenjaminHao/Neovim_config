@@ -5,8 +5,8 @@
 --│                                                                          │--
 --╰──────────────────────────────────────────────────────────────────────────╯--
 return {
-  'folke/which-key.nvim',
-  event = 'VeryLazy',
+  "folke/which-key.nvim",
+  event = "VeryLazy",
   init = function ()
     vim.o.timeout = true
     vim.o.timeoutlen = 300
@@ -15,7 +15,7 @@ return {
   --                          ┃ Config Function ┃
   --                          ┗━━━━━━━━━━━━━━━━━┛
   config = function()
-    local wk = require('which-key')
+    local wk = require("which-key")
     wk.setup({
       plugins = {
         marks = true,           -- shows a list of your marks on ' and `
@@ -43,7 +43,7 @@ return {
       },
       icons = {
         breadcrumb = "", -- symbol used in the command line area that shows your active key combo
-        separator = "", -- symbol used between a key and it's label
+        separator = "", -- symbol used between a key and it"s label
         group = "", -- symbol prepended to a group 
       },
       window = {
@@ -71,25 +71,25 @@ return {
     wk.register({
       ["<leader>"] = {
         b = {
-          name = "[b]uffer", _ = 'which_key_ignore'
+          name = "[b]uffer", _ = "which_key_ignore"
         },
         d = {
-          name = "[d]iagnostic", _ = 'which_key_ignore'
+          name = "[d]iagnostic", _ = "which_key_ignore"
         },
         f = {
-          name = "[f]ind", _ = 'which_key_ignore'
+          name = "[f]ind", _ = "which_key_ignore"
         },
         g = {
-          name = "[g]it", _ = 'which_key_ignore'
+          name = "[g]it", _ = "which_key_ignore"
         },
         l = {
-          name = "[l]SP", _ = 'which_key_ignore'
+          name = "[l]SP", _ = "which_key_ignore"
         },
         m = {
-          name = "[m]essage", _ = 'which_key_ignore'
+          name = "[m]essage", _ = "which_key_ignore"
         },
         t = {
-          name = "[t]oggle", _ = 'which_key_ignore'
+          name = "[t]oggle", _ = "which_key_ignore"
         },
       }
     })

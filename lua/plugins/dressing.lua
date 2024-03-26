@@ -12,7 +12,7 @@ return {
   --                          ┗━━━━━━━━━━━━━━━━━┛
   -- FIX: title missing if too long
   config = function()
-    require('dressing').setup({
+    require("dressing").setup({
       input = {
         -- Set to false to disable the vim.ui.input implementation
         enabled = true,
@@ -20,7 +20,7 @@ return {
         -- Default prompt string
         default_prompt = "Input:",
 
-        -- Can be 'left', 'right', or 'center'
+        -- Can be "left", "right", or "center"
         prompt_align = "center",
 
         -- When true, <Esc> will close the modal
@@ -36,7 +36,7 @@ return {
           return conf
         end,
         border = "rounded",
-        -- 'editor' and 'win' will default to being centered
+        -- "editor" and "win" will default to being centered
         relative = "cursor",
 
         -- These can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
@@ -82,7 +82,7 @@ return {
 
         -- Options for telescope selector
         -- These are passed into the telescope picker directly. Can be used like:
-        -- telescope = require('telescope.themes').get_ivy({...})
+        -- telescope = require("telescope.themes").get_ivy({...})
         telescope = nil,
 
         -- Options for fzf selector
@@ -127,7 +127,7 @@ return {
           -- These are passed to nvim_open_win
           override = "NW",
           border = "rounded",
-          -- 'editor' and 'win' will default to being centered
+          -- "editor" and "win" will default to being centered
           relative = "editor",
 
           -- Window transparency (0-100)

@@ -9,24 +9,24 @@ return {
   branch = "0.1.x",
   cmd = "Telescope",  -- lazy-load on command
   keys = {  -- lazy-load on key maps
-    { '<leader>fb', "<cmd>Telescope buffers<cr>",  desc = '[b]uffers' },
-    { '<leader>fd', "<cmd>Telescope diagnostics<cr>",  desc = '[d]iagnostics' },
-    { '<leader>ff', "<cmd>Telescope find_files<cr>",  desc = '[f]iles' },
-    { '<leader>fg', "<cmd>Telescope live_grep<cr>",  desc = '[g]rep' },
-    { '<leader>fh', "<cmd>Telescope help_tags<cr>",  desc = '[h]elp' },
-    { '<leader>fk', "<cmd>Telescope keymaps<cr>",  desc = '[k]eymaps' },
-    { '<leader>fr', "<cmd>Telescope oldfiles<cr>",  desc = '[r]ecent files' },
-    -- { '<leader>fr', "<cmd>Telescope resume<cr>",  desc = '[r]esume' },
-    { '<leader>fa', "<cmd>Telescope builtin<cr>",  desc = '[a]ll' },
-    { '<leader>fu', "<cmd>Telescope undo<cr>",  desc = '[u]ndo' },
-    { '<leader>fw', "<cmd>Telescope grep_string<cr>",  desc = '[w]ord' },
+    { "<leader>fb", "<cmd>Telescope buffers<cr>",  desc = "[b]uffers" },
+    { "<leader>fd", "<cmd>Telescope diagnostics<cr>",  desc = "[d]iagnostics" },
+    { "<leader>ff", "<cmd>Telescope find_files<cr>",  desc = "[f]iles" },
+    { "<leader>fg", "<cmd>Telescope live_grep<cr>",  desc = "[g]rep" },
+    { "<leader>fh", "<cmd>Telescope help_tags<cr>",  desc = "[h]elp" },
+    { "<leader>fk", "<cmd>Telescope keymaps<cr>",  desc = "[k]eymaps" },
+    { "<leader>fr", "<cmd>Telescope oldfiles<cr>",  desc = "[r]ecent files" },
+    -- { "<leader>fr", "<cmd>Telescope resume<cr>",  desc = "[r]esume" },
+    { "<leader>fa", "<cmd>Telescope builtin<cr>",  desc = "[a]ll" },
+    { "<leader>fu", "<cmd>Telescope undo<cr>",  desc = "[u]ndo" },
+    { "<leader>fw", "<cmd>Telescope grep_string<cr>",  desc = "[w]ord" },
     -- Shortcut for searching your neovim configuration files
-    { '<leader>fn', function()
+    { "<leader>fn", function()
       require("telescope.builtin").find_files {
-        cwd = vim.fn.stdpath 'config',
-        prompt_title = 'Find Neovim Config Files',
+        cwd = vim.fn.stdpath "config",
+        prompt_title = "Find Neovim Config Files",
       } end,
-      desc = '[n]eovim config'
+      desc = "[n]eovim config"
     }
   },
   dependencies = {
@@ -36,7 +36,7 @@ return {
       "nvim-telescope/telescope-fzf-native.nvim",
       build = "make",
       cond = function()  -- determine if this should be installed and loaded
-        return vim.fn.executable 'make' == 1
+        return vim.fn.executable "make" == 1
       end,
     },
     "nvim-tree/nvim-web-devicons",

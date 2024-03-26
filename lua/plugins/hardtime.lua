@@ -17,10 +17,21 @@ return {
   --                          ┃ Config Function ┃
   --                          ┗━━━━━━━━━━━━━━━━━┛
   config = function ()
-    require("hardtime").setup()
+    require("hardtime").setup({
+      disabled_filetypes = {
+        "qf",
+        "netrw",
+        "help",
+        "NvimTree",
+        "lazy",
+        "mason",
+        "spectre_panel",
+        "noice"
+      },
+    })
 
     --------------------------- Hardtime Key Binds -----------------------------
-    vim.keymap.set('n', '<leader>th', "<cmd>Hardtime toggle<cr>",
+    vim.keymap.set("n", "<leader>th", "<cmd>Hardtime toggle<cr>",
       { desc = "[h]ardtime", noremap = true, silent = true })
   end
   --                            ┏━━━━━━━━━━━━━┓

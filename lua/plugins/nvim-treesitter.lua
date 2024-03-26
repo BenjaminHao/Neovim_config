@@ -7,6 +7,8 @@
 return {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
+  -- event = "VeryLazy",
+  -- TODO: bug fix? treessiter no loading after checkhealth. another event?
   event = { "BufReadPre", "BufNewFile" },  -- lazy-load on events
   dependencies = {
     "nvim-treesitter/nvim-treesitter-textobjects", -- syntax aware text-objects
@@ -21,6 +23,7 @@ return {
   config = function()
     local treesitter = require("nvim-treesitter.configs")
     local treesj = require("treesj")
+    local context = require("treesitter-context")
 
     --------------------------- Treesitter Setup -------------------------------
     treesitter.setup({
@@ -83,21 +86,17 @@ return {
     treesj.setup = {
       use_default_keymaps = false
     }
-
     ------------------------ Treesitter Key Binds ---------------------------------
     -- context key binds
-    vim.keymap.set("n", "[c", function()
-      require("treesitter-context").go_to_context(vim.v.count1)
-    end,
+    vim.keymap.set("n", "[c", function() context.go_to_context(vim.v.count1) end,
       { desc = "Go back to context", noremap = true, silent = true })
     vim.keymap.set("n", "<leader>tc", "<cmd>TSContextToggle<cr>",
-      { desc = "[c]ontext Preview"})
+      { desc = "[c]ontext Preview", noremap = true, silent = true })
 
     -- Treesj key bind
-    vim.keymap.set("n", "<C-m>", function ()
-      treesj.toggle()
-    end,
+    vim.keymap.set("n", "<C-Enter>", function() treesj.toggle() end,
       { desc = "Split/joining blocks of Code", noremap = true, silent = true })
+
   end
   --                            ┏━━━━━━━━━━━━━┓
   --                            ┃ Config Ends ┃
