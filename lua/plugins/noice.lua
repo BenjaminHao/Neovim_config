@@ -45,19 +45,7 @@ return {
         -- Icons for completion item kinds (see defaults at noice.config.icons.kinds)
         kind_icons = {}, -- set to `false` to disable icons
       },
-      routes = {
-        {
-          filter = {
-            event = "msg_show",
-            any = {
-              { find = "%d+L, %d+B" },
-              { find = "; after #%d+" },
-              { find = "; before #%d+" },
-            },
-          },
-          view = "notify",
-        },
-        lsp = {
+      lsp = {
           progress = {
             enabled = true,
             -- See config.format.builtin
@@ -109,6 +97,24 @@ return {
               win_options = { concealcursor = "n", conceallevel = 3 },
             },
           },
+      },
+      routes = {
+        --[[ { -- show @recording message
+          filter = { event = "msg_showmode" },
+          view = "mini",
+        }, ]]
+        {
+          filter = {
+            event = "msg_show",
+            kind = "",
+            any = {
+              { find = "%d+L, %d+B" }, -- for written messages
+              { find = "; after #%d+" }, -- for redo messages
+              { find = "; before #%d+" }, -- for undo messages
+            },
+          },
+          -- opts = { skip = true }, -- hide messgage
+          view = "mini", -- show with mini
         },
       },
       presets = {

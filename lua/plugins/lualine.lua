@@ -60,7 +60,12 @@ return {
           { "branch" }
         },
         lualine_c = {},
-        lualine_x = {},
+        lualine_x = {
+          { -- show @recording message
+            require("noice").api.statusline.mode.get,
+            cond = require("noice").api.statusline.mode.has,
+          }
+        },
         lualine_y = { "location", "progress" },
         lualine_z = {
           {

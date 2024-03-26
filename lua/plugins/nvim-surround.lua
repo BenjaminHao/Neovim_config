@@ -11,6 +11,7 @@ return {
   --━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
   --                          ┃ Config Function ┃
   --                          ┗━━━━━━━━━━━━━━━━━┛
+  -- TODO: add key binds, resolve conflict with hardtime
   config = function()
     require("nvim-surround").setup({
       keymaps = {

@@ -26,7 +26,7 @@ vim.opt.rtp:prepend(lazypath)
 require("core.options")
 require("core.keymaps")  -- <Leader> key must be set before setting up Lazy
 require("core.autocmds")
--- require("") --TBA
+require("core.utils")
 --━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 --                            ┃ LAZY.NVIM CONFIG ┃
 --                            ┗━━━━━━━━━━━━━━━━━━┛

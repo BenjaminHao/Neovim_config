@@ -20,6 +20,20 @@ local function Map(mode, lhs, rhs, opts)
   end
   vim.keymap.set(mode, lhs, rhs, options)
 end
+--━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
+--                            ┃ TOGGLE FUNCTION ┃
+--                            ┗━━━━━━━━━━━━━━━━━┛
+local function Toggle(opt, on, off, name)
+  local message = name
+  if vim.opt[opt]:get() == off then
+    vim.opt[opt] = on
+    message = message .. ' Enabled'
+  else
+    vim.opt[opt] = off
+    message = message .. ' Disabled'
+  end
+  vim.notify(message)
+end
 --━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 --                           ┃ GENERAL KEY BINDS ┃
 --                           ┗━━━━━━━━━━━━━━━━━━━┛
@@ -94,9 +108,11 @@ Map("n", "<leader>dl", vim.diagnostic.setloclist, { desc = "Open diagnostic quic
 --━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 --                                ┃ TOGGLES ┃
 --                                ┗━━━━━━━━━┛
-Map("n", "<leader>ts", function() vim.o.spell = not vim.o.spell end, { desc = "[s]pell Check"})
-Map("n", "<leader>tn", function() vim.o.relativenumber = not vim.o.relativenumber end, { desc = "Relative [n]umber"})
-Map("n", "<leader>tN", function() vim.o.number = not vim.o.number end, { desc = "Line [N]umber"})
+-- TODO: toggle function
+Map("n", "<leader>ts", function() Toggle("spell", true, false, "Spell check") end, { desc = "[s]pell Check"})
+Map("n", "<leader>tn", function() Toggle("relativenumber", true, false, "Relative number") end, { desc = "Relative [n]umber"})
+Map("n", "<leader>tN", function() Toggle("number", true, false, "Line number") end, { desc = "Line [N]umber"})
+Map("n", "<leader>tC", ":lua require('core.utils').toggle_set_color_column()<cr>", { desc = "Color [C]olumn" })
 --━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 --                                ┃ PLUGINS ┃
 --                                ┗━━━━━━━━━┛

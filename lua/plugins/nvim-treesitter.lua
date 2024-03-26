@@ -17,7 +17,6 @@ return {
   --━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
   --                          ┃ Config Function ┃
   --                          ┗━━━━━━━━━━━━━━━━━┛
-  -- TODO: Treesitter textobject key binds
   config = function()
     local treesitter = require("nvim-treesitter.configs")
     local treesj = require("treesj")
@@ -38,6 +37,7 @@ return {
       autopairs = {
         enable = true,            -- enable autopairs
       },
+      auto_install = true,
       ensure_installed = {        -- ensure these language parsers are installed
         "bash",
         "c",
@@ -68,7 +68,39 @@ return {
         "vim",
         "vimdoc",
       },
-      auto_install = true,
+      textobjects = {
+        select = {
+          enable = true,
+          -- Automatically jump forward to textobj, similar to targets.vim
+          lookahead = true,
+          -- TODO: Treesitter textobject key binds
+          keymaps = {
+            -- You can use the capture groups defined in textobjects.scm
+            ["af"] = "@function.outer",
+            ["if"] = "@function.inner",
+            ["at"] = "@class.outer",
+            ["it"] = "@class.inner",
+            ["ac"] = "@call.outer",
+            ["ic"] = "@call.inner",
+            ["aa"] = "@parameter.outer",
+            ["ia"] = "@parameter.inner",
+            ["al"] = "@loop.outer",
+            ["il"] = "@loop.inner",
+            ["ai"] = "@conditional.outer",
+            ["ii"] = "@conditional.inner",
+            ["a/"] = "@comment.outer",
+            ["i/"] = "@comment.inner",
+            ["ab"] = "@block.outer",
+            ["ib"] = "@block.inner",
+            ["as"] = "@statement.outer",
+            ["is"] = "@scopename.inner",
+            ["aA"] = "@attribute.outer",
+            ["iA"] = "@attribute.inner",
+            ["aF"] = "@frame.outer",
+            ["iF"] = "@frame.inner",
+          },
+        },
+      },
       incremental_selection = {
         enable = true,
         keymaps = {
