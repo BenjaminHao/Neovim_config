@@ -7,8 +7,6 @@
 return {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
-  -- event = "VeryLazy",
-  -- TODO: bug fix? treessiter no loading after checkhealth. another event?
   event = { "BufReadPre", "BufNewFile" },  -- lazy-load on events
   dependencies = {
     "nvim-treesitter/nvim-treesitter-textobjects", -- syntax aware text-objects
@@ -94,7 +92,7 @@ return {
       { desc = "[c]ontext Preview", noremap = true, silent = true })
 
     -- Treesj key bind
-    vim.keymap.set("n", "<C-Enter>", function() treesj.toggle() end,
+    vim.keymap.set("n", "<C-cr>", function() treesj.toggle() end,
       { desc = "Split/joining blocks of Code", noremap = true, silent = true })
 
   end
