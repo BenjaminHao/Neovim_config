@@ -22,6 +22,8 @@ return {
         "qf",
         "netrw",
         "help",
+        "checkhealth",
+        "alpha",
         "NvimTree",
         "lazy",
         "mason",
