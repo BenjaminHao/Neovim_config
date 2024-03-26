@@ -56,7 +56,7 @@ return {
       dashboard.button("e", "󰙅 " .. " Explorer", "<cmd>NvimTreeOpen<cr>"),
       dashboard.button("c", " " .. " Config" , "<cmd>e $MYVIMRC|cd %:p:h|NvimTreeOpen<CR>"),
       dashboard.button("p", "󰦬 " .. " Plugins", "<cmd>Lazy<cr>"),
-      dashboard.button("h", "󰗶 " .. " Checkhealth", "<cmd>checkhealth<cr>"),
+      dashboard.button("h", "󰗶 " .. " Checkhealth", "<cmd>Lazy load all | checkhealth<cr>"),
       dashboard.button("q", " " .. " Quit", "<cmd>qa!<cr>"),
     }
 
@@ -72,7 +72,7 @@ return {
     -- Send config to alpha
     alpha.setup(dashboard.opts)
 
-    ---------------------------- Alpha Autocmds --------------------------------
+    ------------------------------ Autocmds ------------------------------------
     local autocmd = vim.api.nvim_create_autocmd
     local alphaaugroup = vim.api.nvim_create_augroup("Alpha", { clear = true })
 
