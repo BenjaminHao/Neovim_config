@@ -1,7 +1,7 @@
 --╭──────────────────────────────────────────────────────────────────────────╮--
 --│                                                                          │--
---│ File: core/utils.lua                                                     │--
---│ Note: util functions                                                     │--
+--│ FILE: core/utils.lua                                                     │--
+--│ NOTE: util functions                                                     │--
 --│                                                                          │--
 --╰──────────────────────────────────────────────────────────────────────────╯--
 -- TODO: https://dev.to/voyeg3r/my-lazy-neovim-config-3h6o

@@ -1,7 +1,7 @@
 --╭──────────────────────────────────────────────────────────────────────────╮--
 --│                                                                          │--
---│ File: plugins/nvim-surround.lua                                          │--
---│ Note: surround selections                                                │--
+--│ FILE: plugins/nvim-surround.lua                                          │--
+--│ NOTE: surround selections                                                │--
 --│                                                                          │--
 --╰──────────────────────────────────────────────────────────────────────────╯--
 return {

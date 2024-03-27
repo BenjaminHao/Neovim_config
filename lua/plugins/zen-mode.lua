@@ -1,7 +1,7 @@
 --╭──────────────────────────────────────────────────────────────────────────╮--
 --│                                                                          │--
---│ File: plugins/zen-mode.lua                                               │--
---│ Note: Distracion-free environment                                        │--
+--│ FILE: plugins/zen-mode.lua                                               │--
+--│ NOTE: Distracion-free environment                                        │--
 --│                                                                          │--
 --╰──────────────────────────────────────────────────────────────────────────╯--
 return {

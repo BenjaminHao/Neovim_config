@@ -1,7 +1,7 @@
 --╭──────────────────────────────────────────────────────────────────────────╮--
 --│                                                                          │--
---│ File: plugins/flash.lua                                                  │--
---│ Note: better search motion plugin                                        │--
+--│ FILE: plugins/flash.lua                                                  │--
+--│ NOTE: better search motion plugin                                        │--
 --│                                                                          │--
 --╰──────────────────────────────────────────────────────────────────────────╯--
 return {

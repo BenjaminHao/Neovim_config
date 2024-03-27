@@ -1,7 +1,7 @@
 --╭──────────────────────────────────────────────────────────────────────────╮--
 --│                                                                          │--
---│ File: plugins/dressing.lua                                               │--
---│ Note: UI improvement plugin, better looking promt                        │--
+--│ FILE: plugins/dressing.lua                                               │--
+--│ NOTE: UI improvement plugin, better looking promt                        │--
 --│                                                                          │--
 --╰──────────────────────────────────────────────────────────────────────────╯--
 return {

@@ -1,7 +1,7 @@
 --╭──────────────────────────────────────────────────────────────────────────╮--
 --│                                                                          │--
---│ File: plugins/nvim-cmp.lua                                               │--
---│ Note: Auto-completion plugin, engine for LSP, etc.                       │--
+--│ FILE: plugins/nvim-cmp.lua                                               │--
+--│ NOTE: Auto-completion plugin, engine for LSP, etc.                       │--
 --│                                                                          │--
 --╰──────────────────────────────────────────────────────────────────────────╯--
 return {

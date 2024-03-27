@@ -1,7 +1,7 @@
 --╭──────────────────────────────────────────────────────────────────────────╮--
 --│                                                                          │--
---│ File: core/init.lua                                                      │--
---│ Note: Use Lazy.nvim as plugin manager                                    │--
+--│ FILE: core/init.lua                                                      │--
+--│ NOTE: Use Lazy.nvim as plugin manager                                    │--
 --│                                                                          │--
 --╰──────────────────────────────────────────────────────────────────────────╯--
 --━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━--
@@ -26,7 +26,7 @@ vim.opt.rtp:prepend(lazypath)
 require("core.options")
 require("core.keymaps")  -- <Leader> key must be set before setting up Lazy
 require("core.autocmds")
-require("core.utils")
+-- require("core.utils")
 --━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 --                            ┃ LAZY.NVIM CONFIG ┃
 --                            ┗━━━━━━━━━━━━━━━━━━┛

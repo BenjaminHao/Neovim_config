@@ -1,7 +1,7 @@
 --╭──────────────────────────────────────────────────────────────────────────╮--
 --│                                                                          │--
---│ File: plugins/mason.lua                                                  │--
---│ Note: package manager for LSP servers                                    │--
+--│ FILE: plugins/mason.lua                                                  │--
+--│ NOTE: package manager for LSP servers                                    │--
 --│                                                                          │--
 --╰──────────────────────────────────────────────────────────────────────────╯--
 return {

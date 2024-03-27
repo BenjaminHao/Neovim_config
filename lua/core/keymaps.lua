@@ -1,7 +1,7 @@
 --╭──────────────────────────────────────────────────────────────────────────╮--
 --│                                                                          │--
---│ File: core/keymaps.lua                                                   │--
---│ Note: Custom key binds                                                   │--
+--│ FILE: core/keymaps.lua                                                   │--
+--│ NOTE: Custom key binds                                                   │--
 --│                                                                          │--
 --╰──────────────────────────────────────────────────────────────────────────╯--
 --━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━--
@@ -37,20 +37,24 @@ end
 --━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 --                           ┃ GENERAL KEY BINDS ┃
 --                           ┗━━━━━━━━━━━━━━━━━━━┛
+-- BUG: ESC Does not quit visual mode?!
 -- Unmapping
 Map("n", "<C-z>", "<nop>")  -- <Ctrl-z>: suspend Neovim, "fg" in cmd to get back
 Map("i", "<C-h>", "<nop>")  -- <Ctrl-h> = <delete>, conflict with cmp key bind
 Map("i", "<C-j>", "<nop>")  -- <Ctrl-j> = <enter>, conflict with cmp key bind
--- Shortcut for <ESC>
-Map("i", "jk", "<ESC>")
+-- Map ctrl-c to esc
+Map("i", "<c-c>", "<esc>")
 -- Move to beginning/end of the line
 Map({ "n", "v", "x" }, "gl", "$", { desc = "End of line" })
 Map({ "n", "v", "x" }, "gh", "^", { desc = "Beginning of line" })
 -- Move the line up or down in Visual mode
 Map("x", "<S-j>", [[:m '>+1<CR><CR>gv=gv]], { desc = "Move line down" })
 Map("x", "<S-k>", [[:m '<-2<CR><CR>gv=gv]], { desc = "Move line up" })
--- Move text to next line
+-- Move text to next line, corresponding key bind for <S-j>
 Map("n", "<S-k>", "i<CR><ESC>")
+-- Insert lines above/below without leaving normal mode
+Map("n", "<cr>", "o<esc>k")
+Map("n", "<S-cr>", "O<esc>j")
 --━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 --                             ┃ QOL KEY BINDS ┃
 --                             ┗━━━━━━━━━━━━━━━┛
@@ -60,9 +64,9 @@ Map("n", "<ESC>","<ESC><cmd>noh<CR>", { desc = "Clear search highlights" })
 Map("v", "<", "<gv")
 Map("v", ">", ">gv")
 -- Visual overwrite paste
-Map({ "v", "x" }, "p", '"_dP')
+Map("v", "p", '"_dP')
 -- Do not copy on x
-Map({ "v", "x" }, "x", '"_x')
+Map({ "n", "v" }, "x", '"_x')
 -- Keep window centered when going up/down
 Map("n", "J", "mzJ`z")
 Map("n", "<C-d>", "<C-d>zz")
@@ -80,9 +84,8 @@ Map("i", ";", ";<c-g>u")
 --                                ┃ BUFFERS ┃
 --                                ┗━━━━━━━━━┛
 -- For other buffer key binds, see plugins/bufferline.lua
-Map("n", "<leader>bn",  "<cmd>bn<CR>", { desc = "[n]ext buffer"})
-Map("n", "<leader>bp", "<cmd>bp<CR>", { desc = "[p]revious buffer"})
-Map("n", "<leader>bd", "<cmd>bd<CR>", { desc = "[d]elete current buffer"})
+Map("n", "<C-n>",  "<cmd>bn<CR>", { desc = "Next Buffer"})
+Map("n", "<C-p>", "<cmd>bp<CR>", { desc = "Previous Buffer"})
 --━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 --                                ┃ WINDOWS ┃
 --                                ┗━━━━━━━━━┛
@@ -90,6 +93,11 @@ Map("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
 Map("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
 Map("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 Map("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
+-- Resize windows with Ctrl+Arrow keys, disable Mission control in MacOS
+Map("n", "<C-Up>", ":resize +2<CR>")
+Map("n", "<C-Down>", ":resize -2<CR>")
+Map("n", "<C-Right>", ":vertical resize +2<CR>")
+Map("n", "<C-Left>", ":vertical resize -2<CR>")
 --━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 --                                  ┃ LSP ┃
 --                                  ┗━━━━━┛

@@ -1,7 +1,7 @@
 --╭──────────────────────────────────────────────────────────────────────────╮--
 --│                                                                          │--
---│ File: plugins/nvim-autopairs.lua                                         │--
---│ Note: Auto-pair plugin for '"{[( etc.                                    │--
+--│ FILE: plugins/nvim-autopairs.lua                                         │--
+--│ NOTE: Auto-pair plugin for '"{[( etc.                                    │--
 --│                                                                          │--
 --╰──────────────────────────────────────────────────────────────────────────╯--
 return {

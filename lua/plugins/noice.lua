@@ -1,7 +1,7 @@
 --╭──────────────────────────────────────────────────────────────────────────╮--
 --│                                                                          │--
---│ File: plugins/noice.lua                                                  │--
---│ Note: Default UI replacement plugin                                      │--
+--│ FILE: plugins/noice.lua                                                  │--
+--│ NOTE: Default UI replacement plugin                                      │--
 --│                                                                          │--
 --╰──────────────────────────────────────────────────────────────────────────╯--
 return {

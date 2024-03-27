@@ -1,7 +1,7 @@
 --╭──────────────────────────────────────────────────────────────────────────╮--
 --│                                                                          │--
---│ File: plugins/nvim-treesitter.lua                                        │--
---│ Note: Syntax highlighting plugin (a C complier is required)              │--
+--│ FILE: plugins/nvim-treesitter.lua                                        │--
+--│ NOTE: Syntax highlighting plugin (a C complier is required)              │--
 --│                                                                          │--
 --╰──────────────────────────────────────────────────────────────────────────╯--
 return {
@@ -101,13 +101,14 @@ return {
           },
         },
       },
+      -- FIX: fix key binds
       incremental_selection = {
-        enable = true,
+        enable = false,
         keymaps = {
-          init_selection = "<C-n>",
-          node_incremental = "<C-n>",
+          init_selection = "<C-]>",
+          node_incremental = "<C-]>",
           scope_incremental = false,
-          node_decremental = "<C-p>",
+          node_decremental = "<C-[>",
         },
       },
     })

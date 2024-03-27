@@ -1,7 +1,7 @@
 --╭──────────────────────────────────────────────────────────────────────────╮--
 --│                                                                          │--
---│  File: init.lua                                                          │--
---│  Note: Initial file of NeoVim config                                     │--
+--│  FILE: init.lua                                                          │--
+--│  NOTE: Initial file of NeoVim config                                     │--
 --│                                                                          │--
 --╰──────────────────────────────────────────────────────────────────────────╯--
 require("core") -- DO NOT MODIFY

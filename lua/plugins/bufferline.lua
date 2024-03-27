@@ -1,7 +1,7 @@
 --╭──────────────────────────────────────────────────────────────────────────╮--
 --│                                                                          │--
---│ File: plugins/bufferline.lua                                             │--
---│ Note: UI Plugin for buffers                                              │--
+--│ FILE: plugins/bufferline.lua                                             │--
+--│ NOTE: UI Plugin for buffers                                              │--
 --│                                                                          │--
 --╰──────────────────────────────────────────────────────────────────────────╯--
 return {

@@ -1,7 +1,7 @@
 --╭──────────────────────────────────────────────────────────────────────────╮--
 --│                                                                          │--
---│ File: core/autocmds.lua                                                  │--
---│ Note: Some better settings                                               │--
+--│ FILE: core/autocmds.lua                                                  │--
+--│ NOTE: Some better settings                                               │--
 --│                                                                          │--
 --╰──────────────────────────────────────────────────────────────────────────╯--
 local autocmd = vim.api.nvim_create_autocmd

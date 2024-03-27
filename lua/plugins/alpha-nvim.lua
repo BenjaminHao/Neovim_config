@@ -1,7 +1,7 @@
 --╭──────────────────────────────────────────────────────────────────────────╮--
 --│                                                                          │--
---│ File: plugins/alpha-nvim.lua                                             │--
---│ Note: Startup screen plugin                                              │--
+--│ FILE: plugins/alpha-nvim.lua                                             │--
+--│ NOTE: Startup screen plugin                                              │--
 --│                                                                          │--
 --╰──────────────────────────────────────────────────────────────────────────╯--
 return {

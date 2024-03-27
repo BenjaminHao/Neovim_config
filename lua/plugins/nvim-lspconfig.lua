@@ -1,7 +1,7 @@
 --╭──────────────────────────────────────────────────────────────────────────╮--
 --│                                                                          │--
---│ File: plugins/nvim-lspconfig.lua                                         │--
---│ Note: LSP config file (npm is required)                                  │--
+--│ FILE: plugins/nvim-lspconfig.lua                                         │--
+--│ NOTE: LSP config file (npm is required)                                  │--
 --│                                                                          │--
 --╰──────────────────────────────────────────────────────────────────────────╯--
 -- TODO: Restructuring LSP files, add neodev.nvim
@@ -11,7 +11,6 @@ return {
   dependencies = {
     "williamboman/mason.nvim",
     "hrsh7th/cmp-nvim-lsp",
-    { "folke/neodev.nvim", opts = {} }, -- for Neovim config or plugin developent
   },
   --━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
   --                          ┃ Config Function ┃
@@ -21,8 +20,6 @@ return {
     local lspconfig = require("lspconfig")
     -- import cmp-nvim-lsp plugin
     local cmp_nvim_lsp = require("cmp_nvim_lsp")
-    -- import neodev plugin
-    local neodev = require("neodev")
     -- used to enable autocompletion (assign to every lsp server config)
     local default = cmp_nvim_lsp.default_capabilities()
     -- Change the Diagnostic symbols in the sign column (gutter)
@@ -32,11 +29,6 @@ return {
       local hl = "DiagnosticSign" .. type
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
     end
-
-    -- IMPORTANT: make sure to setup neodev BEFORE lspconfig
-    neodev.setup({
-  -- add any options here, or leave empty to use the default settings
-    })
 
     -- configure lua server (with special settings)
     lspconfig["lua_ls"].setup({

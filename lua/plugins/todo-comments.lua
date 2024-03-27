@@ -1,7 +1,7 @@
 --╭──────────────────────────────────────────────────────────────────────────╮--
 --│                                                                          │--
---│ File: plugins/todo-comments.lua                                          │--
---│ Note: Highlight and search for todo comments                             │--
+--│ FILE: plugins/todo-comments.lua                                          │--
+--│ NOTE: Highlight and search for todo comments                             │--
 --│                                                                          │--
 --╰──────────────────────────────────────────────────────────────────────────╯--
 return {
@@ -19,18 +19,14 @@ return {
       signs = false, -- show icons in the signs column
       sign_priority = 8, -- sign priority
       keywords = {
-        FIX = {
-          icon = " ",
-          color = "error",
-          alt = { "Fix", "fix", "FIXME", "Fixme", "fixme", "BUG", "Bug", "bug" },
-        },
-        TODO = { icon = "󰝖 ", color = "info", alt = { "Todo", "todo" } },
-        HACK = { icon = " ", color = "warning", alt = { "Hack", "hack" } },
-        WARN = { icon = " ", color = "warning", alt = { "Warn", "warn", "Warning", "WARNING"} },
-        PERF = { icon = "󰁫 ", alt = { "Perf", "perf" } },
-        TEST = { icon = " ", color = "test", alt = { "Test", "test" } },
-        FILE = { icon = " ", alt = { "File", "file" } },
-        NOTE = { icon = " ", color = "hint", alt = { "Note", "note", "INFO", "Info", "info" } },
+        FIX = { icon = " ", color = "error", alt = { "FIXME", "BUG" }},
+        TODO = { icon = "󰝖 ", color = "info" },
+        HACK = { icon = " ", color = "warning" },
+        WARN = { icon = " ", color = "warning", alt = { "WARNING" }},
+        PERF = { icon = "󰁫 " },
+        TEST = { icon = " ", color = "test" },
+        FILE = { icon = " " },
+        NOTE = { icon = " ", color = "hint", alt = { "INFO" }},
       },
       gui_style = {
         fg = "NONE", -- The gui style to use for the fg highlight group.
@@ -58,7 +54,7 @@ return {
           "--with-filename",
           "--line-number",
           "--column",
-          "--ignore-case",
+          -- "--ignore-case",
         },
         pattern = [[\b(KEYWORDS):]],
       },

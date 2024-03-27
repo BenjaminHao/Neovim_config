@@ -1,7 +1,7 @@
 --╭──────────────────────────────────────────────────────────────────────────╮--
 --│                                                                          │--
---│ File: plugins/which-key.lua                                              │--
---│ Note: showing pending key binds                                          │--
+--│ FILE: plugins/which-key.lua                                              │--
+--│ NOTE: showing pending key binds                                          │--
 --│                                                                          │--
 --╰──────────────────────────────────────────────────────────────────────────╯--
 return {
