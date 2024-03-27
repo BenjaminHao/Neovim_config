@@ -101,14 +101,13 @@ return {
           },
         },
       },
-      -- FIX: fix key binds
       incremental_selection = {
-        enable = false,
+        enable = true,
         keymaps = {
-          init_selection = "<C-]>",
-          node_incremental = "<C-]>",
+          init_selection = "<C-space>",
+          node_incremental = "<C-space>",
           scope_incremental = false,
-          node_decremental = "<C-[>",
+          node_decremental = "<bs>",
         },
       },
     })
