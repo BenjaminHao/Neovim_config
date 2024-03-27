@@ -16,9 +16,7 @@ return {
   --                          ┃ Config Function ┃
   --                          ┗━━━━━━━━━━━━━━━━━┛
   config = function()
-    -- import lspconfig plugin
     local lspconfig = require("lspconfig")
-    -- import cmp-nvim-lsp plugin
     local cmp_nvim_lsp = require("cmp_nvim_lsp")
     -- used to enable autocompletion (assign to every lsp server config)
     local default = cmp_nvim_lsp.default_capabilities()
