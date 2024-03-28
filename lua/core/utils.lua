@@ -44,7 +44,6 @@ utils.toggle_set_color_column = function()
   end
 end
 
--- https://github.com/prdanelli/dotfiles/blob/ce07fb3b9ffff7da3c054678d396d4606923681b/neovim/lua/user/invert_term.lua
 utils.invert_term = function()
   local terms = vim.tbl_add_reverse_lookup({
     ["0"] = "1",
