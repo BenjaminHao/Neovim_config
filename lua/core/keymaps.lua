@@ -39,8 +39,13 @@ map("i", "<C-a>", "<home>")
 map("i", "<C-e>", "<end>")
 map("i", "<C-f>", "<right>")
 map("i", "<C-b>", "<left>")
--- super semicolon
+-- super colon/semicolon
+map("i", "<C-,>", "<end>,")
 map("i", "<C-;>", "<end>;")
+-- input in next line
+map("i", "<C-cr>", "<end><cr>")
+-- super tilde
+map({ "n", "v" }, "`", function() util.invert_term() end)
 --━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 --                             ┃ QOL KEY BINDS ┃
 --                             ┗━━━━━━━━━━━━━━━┛
@@ -61,13 +66,12 @@ map("n", "<C-f>", "<C-f>zz")
 map("n", "<C-b>", "<C-b>zz")
 map("n", "N", "Nzzzv")
 map("n", "n", "nzzzv")
--- TODO: <~> key able to toggle true/false, 1/0, +/-. Maybe need to create .lua
 --━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 --                                ┃ BUFFERS ┃
 --                                ┗━━━━━━━━━┛
 -- For other buffer key binds, see plugins/bufferline.lua
-map("n", "<C-n>",  "<cmd>bn<CR>", { desc = "Next Buffer"})
-map("n", "<C-p>", "<cmd>bp<CR>", { desc = "Previous Buffer"})
+map("n", "<leader>bn",  "<cmd>bn<CR>", { desc = "[n]ext Buffer"})
+map("n", "<leader>bp", "<cmd>bp<CR>", { desc = "[p]revious Buffer"})
 --━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 --                                ┃ WINDOWS ┃
 --                                ┗━━━━━━━━━┛
@@ -102,9 +106,9 @@ map("n", "<leader>dl", vim.diagnostic.setloclist, { desc = "Open diagnostic quic
 --                                ┃ TOGGLES ┃
 --                                ┗━━━━━━━━━┛
 -- TODO: toggle function
-map("n", "<leader>ts", function() toggle("spell", true, false, "Spell check") end, { desc = "[s]pell Check"})
-map("n", "<leader>tn", function() toggle("relativenumber", true, false, "Relative number") end, { desc = "Relative [n]umber"})
-map("n", "<leader>tN", function() toggle("number", true, false, "Line number") end, { desc = "Line [N]umber"})
+map("n", "<leader>ts", function() toggle("spell", true, false, "Spell Check") end, { desc = "[s]pell Check"})
+map("n", "<leader>tn", function() toggle("relativenumber", true, false, "Relative Line Number") end, { desc = "Relative [n]umber"})
+map("n", "<leader>tN", function() toggle("number", true, false, "Line Number") end, { desc = "Line [N]umber"})
 map("n", "<leader>tC", function() util.toggle_set_color_column() end, { desc = "Color [C]olumn" })
 --━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 --                                ┃ PLUGINS ┃

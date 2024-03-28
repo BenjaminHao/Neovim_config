@@ -99,8 +99,8 @@ return {
         ["<C-k>"] = cmp.mapping.select_prev_item(), -- previous suggestion
         ["<C-d>"] = cmp.mapping.scroll_docs(4),  -- scroll down docs(check backwards)
         ["<C-u>"] = cmp.mapping.scroll_docs(-4),  -- scroll up docs(check forwards)
-        ["<C-f>"] = cmp.mapping.scroll_docs(8),  -- scroll down docs(check forwards)
-        ["<C-b>"] = cmp.mapping.scroll_docs(-8),  -- scroll up docs(check backwards)
+        -- ["<C-f>"] = cmp.mapping.scroll_docs(8),  -- scroll down docs(check forwards)
+        -- ["<C-b>"] = cmp.mapping.scroll_docs(-8),  -- scroll up docs(check backwards)
         ["<CR>"] = cmp.mapping.confirm({ select = false }),
         ["<S-CR>"] = cmp.mapping.confirm({
           behavior = cmp.ConfirmBehavior.Replace,
