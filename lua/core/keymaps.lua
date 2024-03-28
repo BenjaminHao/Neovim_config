@@ -45,7 +45,7 @@ map("i", "<C-;>", "<end>;")
 -- input in next line
 map("i", "<C-cr>", "<end><cr>")
 -- super tilde
-map({ "n", "v" }, "`", function() util.invert_term() end)
+map({ "n", "v" }, "~", function() util.invert_term() end)
 --━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 --                             ┃ QOL KEY BINDS ┃
 --                             ┗━━━━━━━━━━━━━━━┛
@@ -79,7 +79,7 @@ map("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
 map("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
 map("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 map("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
--- Resize windows with Ctrl+Arrow keys, disable Mission control in MacOS
+-- Resize windows with Ctrl+Arrow keys (disable Mission control in MacOS first)
 map("n", "<C-up>", ":resize +2<CR>")
 map("n", "<C-down>", ":resize -2<CR>")
 map("n", "<C-right>", ":vertical resize +2<CR>")
