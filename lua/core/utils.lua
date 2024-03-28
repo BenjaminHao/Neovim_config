@@ -19,10 +19,10 @@ utils.toggle_vim_opt = function(opt, on, off, name)
   local message = name
   if vim.opt[opt]:get() == off then
     vim.opt[opt] = on
-    message = message .. ' Enabled'
+    message = message .. " Enabled"
   else
     vim.opt[opt] = off
-    message = message .. ' Disabled'
+    message = message .. " Disabled"
   end
   vim.notify(message)
 end
@@ -42,6 +42,36 @@ utils.toggle_set_color_column = function()
   else
     vim.o.colorcolumn = ""
   end
+end
+
+-- https://github.com/prdanelli/dotfiles/blob/ce07fb3b9ffff7da3c054678d396d4606923681b/neovim/lua/user/invert_term.lua
+utils.invert_term = function()
+  local terms = vim.tbl_add_reverse_lookup({
+    ["0"] = "1",
+    ["true"] = "false",
+    ["yes"] = "no",
+    ["on"] = "off",
+    ["left"] = "right",
+    ["up"] = "down",
+    ["enable"] = "disable",
+    ["+"] = "-",
+    ["=="] = "!=",
+    [">"] = "<",
+    [">="] = "<=",
+  })
+
+  local commands = {
+    ["n"] = "norm! ciw",
+    ["v"] = "norm! c",
+  }
+
+  local inverted = vim.tbl_get(terms, vim.fn.expand("<cword>"))
+  xpcall(function()
+    vim.cmd(vim.tbl_get(commands, vim.api.nvim_get_mode().mode) .. inverted)
+  end, function()
+      -- vim.notify("This term cannot be inverted.", vim.log.levels.WARN)
+      vim.cmd("norm! ~") -- toggle case as fallback
+    end)
 end
 
 return utils
