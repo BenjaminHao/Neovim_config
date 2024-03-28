@@ -9,7 +9,7 @@ return {
   event = "VeryLazy",
   init = function ()
     vim.o.timeout = true
-    vim.o.timeoutlen = 300
+    vim.o.timeoutlen = 500
   end,
   --━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
   --                          ┃ Config Function ┃
@@ -49,7 +49,7 @@ return {
       window = {
         border = "rounded", -- none, single, double, shadow
         position = "bottom", -- bottom, top
-        margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
+        margin = { 1, 2, 1, 2 }, -- extra window margin [top, right, bottom, left]
         padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
         winblend = 0, -- 0-100 transparency
         zindex = 1000, -- positive value to position WhichKey above other floating windows.
@@ -70,6 +70,9 @@ return {
     -- Document existing key chains
     wk.register({
       ["<leader>"] = {
+        S = {
+          "z=", "[S]pelling", remap = true
+        },
         b = {
           name = "[b]uffer", _ = "which_key_ignore"
         },
