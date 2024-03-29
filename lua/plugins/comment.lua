@@ -14,9 +14,9 @@ return {
   --                          ┃ Config Function ┃
   --                          ┗━━━━━━━━━━━━━━━━━┛
   config = function()
-    -- import comment plugin safely
     local comment = require("Comment")
     local ts_context_commentstring = require("ts_context_commentstring.integrations.comment_nvim")
+    local map = require("core.utils").set_vim_keymap
 
     -- enable comment
     comment.setup({
@@ -38,10 +38,14 @@ return {
     })
 
     -------------------------- Comment Key Binds -------------------------------
-    vim.keymap.set("n", "<C-Bslash>", "<Plug>(comment_toggle_linewise_current)",
-      { desc = "Comment current line", noremap = true, silent = true })
-    vim.keymap.set("x", "<C-Bslash>", "<Plug>(comment_toggle_blockwise_visual)",
-      { desc = "Comment selected lines", noremap = true, silent = true })
+    map("n", "<C-/>", "<Plug>(comment_toggle_linewise_current)",
+      { desc = "Comment current line" })
+    map("n", "<C-?>", "<Plug>(comment_toggle_blockwise_current)",
+      { desc = "Comment current line (multi-line style)" })
+    map("x", "<C-/>", "<Plug>(comment_toggle_linewise_visual)",
+      { desc = "Comment selected lines" })
+    map("x", "<C-?>", "<Plug>(comment_toggle_blockwise_visual)",
+      { desc = "Comment selected lines (multi-line style)" })
   end,
   --                            ┏━━━━━━━━━━━━━┓
   --                            ┃ Config Ends ┃

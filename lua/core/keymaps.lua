@@ -106,10 +106,10 @@ map("n", "<leader>dl", vim.diagnostic.setloclist, { desc = "Open diagnostic quic
 --                                ┃ TOGGLES ┃
 --                                ┗━━━━━━━━━┛
 -- TODO: toggle function
-map("n", "<leader>ts", function() toggle("spell", true, false, "Spell Check") end, { desc = "[s]pell Check"})
-map("n", "<leader>tn", function() toggle("relativenumber", true, false, "Relative Line Number") end, { desc = "Relative [n]umber"})
-map("n", "<leader>tN", function() toggle("number", true, false, "Line Number") end, { desc = "Line [N]umber"})
-map("n", "<leader>tC", function() util.toggle_set_color_column() end, { desc = "Color [C]olumn" })
+map("n", "<leader>Ts", function() toggle("spell", true, false, "Spell Check") end, { desc = "[s]pell Check"})
+map("n", "<leader>Tn", function() toggle("number", true, false, "Line Number") end, { desc = "Line [n]umber"})
+map("n", "<leader>TN", function() toggle("relativenumber", true, false, "Relative Line Number") end, { desc = "Relative [N]umber"})
+map("n", "<leader>TC", function() util.toggle_set_color_column() end, { desc = "Color [C]olumn" })
 --━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 --                                ┃ PLUGINS ┃
 --                                ┗━━━━━━━━━┛

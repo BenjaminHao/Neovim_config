@@ -14,6 +14,7 @@ return {
   --                          ┗━━━━━━━━━━━━━━━━━┛
   config = function()
     local bufferline = require("bufferline")
+    local map = require("core.utils").set_vim_keymap
 
     bufferline.setup({
       options = {
@@ -45,8 +46,7 @@ return {
       }
     })
     ------------------------ bufferline key binds ------------------------------
-    vim.keymap.set("n", "<leader>bD", "<cmd>BufferLineCloseOthers<cr>",
-      { desc = "[D]elete other buffers", noremap = true, silent = true })
+    map("n", "<leader>bD", "<cmd>BufferLineCloseOthers<cr>", { desc = "[D]elete other buffers" })
   end
   --                            ┏━━━━━━━━━━━━━┓
   --                            ┃ Config Ends ┃

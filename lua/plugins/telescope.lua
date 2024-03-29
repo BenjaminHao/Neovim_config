@@ -16,10 +16,10 @@ return {
     { "<leader>fh", "<cmd>Telescope help_tags<cr>",  desc = "[h]elp" },
     { "<leader>fk", "<cmd>Telescope keymaps<cr>",  desc = "[k]eymaps" },
     { "<leader>fr", "<cmd>Telescope oldfiles<cr>",  desc = "[r]ecent files" },
-    -- { "<leader>fr", "<cmd>Telescope resume<cr>",  desc = "[r]esume" },
     { "<leader>fa", "<cmd>Telescope builtin<cr>",  desc = "[a]ll" },
     { "<leader>fu", "<cmd>Telescope undo<cr>",  desc = "[u]ndo" },
     { "<leader>fw", "<cmd>Telescope grep_string<cr>",  desc = "[w]ord" },
+    { "<leader>f<leader>", "<cmd>Telescope resume<cr>",  desc = "[RESUME]" },
     -- Shortcut for searching your neovim configuration files
     { "<leader>fn", function()
       require("telescope.builtin").find_files {

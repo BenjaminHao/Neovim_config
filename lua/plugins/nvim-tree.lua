@@ -24,9 +24,9 @@ return {
 
     local function on_attach(bufnr)
       local api = require "nvim-tree.api"
-      local map = vim.keymap.set
+      local map = require("core.utils").set_vim_keymap
       local function opts(desc)
-        return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+        return { desc = "nvim-tree: " .. desc, buffer = bufnr }
       end
       map("n", "?", api.tree.toggle_help, opts "Help")
       map("n", "l", api.node.open.edit, opts "Open")
@@ -43,10 +43,10 @@ return {
       map("n", "p", api.fs.paste, opts("Paste"))
       map("n", "d", api.fs.remove, opts("Delete"))
       map("n", "D", api.fs.trash, opts("Trash"))
-      map("n", "y", api.fs.copy.filename, opts("Yank Filename"))  -- or basename
+      map("n", "y", api.fs.copy.filename, opts("Yank Filename"))  -- or .basename
       map("n", "Y", api.fs.copy.absolute_path, opts("Yank Absolute Path"))
-      map("n", "t", api.tree.toggle_custom_filter, opts("Toggle Dotfiles Files"))
-      map("n", "T", api.tree.toggle_custom_filter, opts("Toggle Hidden Files"))
+      -- map("n", "t", api.tree.toggle_custom_filter, opts("Toggle Dotfiles Files"))
+      map("n", ".", api.tree.toggle_hidden_filter, opts("Toggle Dot Files"))
       map("n", "J", api.node.navigate.sibling.last, opts("To Last Sibling"))
       map("n", "K", api.node.navigate.sibling.first, opts("To First Sibling"))
       map("n", "h", api.node.navigate.parent, opts("To Parent Directory"))
@@ -55,7 +55,10 @@ return {
       map("n", "q", api.tree.close, opts("Close"))
       map("n", "<esc>", api.tree.close, opts("Close"))
       map("n", "R", api.tree.reload, opts("Refresh"))
-      -- map("n", "S", api.tree.search_node, opts("Search")) -- this sucks, use flash
+      map("n", "S", api.tree.search_node, opts("Search")) -- this sucks
+      map('n', 'm', api.marks.toggle, opts('Bookmark'))
+      map('n', 'M', api.tree.toggle_no_bookmark_filter, opts('Check Bookmark files'))
+      map('n', '/', api.node.run.cmd, opts('Run Command'))
     end
 
     nvimtree.setup({
@@ -102,9 +105,8 @@ return {
         args = {},
       },
       filters = {
-        git_ignored = false,
-        dotfiles = false,
-        custom = { "^.git$" },
+        dotfiles = false, -- show dot files by default
+        custom = { "^.git$" }, -- not showing .git folder
       },
       git = {
         enable = true,
@@ -154,11 +156,11 @@ return {
             git = true,
             modified = true,
             diagnostics = true,
-            bookmarks = false,
+            bookmarks = true,
           },
           glyphs = {
             symlink = "",
-            bookmark = "󰆤",
+            bookmark = "",
             modified = "●",
             folder = {
               arrow_closed = "",

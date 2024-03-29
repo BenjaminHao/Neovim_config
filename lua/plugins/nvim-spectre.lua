@@ -2,7 +2,7 @@ return {
   "nvim-pack/nvim-spectre",
   cmd = "Spectre",
   keys = {
-    { "<leader>s", "<cmd>Spectre<cr>", desc = "[s]earch & Replace" }
+    { "<leader>s", "<cmd>Spectre<cr>", desc = "[s]earch/Replace" }
   },
   config = function ()
     require("spectre").setup({

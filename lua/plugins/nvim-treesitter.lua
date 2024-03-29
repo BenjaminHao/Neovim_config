@@ -21,6 +21,7 @@ return {
     local treesitter = require("nvim-treesitter.configs")
     local treesj = require("treesj")
     local context = require("treesitter-context")
+    local map = require("core.utils").set_vim_keymap
 
     --------------------------- Treesitter Setup -------------------------------
     treesitter.setup({
@@ -118,14 +119,10 @@ return {
     }
     ------------------------ Treesitter Key Binds ---------------------------------
     -- context key binds
-    vim.keymap.set("n", "[c", function() context.go_to_context(vim.v.count1) end,
-      { desc = "Go back to context", noremap = true, silent = true })
-    vim.keymap.set("n", "<leader>tc", "<cmd>TSContextToggle<cr>",
-      { desc = "[c]ontext Preview", noremap = true, silent = true })
-
+    map("n", "[c", function() context.go_to_context(vim.v.count1) end, { desc = "Go back to context" })
+    map("n", "<leader>Tc", "<cmd>TSContextToggle<cr>", { desc = "[c]ontext Preview" })
     -- Treesj key bind
-    vim.keymap.set("n", "<C-cr>", function() treesj.toggle() end,
-      { desc = "Split/joining blocks of Code", noremap = true, silent = true })
+    map("n", "<C-cr>", function() treesj.toggle() end, { desc = "Split/joining blocks of Code" })
 
   end
   --                            ┏━━━━━━━━━━━━━┓

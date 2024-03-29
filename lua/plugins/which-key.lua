@@ -91,8 +91,8 @@ return {
         m = {
           name = "[m]essage", _ = "which_key_ignore"
         },
-        t = {
-          name = "[t]oggle", _ = "which_key_ignore"
+        T = {
+          name = "[T]oggle", _ = "which_key_ignore"
         },
       }
     })
