@@ -1,7 +1,7 @@
 --╭──────────────────────────────────────────────────────────────────────────╮--
 --│                                                                          │--
 --│ FILE: plugins/comment.lua                                                │--
---│ NOTE: plugin for commenting                                              │--
+--│ DESC: plugin for commenting                                              │--
 --│                                                                          │--
 --╰──────────────────────────────────────────────────────────────────────────╯--
 return {
@@ -38,14 +38,13 @@ return {
     })
 
     -------------------------- Comment Key Binds -------------------------------
-    map("n", "<C-/>", "<Plug>(comment_toggle_linewise_current)",
-      { desc = "Comment current line" })
-    map("n", "<C-?>", "<Plug>(comment_toggle_blockwise_current)",
-      { desc = "Comment current line (multi-line style)" })
-    map("x", "<C-/>", "<Plug>(comment_toggle_linewise_visual)",
-      { desc = "Comment selected lines" })
-    map("x", "<C-?>", "<Plug>(comment_toggle_blockwise_visual)",
-      { desc = "Comment selected lines (multi-line style)" })
+    map('n', '<C-/>', function ()
+        return vim.v.count == 0
+            and '<Plug>(comment_toggle_linewise_current)'
+            or '<Plug>(comment_toggle_linewise_count)'
+    end, { desc = 'Comment line(s)', expr = true })
+
+    map('x', '<C-/>', '<Plug>(comment_toggle_blockwise_visual)', { desc = 'Comment selected lines' })
   end,
   --                            ┏━━━━━━━━━━━━━┓
   --                            ┃ Config Ends ┃

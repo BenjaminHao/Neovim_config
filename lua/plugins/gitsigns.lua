@@ -1,7 +1,7 @@
 --╭──────────────────────────────────────────────────────────────────────────╮--
 --│                                                                          │--
 --│ FILE: plugins/gitsigns.lua                                               │--
---│ NOTE: git decorations                                                    │--
+--│ DESC: git decorations                                                    │--
 --│                                                                          │--
 --╰──────────────────────────────────────────────────────────────────────────╯--
 return {
@@ -58,61 +58,44 @@ return {
         enable = false,
       },
       -------------------------- Gitsigns Key binds ----------------------------
-      -- TODO: Change key binds
       on_attach = function(bufnr)
         local gs = package.loaded.gitsigns
-
-        local function map(mode, l, r, opts)
-          local options = { noremap = true, silent = true }
-          if opts then
-            options = vim.tbl_extend("force", options, opts)
+        local map = require("core.utils").set_vim_keymap
+        local function opts(desc, extra)
+          local options = { desc = desc, buffer = bufnr }
+          if extra then
+            options = vim.tbl_extend("force", options, extra)
           end
-          opts.buffer = bufnr
-          vim.keymap.set(mode, l, r, opts)
+          return options
         end
 
         -- Navigation
         map("n", "]h", function()
-          if vim.wo.diff then
-            return "]h"
-          end
-          vim.schedule(function()
-            gs.next_hunk()
-          end)
+          if vim.wo.diff then return "]h" end
+          vim.schedule(function() gs.next_hunk() end)
           return "<Ignore>"
-        end, { expr = true, desc = "Next [h]unk" })
+        end, opts("Next [h]unk", { expr = true }))
 
         map("n", "[h", function()
-          if vim.wo.diff then
-            return "[h"
-          end
-          vim.schedule(function()
-            gs.prev_hunk()
-          end)
+          if vim.wo.diff then return "[h" end
+          vim.schedule(function() gs.prev_hunk() end)
           return "<Ignore>"
-        end, { expr = true, desc = "Previous [h]unk" })
+        end, opts("Previous [h]unk", { expr = true }))
 
         -- Actions
-        map({ "n", "v" }, "<leader>gs", "<cmd>Gitsigns stage_hunk<CR>", { desc = "[s]tage hunk" })
-        map({ "n", "v" }, "<leader>gr", "<cmd>Gitsigns reset_hunk<CR>", { desc = "[r]eset hunk" })
-        map("n", "<leader>gu", gs.undo_stage_hunk, { desc = "[u]ndo stage hunk" })
-        map("n", "<leader>gp", gs.preview_hunk_inline, { desc = "[p]review hunk" })
-        map("n", "<leader>gP", gs.preview_hunk, { desc = "[P]review hunk inline" })
-        map("n", "<leader>gS", gs.stage_buffer, { desc = "[S]tage buffer" })
-        map("n", "<leader>gR", gs.reset_buffer, { desc = "[R]eset buffer" })
-        map("n", "<leader>gb", function()
-          gs.blame_line({ full = true })
-        end, { desc = "[b]lame line" })
-        map("n", "<leader>gd", gs.diffthis, { desc = "[d]iff this" })
-        map("n", "<leader>gD", function()
-          gs.diffthis("~")
-        end, { desc = "[D]iff this against parent" })
+        map({ "n", "v" }, "<leader>gs", "<cmd>Gitsigns stage_hunk<CR>", opts("[s]tage hunk"))
+        map({ "n", "v" }, "<leader>gr", "<cmd>Gitsigns reset_hunk<CR>", opts("[r]eset hunk"))
+        map("n", "<leader>gu", gs.undo_stage_hunk, opts("[u]ndo stage hunk"))
+        map("n", "<leader>gp", gs.preview_hunk_inline, opts("[p]review hunk"))
+        map("n", "<leader>gP", gs.preview_hunk, opts("[P]review hunk inline"))
+        map("n", "<leader>gS", gs.stage_buffer, opts("[S]tage buffer"))
+        map("n", "<leader>gR", gs.reset_buffer, opts("[R]eset buffer"))
+        map("n", "<leader>gb", function() gs.blame_line({ full = true }) end, opts("[b]lame line"))
+        map("n", "<leader>gd", gs.diffthis, opts("[d]iff this"))
+        map("n", "<leader>gD", function() gs.diffthis("~") end, opts("[D]iff this against parent"))
 
-        map("n", "<leader>tb", gs.toggle_current_line_blame, { desc = "[b]lame line" })
-        map("n", "<leader>td", gs.toggle_deleted, { desc = "git [d]eleted" })
-
-        -- Text object
-        map({ "o", "x" }, "ih", "<cmd><C-U>Gitsigns select_hunk<CR>", { desc = "Select hunk" })
+        map("n", "<leader>Tb", gs.toggle_current_line_blame, opts("[b]lame line"))
+        map("n", "<leader>Td", gs.toggle_deleted, opts("git [d]eleted"))
       end,
     })
   end

@@ -1,7 +1,7 @@
 --╭──────────────────────────────────────────────────────────────────────────╮--
 --│                                                                          │--
 --│ FILE: plugins/nvim-lspconfig.lua                                         │--
---│ NOTE: LSP config file (npm is required)                                  │--
+--│ DESC: LSP config file (npm is required)                                  │--
 --│                                                                          │--
 --╰──────────────────────────────────────────────────────────────────────────╯--
 -- TODO: Restructuring LSP files, add neodev.nvim

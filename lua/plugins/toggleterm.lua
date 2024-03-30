@@ -12,7 +12,7 @@ return {
   config = function()
     require("toggleterm").setup{
       shell = vim.o.shell,      -- Change the default shell. Can be a string or a function returning a string
-      size = 10,
+      size = 15,
       direction = "horizontal", -- direction = "vertical" | "horizontal" | "tab" | "float",
       open_mapping = "<C-`>",
       terminal_mappings = true, -- whether or not the open mapping applies in the opened terminals

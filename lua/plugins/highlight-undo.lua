@@ -1,7 +1,7 @@
 --╭──────────────────────────────────────────────────────────────────────────╮--
 --│                                                                          │--
 --│ FILE: plugins/highlight-undo.nvim                                        │--
---│ NOTE: Highlight changed text after Undo/Redo operations                  │--
+--│ DESC: Highlight changed text after Undo/Redo operations                  │--
 --│                                                                          │--
 --╰──────────────────────────────────────────────────────────────────────────╯--
 return {

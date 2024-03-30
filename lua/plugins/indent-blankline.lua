@@ -1,7 +1,7 @@
 --╭──────────────────────────────────────────────────────────────────────────╮--
 --│                                                                          │--
 --│ FILE: plugins/indent-blankline.nvim                                      │--
---│ NOTE: Indentation guides for Neovim                                      │--
+--│ DESC: Indentation guides for Neovim                                      │--
 --│                                                                          │--
 --╰──────────────────────────────────────────────────────────────────────────╯--
 return {

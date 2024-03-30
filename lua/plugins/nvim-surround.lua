@@ -1,7 +1,7 @@
 --╭──────────────────────────────────────────────────────────────────────────╮--
 --│                                                                          │--
 --│ FILE: plugins/nvim-surround.lua                                          │--
---│ NOTE: surround selections                                                │--
+--│ DESC: surround selections                                                │--
 --│                                                                          │--
 --╰──────────────────────────────────────────────────────────────────────────╯--
 return {
@@ -11,28 +11,21 @@ return {
   --━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
   --                          ┃ Config Function ┃
   --                          ┗━━━━━━━━━━━━━━━━━┛
-  -- TODO: add key binds, resolve conflict with hardtime
+  -- NOTE: maybe need to change key binds later
   config = function()
     require("nvim-surround").setup({
       keymaps = {
         insert = false,
         insert_line = false,
-        normal = false,
-        normal_cur = false,
-        normal_line = false,
-        normal_cur_line = false,
-        visual = "<S-s>",
-        visual_line = false,
-        delete = false,
-        change = false,
-      },
-      aliases = {
-        ["a"] = false,
-        ["b"] = false,
-        ["B"] = false,
-        ["r"] = false,
-        ["q"] = false,
-        ["s"] = false,
+        normal = "s",
+        normal_cur = "ss",
+        normal_line = "S",
+        normal_cur_line = "SS",
+        visual = "s",
+        visual_line = "S",
+        delete = "ds",
+        change = "cs",
+        change_line = "cS"
       },
     })
   end

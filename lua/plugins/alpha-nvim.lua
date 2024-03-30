@@ -1,7 +1,7 @@
 --╭──────────────────────────────────────────────────────────────────────────╮--
 --│                                                                          │--
 --│ FILE: plugins/alpha-nvim.lua                                             │--
---│ NOTE: Startup screen plugin                                              │--
+--│ DESC: Startup screen plugin                                              │--
 --│                                                                          │--
 --╰──────────────────────────────────────────────────────────────────────────╯--
 return {
@@ -47,7 +47,6 @@ return {
     -- }
 
     -- Set menu
-    -- FIX: resolve conflict with which-key
     dashboard.section.buttons.val = {
       dashboard.button("r", "󰈙 " .. " Recent file", "<cmd>Telescope oldfiles<cr>"),
       dashboard.button("n", "󰈔 " .. " New file", "<cmd>ene <bar> startinsert<cr>"),
@@ -83,7 +82,6 @@ return {
       callback = function()
         local stats = require("lazy").stats()
         local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-
         -- local now = os.date "%d-%m-%Y %H:%M:%S"
         local version = " eovim -  " .. vim.version().major .. "." .. vim.version().minor .. "." .. vim.version().patch
         -- local fortune = require "alpha.fortune"

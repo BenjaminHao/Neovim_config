@@ -1,7 +1,7 @@
 --╭──────────────────────────────────────────────────────────────────────────╮--
 --│                                                                          │--
 --│ FILE: plugins/nvim-tree.lua                                              │--
---│ NOTE: file explorer plugin                                               │--
+--│ DESC: file explorer plugin                                               │--
 --│                                                                          │--
 --╰──────────────────────────────────────────────────────────────────────────╯--
 return {
@@ -31,10 +31,10 @@ return {
       map("n", "?", api.tree.toggle_help, opts "Help")
       map("n", "l", api.node.open.edit, opts "Open")
       map("n", "<cr>", api.node.open.edit, opts "Open")
-      map("n", "<Tab>", api.node.open.preview, opts("Open Preview"))
-      map("n", "s", api.node.open.horizontal, opts("Open With Horizontal Split"))
-      map("n", "v", api.node.open.vertical, opts("Open With Vertical Split"))
-      map("n", "o", api.node.run.system, opts("System Open"))
+      map("n", "<Tab>", api.node.open.preview, opts("Open (Preview)"))
+      map("n", "s", api.node.open.horizontal, opts("Open (Horizontal)"))
+      map("n", "v", api.node.open.vertical, opts("Open (Vertical)"))
+      map("n", "o", api.node.run.system, opts("Open (Default App)"))
       map("n", "i", api.node.show_info_popup, opts("Info"))
       map("n", "a", api.fs.create, opts("Create"))
       map("n", "r", api.fs.rename, opts("Rename"))
@@ -45,7 +45,7 @@ return {
       map("n", "D", api.fs.trash, opts("Trash"))
       map("n", "y", api.fs.copy.filename, opts("Yank Filename"))  -- or .basename
       map("n", "Y", api.fs.copy.absolute_path, opts("Yank Absolute Path"))
-      -- map("n", "t", api.tree.toggle_custom_filter, opts("Toggle Dotfiles Files"))
+      -- map("n", "t", api.tree.toggle_custom_filter, opts("Toggle Custom Filter"))
       map("n", ".", api.tree.toggle_hidden_filter, opts("Toggle Dot Files"))
       map("n", "J", api.node.navigate.sibling.last, opts("To Last Sibling"))
       map("n", "K", api.node.navigate.sibling.first, opts("To First Sibling"))
@@ -56,9 +56,9 @@ return {
       map("n", "<esc>", api.tree.close, opts("Close"))
       map("n", "R", api.tree.reload, opts("Refresh"))
       map("n", "S", api.tree.search_node, opts("Search")) -- this sucks
-      map('n', 'm', api.marks.toggle, opts('Bookmark'))
-      map('n', 'M', api.tree.toggle_no_bookmark_filter, opts('Check Bookmark files'))
-      map('n', '/', api.node.run.cmd, opts('Run Command'))
+      map('n', 'm', api.marks.toggle, opts('Set Bookmark'))
+      map('n', 'M', api.tree.toggle_no_bookmark_filter, opts('Toggle Bookmarks'))
+      map('n', 'e', api.node.run.cmd, opts('Execute Command'))
     end
 
     nvimtree.setup({
@@ -205,7 +205,7 @@ return {
         require_confirm = true,
       },
       notify = {
-        threshold = vim.log.levels.ERROR,
+        threshold = vim.log.levels.INFO,
         absolute_path = true,
       },
       help = {

@@ -1,7 +1,7 @@
 --╭──────────────────────────────────────────────────────────────────────────╮--
 --│                                                                          │--
 --│ FILE: plugins/dressing.lua                                               │--
---│ NOTE: UI improvement plugin, better looking promt                        │--
+--│ DESC: UI improvement plugin, better looking promt                        │--
 --│                                                                          │--
 --╰──────────────────────────────────────────────────────────────────────────╯--
 return {
@@ -10,7 +10,6 @@ return {
   --━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
   --                          ┃ Config Function ┃
   --                          ┗━━━━━━━━━━━━━━━━━┛
-  -- FIX: title missing if too long
   config = function()
     require("dressing").setup({
       input = {

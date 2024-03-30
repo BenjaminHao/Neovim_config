@@ -1,7 +1,7 @@
 --╭──────────────────────────────────────────────────────────────────────────╮--
 --│                                                                          │--
 --│ FILE: plugins/lualine.lua                                                │--
---│ NOTE: Status line plugin                                                 │--
+--│ DESC: Status line plugin                                                 │--
 --│                                                                          │--
 --╰──────────────────────────────────────────────────────────────────────────╯--
 return {
@@ -60,12 +60,7 @@ return {
           { "branch" }
         },
         lualine_c = {},
-        lualine_x = {
-          { -- show @recording message
-            require("noice").api.statusline.mode.get,
-            cond = require("noice").api.statusline.mode.has,
-          }
-        },
+        lualine_x = {},
         lualine_y = { "location", "progress" },
         lualine_z = {
           {

@@ -1,12 +1,13 @@
 --╭──────────────────────────────────────────────────────────────────────────╮--
 --│                                                                          │--
 --│ FILE: core/keymaps.lua                                                   │--
---│ NOTE: Custom key binds                                                   │--
+--│ DESC: Custom key binds                                                   │--
 --│                                                                          │--
 --╰──────────────────────────────────────────────────────────────────────────╯--
 
 local util = require("core.utils")
 local map = require("core.utils").set_vim_keymap
+local unmap = require("core.utils").del_vim_keymap
 local toggle = require("core.utils").toggle_vim_opt
 --━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━--
 --        ┃                        LEADER KEY                         ┃
@@ -14,13 +15,18 @@ local toggle = require("core.utils").toggle_vim_opt
 --        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "  -- No use of this now
+--━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
+--                               ┃ Unmappings ┃
+--                               ┗━━━━━━━━━━━━┛
+unmap("n", "<C-z>") -- <Ctrl-z>: suspend Neovim, "fg" in cmd to get back
+unmap("n", "Q") -- What is this anyway
+unmap("n", "<C-o>") -- use which-key ' key to jump
+unmap("n", "<C-i>") -- <Ctrl-i> = <tab>, key bind conflict
+unmap("i", "<C-h>") -- <Ctrl-h> = <delete>, key bind conflict
+unmap("i", "<C-j>") -- <Ctrl-j> = <enter>, key bind conflict
 --━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 --                           ┃ GENERAL KEY BINDS ┃
 --                           ┗━━━━━━━━━━━━━━━━━━━┛
--- Unmapping
-map("n", "<C-z>", "<nop>")  -- <Ctrl-z>: suspend Neovim, "fg" in cmd to get back
-map("i", "<C-h>", "<nop>")  -- <Ctrl-h> = <delete>, annoying with cmp key bind
-map("i", "<C-j>", "<nop>")  -- <Ctrl-j> = <enter>, annoying with cmp key bind
 -- Map ctrl-c to esc
 map("i", "<C-c>", "<esc>")
 -- Move to beginning/end of the line
@@ -31,9 +37,6 @@ map("x", "J", [[:m '>+1<cr><cr>gv=gv]], { desc = "Move line down" })
 map("x", "K", [[:m '<-2<cr><cr>gv=gv]], { desc = "Move line up" })
 -- Move text to next line, corresponding key bind for <J>
 map("n", "K", "i<cr><esc>")
--- Insert lines above/below without leaving normal mode
-map("n", "<cr>", "o<esc>k")
-map("n", "<S-cr>", "O<esc>j")
 -- Emacs like key binds in insert mode for better typing experience
 map("i", "<C-a>", "<home>")
 map("i", "<C-e>", "<end>")
@@ -45,19 +48,16 @@ map("i", "<C-;>", "<end>;")
 -- input in next line
 map("i", "<C-cr>", "<end><cr>")
 -- super tilde
-map({ "n", "v" }, "~", function() util.invert_term() end)
---━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
---                             ┃ QOL KEY BINDS ┃
---                             ┗━━━━━━━━━━━━━━━┛
+map({ "n", "x" }, "~", function() util.invert_term() end)
 -- Clear search highlights
-map("n", "<esc>","<esc><cmd>noh<cr>", { desc = "Clear search highlights" })
+map("n", "<esc>","<cmd>noh<cr><esc>")
 -- Better indenting
-map("v", "<", "<gv")
-map("v", ">", ">gv")
+map("x", "<", "<gv")
+map("x", ">", ">gv")
 -- Visual overwrite paste
-map("v", "p", '"_dP')
--- Do not copy on x
-map({ "n", "v" }, "x", '"_x')
+map("x", "p", '"_dP')
+-- Do not copy on x. In Visual mode, d for cut, x for delete
+map({ "n", "x" }, "x", '"_x')
 -- Keep window centered when going up/down
 map("n", "J", "mzJ`z")
 map("n", "<C-d>", "<C-d>zz")
@@ -69,16 +69,21 @@ map("n", "n", "nzzzv")
 --━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 --                                ┃ BUFFERS ┃
 --                                ┗━━━━━━━━━┛
+-- TODO: buffer key binds
 -- For other buffer key binds, see plugins/bufferline.lua
 map("n", "<leader>bn",  "<cmd>bn<CR>", { desc = "[n]ext Buffer"})
 map("n", "<leader>bp", "<cmd>bp<CR>", { desc = "[p]revious Buffer"})
 --━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 --                                ┃ WINDOWS ┃
 --                                ┗━━━━━━━━━┛
-map("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
-map("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
-map("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
-map("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
+map("n", "<C-h>", "<C-w>h", { desc = "Move focus to the left window" })
+map("n", "<C-l>", "<C-w>l", { desc = "Move focus to the right window" })
+map("n", "<C-j>", "<C-w>j", { desc = "Move focus to the lower window" })
+map("n", "<C-k>", "<C-w>k", { desc = "Move focus to the upper window" })
+map("n", "<C-S-h>", "<C-w>H", { desc = "Move window to the left" })
+map("n", "<C-S-l>", "<C-w>L", { desc = "Move window to the right" })
+map("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the bottom" })
+map("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the top" })
 -- Resize windows with Ctrl+Arrow keys (disable Mission control in MacOS first)
 map("n", "<C-up>", ":resize +2<CR>")
 map("n", "<C-down>", ":resize -2<CR>")
@@ -88,13 +93,13 @@ map("n", "<C-left>", ":vertical resize -2<CR>")
 --                                  ┃ LSP ┃
 --                                  ┗━━━━━┛
 -- TODO:Move to lsp-config
-map("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", { desc = "[D]eclaration"})
-map("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", { desc = "[d]efinition"})
-map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", { desc = "[i]mplementation"})
-map("n", "M", "<cmd>lua vim.lsp.buf.hover()<CR>", {desc = "[M]ore Info"})
-map("n", "<C-m>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", {desc = "Signature Help"})
-map("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", { desc = "[r]eferences"})
-map("n", "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<CR>", { desc = "[r]ename"})
+map("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", { desc = "[D]eclaration" })
+map("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", { desc = "[d]efinition" })
+map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", { desc = "[i]mplementation" })
+map("n", "M", "<cmd>lua vim.lsp.buf.hover()<CR>", { desc = "[M]ore Info" })
+map("n", "<C-m>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", { desc = "Signature Help" })
+map("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", { desc = "[r]eferences" })
+map("n", "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<CR>", { desc = "[r]ename" })
 --━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 --                              ┃ DIAGNOSTICS ┃
 --                              ┗━━━━━━━━━━━━━┛
@@ -105,11 +110,10 @@ map("n", "<leader>dl", vim.diagnostic.setloclist, { desc = "Open diagnostic quic
 --━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 --                                ┃ TOGGLES ┃
 --                                ┗━━━━━━━━━┛
--- TODO: toggle function
 map("n", "<leader>Ts", function() toggle("spell", true, false, "Spell Check") end, { desc = "[s]pell Check"})
-map("n", "<leader>Tn", function() toggle("number", true, false, "Line Number") end, { desc = "Line [n]umber"})
-map("n", "<leader>TN", function() toggle("relativenumber", true, false, "Relative Line Number") end, { desc = "Relative [N]umber"})
-map("n", "<leader>TC", function() util.toggle_set_color_column() end, { desc = "Color [C]olumn" })
+map("n", "<leader>TL", function() toggle("number", true, false, "Line Number") end, { desc = "[L]ine Number"})
+map("n", "<leader>Tl", function() toggle("relativenumber", true, false, "Relative Line Number") end, { desc = "[l]ine Relative Number"})
+map("n", "<leader>Tr", function() util.toggle_set_color_column() end, { desc = "[r]uler Column" })
 --━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 --                                ┃ PLUGINS ┃
 --                                ┗━━━━━━━━━┛

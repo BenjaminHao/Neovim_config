@@ -1,7 +1,7 @@
 --╭──────────────────────────────────────────────────────────────────────────╮--
 --│                                                                          │--
 --│ FILE: plugins/todo-comments.lua                                          │--
---│ NOTE: Highlight and search for todo comments                             │--
+--│ DESC: Highlight and search for todo comments                             │--
 --│                                                                          │--
 --╰──────────────────────────────────────────────────────────────────────────╯--
 return {
@@ -19,14 +19,13 @@ return {
       signs = false, -- show icons in the signs column
       sign_priority = 8, -- sign priority
       keywords = {
-        FIX = { icon = " ", color = "error", alt = { "FIXME", "BUG" }},
         TODO = { icon = "󰝖 ", color = "info" },
+        FIX = { icon = " ", color = "error", alt = { "FIXME", "BUG" }},
+        NOTE = { icon = " ", color = "hint", alt = { "INFO", "HELP" }},
         HACK = { icon = " ", color = "warning" },
         WARN = { icon = " ", color = "warning", alt = { "WARNING" }},
         PERF = { icon = "󰁫 " },
         TEST = { icon = " ", color = "test" },
-        FILE = { icon = " " },
-        NOTE = { icon = " ", color = "hint", alt = { "INFO" }},
       },
       gui_style = {
         fg = "NONE", -- The gui style to use for the fg highlight group.

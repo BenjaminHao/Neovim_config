@@ -1,7 +1,7 @@
 --╭──────────────────────────────────────────────────────────────────────────╮--
 --│                                                                          │--
 --│ FILE: plugins/noice.lua                                                  │--
---│ NOTE: Default UI replacement plugin                                      │--
+--│ DESC: Default UI replacement plugin                                      │--
 --│                                                                          │--
 --╰──────────────────────────────────────────────────────────────────────────╯--
 return {
@@ -15,8 +15,12 @@ return {
   --                          ┃ Config Function ┃
   --                          ┗━━━━━━━━━━━━━━━━━┛
   config = function ()
+    local noice = require("noice")
+    local notify = require("notify")
+    local map = require("core.utils").set_vim_keymap
+
     ----------------------------- Noice Setup ----------------------------------
-    require("noice").setup({
+    noice.setup({
       cmdline = {
         enabled = true, -- enables the Noice cmdline UI
         view = "cmdline_popup", -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
@@ -28,8 +32,8 @@ return {
           -- icon_hl_group: optional hl_group for the icon
           -- title: set to anything or empty string to hide
           cmdline = { pattern = "^:", icon = "", lang = "vim" },
-          search_down = { kind = "search", pattern = "^/", icon = " ", lang = "regex" },
-          search_up = { kind = "search", pattern = "^%?", icon = " ", lang = "regex" },
+          search_down = { kind = "search", pattern = "^/", icon = " ", lang = "regex" },
+          search_up = { kind = "search", pattern = "^%?", icon = " ", lang = "regex" },
           filter = { pattern = "^:%s*!", icon = "$", lang = "bash" },
           lua = { pattern = { "^:%s*lua%s+", "^:%s*lua%s*=%s*", "^:%s*=%s*" }, icon = "", lang = "lua" },
           help = { pattern = "^:%s*he?l?p?%s+", icon = "" },
@@ -40,10 +44,14 @@ return {
       popupmenu = {
         enabled = true, -- enables the Noice popupmenu UI
         -- @type "nui"|"cmp"
-        backend = "cmp", -- backend to use to show regular cmdline completions
+        backend = "nui", -- backend to use to show regular cmdline completions
         -- @type NoicePopupmenuItemKind|false
         -- Icons for completion item kinds (see defaults at noice.config.icons.kinds)
         kind_icons = {}, -- set to `false` to disable icons
+      },
+      redirect = {
+        view = "notify",
+        filter = { event = "msg_show" },
       },
       lsp = {
           progress = {
@@ -64,13 +72,13 @@ return {
             ["cmp.entry.get_documentation"] = true,
           },
           hover = {
-            enabled = false,
+            enabled = true,
             silent = false, -- set to true to not show a message if hover is not available
             view = nil, -- when nil, use defaults from documentation
             opts = {}, -- merged with defaults from documentation
           },
           signature = {
-            enabled = false,
+            enabled = true,
             auto_open = {
               enabled = true,
               trigger = true, -- Automatically show signature help when typing a trigger character from the LSP
@@ -99,22 +107,22 @@ return {
           },
       },
       routes = {
-        --[[ { -- show @recording message
+        { -- show @recording message
           filter = { event = "msg_showmode" },
-          view = "mini",
-        }, ]]
+          view = "notify",
+        },
         {
           filter = {
             event = "msg_show",
             kind = "",
             any = {
-              { find = "%d+L, %d+B" }, -- for written messages
+              -- { find = "%d+L, %d+B" }, -- for written messages
               { find = "; after #%d+" }, -- for redo messages
               { find = "; before #%d+" }, -- for undo messages
+              { find = "%d+ lines" }, -- for line move/indent messages
             },
           },
-          -- opts = { skip = true }, -- hide messgage
-          view = "mini", -- show with mini
+          opts = { skip = true }, -- hide messages
         },
       },
       presets = {
@@ -125,11 +133,11 @@ return {
         long_message_to_split = true, -- long messages will be sent to a split
         -- TODO: check inc-rename.nvim
         inc_rename = true, -- enables an input dialog for inc-rename.nvim
-        lsp_doc_border = false, -- add a border to hover docs and signature help
+        lsp_doc_border = true, -- add a border to hover docs and signature help
       },
     })
     ---------------------------- nvim-notify Setup -----------------------------
-    require("notify").setup({
+    notify.setup({
       icons = {
         DEBUG = "󱕼 ",
         ERROR = "󰱮 ",
@@ -140,14 +148,22 @@ return {
       timeout = 2000,
     })
     -------------------------- Noice Key Binds ---------------------------------
-    vim.keymap.set("n", "<leader>fm", "<cmd>Telescope notify<cr>", { desc = "[m]essage" })
-    --[[ { "<S-Enter>", function() require("noice").redirect(vim.fn.getcmdline()) end, mode = "c", desc = "Redirect Cmdline" },
-    { "<leader>ml", function() require("noice").cmd("last") end, desc = "Noice Last Message" },
-    { "<leader>mh", function() require("noice").cmd("history") end, desc = "Noice History" },
-    { "<leader>ma", function() require("noice").cmd("all") end, desc = "Noice All" },
-    { "<leader>md", function() require("noice").cmd("dismiss") end, desc = "Dismiss All" },
-    { "<c-f>", function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end, silent = true, expr = true, desc = "Scroll forward", mode = { "i", "n", "s" } },
-    { "<c-b>", function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, silent = true, expr = true, desc = "Scroll backward", mode = { "i", "n", "s" } }, ]]
+    -- for Noice messages
+    map("n", "<leader>fm", "<cmd>Telescope notify<cr>", { desc = "[m]essage" })
+    map("n", "<leader>ml", function() noice.cmd("last") end, { desc = "[l]ast Message" })
+    map("n", "<leader>mh", function() noice.cmd("history") end, { desc = "[h]istory Messages" })
+    map("n", "<leader>md", function() noice.cmd("dismiss") end, { desc = "[d]ismiss Messages" })
+
+    -- for Noice lsp docs
+    map({ "i", "n", "s" }, "<c-f>", function()
+      if not require("noice.lsp").scroll(4) then return "<c-f>" end
+    end, { expr = true, desc = "Scroll forward" })
+    map({ "i", "n", "s" }, "<c-b>", function()
+      if not require("noice.lsp").scroll(-4) then return "<c-b>" end
+    end, { expr = true, desc = "Scroll backward" })
+
+    -- run command without closing cmdline, so you can change it later
+    map("c", "<S-cr>", function() noice.redirect(vim.fn.getcmdline()) end, { desc = "Redirect Cmdline" })
   end
   --                            ┏━━━━━━━━━━━━━┓
   --                            ┃ Config Ends ┃

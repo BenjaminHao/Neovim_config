@@ -1,7 +1,7 @@
 --╭──────────────────────────────────────────────────────────────────────────╮--
 --│                                                                          │--
 --│ FILE: core/autocmds.lua                                                  │--
---│ NOTE: Some better settings                                               │--
+--│ DESC: Some better settings                                               │--
 --│                                                                          │--
 --╰──────────────────────────────────────────────────────────────────────────╯--
 local autocmd = vim.api.nvim_create_autocmd
@@ -34,15 +34,6 @@ autocmd("BufEnter", {
   callback = function()
     vim.opt.formatoptions:remove { "c", "r", "o" }
   end,
-})
-
-autocmd("BufWinEnter", {
-  desc = "Open help window in a vertical split to the left",
-  group = general,
-    pattern = { "*.txt" },
-    callback = function()
-        if vim.o.filetype == "help" then vim.cmd.wincmd("H") end --"HJKL"
-    end
 })
 
 autocmd("FileType", {
@@ -98,4 +89,13 @@ autocmd({ "VimResized" }, {
     vim.cmd("tabdo wincmd =")
     vim.cmd("tabnext " .. current_tab)
   end,
+})
+
+autocmd("BufWinEnter", {
+  desc = "Open help window in a vertical split to the left",
+  group = general,
+  pattern = { "*.txt" },
+  callback = function()
+    if vim.o.filetype == "help" then vim.cmd.wincmd("H") end --"HJKL"
+  end
 })

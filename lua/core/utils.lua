@@ -1,7 +1,7 @@
 --╭──────────────────────────────────────────────────────────────────────────╮--
 --│                                                                          │--
 --│ FILE: core/utils.lua                                                     │--
---│ NOTE: util functions                                                     │--
+--│ DESC: util functions                                                     │--
 --│                                                                          │--
 --╰──────────────────────────────────────────────────────────────────────────╯--
 -- TODO: https://dev.to/voyeg3r/my-lazy-neovim-config-3h6o
@@ -13,6 +13,10 @@ utils.set_vim_keymap = function(mode, lhs, rhs, opts)
     options = vim.tbl_extend("force", options, opts)
   end
   vim.keymap.set(mode, lhs, rhs, options)
+end
+
+utils.del_vim_keymap = function(mode, key)
+  vim.keymap.set(mode, key, "<nop>")
 end
 
 utils.toggle_vim_opt = function(opt, on, off, name)
@@ -52,7 +56,10 @@ utils.invert_term = function()
     ["on"] = "off",
     ["left"] = "right",
     ["up"] = "down",
+    ["before"] = "after",
+    ["first"] = "last",
     ["enable"] = "disable",
+    ["enabled"] = "disabled",
     ["+"] = "-",
     ["=="] = "!=",
     [">"] = "<",

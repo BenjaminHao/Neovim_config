@@ -1,7 +1,7 @@
 --╭──────────────────────────────────────────────────────────────────────────╮--
 --│                                                                          │--
 --│ FILE: plugins/nvim-treesitter.lua                                        │--
---│ NOTE: Syntax highlighting plugin (a C complier is required)              │--
+--│ DESC: Syntax highlighting plugin (a C complier is required)              │--
 --│                                                                          │--
 --╰──────────────────────────────────────────────────────────────────────────╯--
 return {
@@ -105,8 +105,8 @@ return {
       incremental_selection = {
         enable = true,
         keymaps = {
-          init_selection = "<C-space>",
-          node_incremental = "<C-space>",
+          init_selection = "<cr>",
+          node_incremental = "<cr>",
           scope_incremental = false,
           node_decremental = "<bs>",
         },
@@ -122,7 +122,7 @@ return {
     map("n", "[c", function() context.go_to_context(vim.v.count1) end, { desc = "Go back to context" })
     map("n", "<leader>Tc", "<cmd>TSContextToggle<cr>", { desc = "[c]ontext Preview" })
     -- Treesj key bind
-    map("n", "<C-cr>", function() treesj.toggle() end, { desc = "Split/joining blocks of Code" })
+    map("n", "<tab>", function() treesj.toggle() end, { desc = "Split/joining blocks of Code" })
 
   end
   --                            ┏━━━━━━━━━━━━━┓
