@@ -10,7 +10,6 @@ return {
   event = { "BufReadPre", "BufNewFile" },  -- lazy-load on events
   dependencies = {
     "nvim-treesitter/nvim-treesitter-textobjects", -- syntax aware text-objects
-    "nvim-treesitter/nvim-treesitter-context", -- shows the context
     "windwp/nvim-ts-autotag",
     "Wansmer/treesj", -- for splitting/joning blocks of code
   },
@@ -20,7 +19,6 @@ return {
   config = function()
     local treesitter = require("nvim-treesitter.configs")
     local treesj = require("treesj")
-    local context = require("treesitter-context")
     local map = require("core.utils").set_vim_keymap
 
     --------------------------- Treesitter Setup -------------------------------
@@ -114,13 +112,11 @@ return {
     })
 
     ---------------------------- Treesj Config ---------------------------------
-    treesj.setup = {
-      use_default_keymaps = false
-    }
+    treesj.setup({
+      use_default_keymaps = false,
+    })
+
     ------------------------ Treesitter Key Binds ---------------------------------
-    -- context key binds
-    map("n", "[c", function() context.go_to_context(vim.v.count1) end, { desc = "Go back to context" })
-    map("n", "<leader>Tc", "<cmd>TSContextToggle<cr>", { desc = "[c]ontext Preview" })
     -- Treesj key bind
     map("n", "<tab>", function() treesj.toggle() end, { desc = "Split/joining blocks of Code" })
 
