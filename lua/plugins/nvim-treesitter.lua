@@ -7,7 +7,7 @@
 return {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
-  event = { "BufReadPre", "BufNewFile" },  -- lazy-load on events
+  event = { "BufReadPost", "BufNewFile" },  -- lazy-load on events
   dependencies = {
     "nvim-treesitter/nvim-treesitter-textobjects", -- syntax aware text-objects
     "windwp/nvim-ts-autotag",

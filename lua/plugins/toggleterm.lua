@@ -46,9 +46,9 @@ return {
       -- on_stderr = fun(t: Terminal, job: number, data: string[], name: string) -- callback for processing output on stderr
       -- on_exit = fun(t: Terminal, job: number, exit_code: number, name: string) -- function to run when terminal process exits
       -- shade_filetypes = {},
-      -- autochdir = false, -- when neovim changes it current directory the terminal will change it"s own when next it"s opened
+      -- autochdir = false, -- when neovim changes it current directory the terminal will change it's own when next it's opened
       -- highlights = {
-      --   -- highlights which map to a highlight group name and a table of it"s values
+      --   -- highlights which map to a highlight group name and a table of it's values
       --   -- NOTE - this is only a subset of values, any group placed here will be set for the terminal window split
       --   Normal = {
       --     guibg = "<VALUE-HERE>",

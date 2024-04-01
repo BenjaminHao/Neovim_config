@@ -6,7 +6,7 @@
 --╰──────────────────────────────────────────────────────────────────────────╯--
 return {
   "lewis6991/gitsigns.nvim",
-  event = { "BufReadPre", "BufNewFile" },
+  event = { "BufReadPost", "BufNewFile" },
   --━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
   --                          ┃ Config Function ┃
   --                          ┗━━━━━━━━━━━━━━━━━┛
@@ -61,11 +61,8 @@ return {
       on_attach = function(bufnr)
         local gs = package.loaded.gitsigns
         local map = require("core.utils").set_vim_keymap
-        local function opts(desc, extra)
+        local function opts(desc)
           local options = { desc = desc, buffer = bufnr }
-          if extra then
-            options = vim.tbl_extend("force", options, extra)
-          end
           return options
         end
 
@@ -74,13 +71,13 @@ return {
           if vim.wo.diff then return "]h" end
           vim.schedule(function() gs.next_hunk() end)
           return "<Ignore>"
-        end, opts("Next [h]unk", { expr = true }))
+        end, { desc = "Next [h]unk", buffer = bufnr, expr = true })
 
         map("n", "[h", function()
           if vim.wo.diff then return "[h" end
           vim.schedule(function() gs.prev_hunk() end)
           return "<Ignore>"
-        end, opts("Previous [h]unk", { expr = true }))
+        end, { desc = "Previous [h]unk", buffer = bufnr, expr = true })
 
         -- Actions
         map({ "n", "v" }, "<leader>gs", "<cmd>Gitsigns stage_hunk<CR>", opts("[s]tage hunk"))

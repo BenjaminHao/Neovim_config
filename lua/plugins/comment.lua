@@ -6,7 +6,7 @@
 --╰──────────────────────────────────────────────────────────────────────────╯--
 return {
   "numToStr/Comment.nvim",
-  event = { "BufReadPre", "BufNewFile" },
+  event = { "BufReadPost", "BufNewFile" },
   dependencies = {
     "JoosepAlviste/nvim-ts-context-commentstring",
   },
@@ -43,8 +43,15 @@ return {
             and '<Plug>(comment_toggle_linewise_current)'
             or '<Plug>(comment_toggle_linewise_count)'
     end, { desc = 'Comment line(s)', expr = true })
-
-    map('x', '<C-/>', '<Plug>(comment_toggle_blockwise_visual)', { desc = 'Comment selected lines' })
+    map('n', '<C-?>', function ()
+        return vim.v.count == 0
+            and '<Plug>(comment_toggle_blockwise_current)'
+            or '<Plug>(comment_toggle_blockwise_count)'
+    end, { desc = 'Comment line(s) (multi-line style)', expr = true })
+    map("x", "<C-/>", "<Plug>(comment_toggle_linewise_visual)",
+      { desc = "Comment selected lines" })
+    map("x", "<C-?>", "<Plug>(comment_toggle_blockwise_visual)",
+      { desc = "Comment selected lines (multi-line style)" })
   end,
   --                            ┏━━━━━━━━━━━━━┓
   --                            ┃ Config Ends ┃

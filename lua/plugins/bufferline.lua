@@ -19,16 +19,20 @@ return {
     bufferline.setup({
       options = {
         mode = "buffers",
-        -- separator_style = "slant",
         style_preset = bufferline.style_preset.no_italic,
+        themable = true,
+        color_icons = true,
+        separator_style = "slant",
+        -- indicator = { style = "underline" },
         --[[ numbers = function(opts)
           return string.format("%s", opts.raise(opts.ordinal))
         end, ]]
         diagnostics = false,           -- OR: | "nvim_lsp" 
         diagnostics_update_in_insert = false,
+        always_show_bufferline = true,
+        show_buffer_icons = true,
         show_buffer_close_icons = false,
-        always_show_bufferline = false,
-        show_close_icon = true,
+        show_close_icon = false,
         sort_by = "insert_at_end",
         offsets = {
           {

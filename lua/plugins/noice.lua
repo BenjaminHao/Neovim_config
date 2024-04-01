@@ -31,12 +31,12 @@ return {
           -- opts: any options passed to the view
           -- icon_hl_group: optional hl_group for the icon
           -- title: set to anything or empty string to hide
-          cmdline = { pattern = "^:", icon = "", lang = "vim" },
-          search_down = { kind = "search", pattern = "^/", icon = " ", lang = "regex" },
-          search_up = { kind = "search", pattern = "^%?", icon = " ", lang = "regex" },
-          filter = { pattern = "^:%s*!", icon = "$", lang = "bash" },
-          lua = { pattern = { "^:%s*lua%s+", "^:%s*lua%s*=%s*", "^:%s*=%s*" }, icon = "", lang = "lua" },
-          help = { pattern = "^:%s*he?l?p?%s+", icon = "" },
+          cmdLine = { pattern = "^:", icon = "", lang = "vim" },
+          search_down = { title = " Search Downwards ", kind = "search", pattern = "^/", icon = " ", lang = "regex" },
+          search_up = { title = " Search Upwards ", kind = "search", pattern = "^%?", icon = " ", lang = "regex" },
+          lua = { title = " Lua ", pattern = { "^:%s*lua%s+", "^:%s*lua%s*=%s*", "^:%s*=%s*" }, icon = "", lang = "lua" },
+          help = { title = " Help ", pattern = "^:%s*he?l?p?%s+", icon = "󰮥" },
+          filter = { title = " Shell ", pattern = "^:%s*!", icon = "", lang = "bash" },
           input = {}, -- Used by input()
           -- lua = false, -- to disable a format, set to `false`
         },
@@ -107,10 +107,10 @@ return {
           },
       },
       routes = {
-        { -- show @recording message
-          filter = { event = "msg_showmode" },
-          view = "notify",
-        },
+        -- { -- show @recording message
+        --   filter = { event = "msg_showmode" },
+        --   view = "notify",
+        -- },
         {
           filter = {
             event = "msg_show",
@@ -133,11 +133,13 @@ return {
         long_message_to_split = true, -- long messages will be sent to a split
         -- TODO: check inc-rename.nvim
         inc_rename = true, -- enables an input dialog for inc-rename.nvim
-        lsp_doc_border = true, -- add a border to hover docs and signature help
+        lsp_doc_border = false, -- add a border to hover docs and signature help
       },
     })
+
     ---------------------------- nvim-notify Setup -----------------------------
     notify.setup({
+      level = vim.log.levels.INFO,
       icons = {
         DEBUG = "󱕼 ",
         ERROR = "󰱮 ",
@@ -145,12 +147,15 @@ return {
         TRACE = "󰱴 ",
         WARN = "󰱶 "
       },
-      timeout = 2000,
+      timeout = 3000, -- default 5000
     })
+
     -------------------------- Noice Key Binds ---------------------------------
     -- for Noice messages
     map("n", "<leader>fm", "<cmd>Telescope notify<cr>", { desc = "[m]essage" })
+    map("n", "<leader>mn", "<cmd>Notifications<cr>", { desc = "[n]otifications" })
     map("n", "<leader>ml", function() noice.cmd("last") end, { desc = "[l]ast Message" })
+    map("n", "<leader>me", function() noice.cmd("errors") end, { desc = "[e]rror Messages" })
     map("n", "<leader>mh", function() noice.cmd("history") end, { desc = "[h]istory Messages" })
     map("n", "<leader>md", function() noice.cmd("dismiss") end, { desc = "[d]ismiss Messages" })
 

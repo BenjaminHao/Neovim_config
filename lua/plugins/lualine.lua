@@ -15,7 +15,7 @@ return {
     local lualine = require("lualine")
     local mode_icon = {
       ["NORMAL"] = " ",
-      ["INSERT"] = "󰘎 ",
+      ["INSERT"] = "󱂕 ", -- 󰘎
       ["VISUAL"] = " ",
       ["V-LINE"] = " ",
       ["V-BLOCK"] = " ",
@@ -31,6 +31,7 @@ return {
       ["EX"] = "󰯷 ",
     }
 
+    -- TODO: Style change, add nvim-navic
     lualine.setup {
       options = {
         theme = "auto",
@@ -50,17 +51,25 @@ return {
         lualine_b = {
           {
             "filename",
+            file_status = true,     -- Displays file status (readonly status, modified status)
+            newfile_status = false, -- Display new file status (new file means no write after created)
+            path = 0,               -- 1: Relative path
             symbols = {
-              modified = "󰏫",  -- Text to show when the file is modified.
-              readonly = "",  -- Text to show when the file is non-modifiable or readonly.
-              unnamed = "",    -- Text to show for unnamed buffers.
-              newfile = "",   -- Text to show for newly created file before first write
+              modified = "󰏫", -- Text to show when the file is modified.
+              readonly = "", -- Text to show when the file is non-modifiable or readonly.
+              unnamed = "",   -- Text to show for unnamed buffers.
+              newfile = "",  -- Text to show for newly created file before first write
             },
           },
           { "branch" }
         },
         lualine_c = {},
-        lualine_x = {},
+        lualine_x = {
+          { -- show @recording message
+            require("noice").api.statusline.mode.get,
+            cond = require("noice").api.statusline.mode.has,
+          }
+        },
         lualine_y = { "location", "progress" },
         lualine_z = {
           {

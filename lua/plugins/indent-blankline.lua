@@ -7,7 +7,7 @@
 return {
   "lukas-reineke/indent-blankline.nvim",
   version = "*",
-  event = { "BufReadPre", "BufNewFile" },
+  event = { "BufReadPost", "BufNewFile" },
   --━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
   --                          ┃ Config Function ┃
   --                          ┗━━━━━━━━━━━━━━━━━┛

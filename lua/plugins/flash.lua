@@ -7,7 +7,7 @@
 -- TODO: explore flash
 return {
   "folke/flash.nvim",
-  event = { "BufReadPre", "BufNewFile" },
+  event = { "BufReadPost", "BufNewFile" },
   opts = {
     labels = "asdfghjklqwertyuiopzxcvbnm",
     search = {

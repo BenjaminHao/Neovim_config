@@ -42,8 +42,8 @@ return {
         scroll_up = "<c-u>", -- binding to scroll up inside the popup
       },
       icons = {
-        breadcrumb = "", -- symbol used in the command line area that shows your active key combo
-        separator = "", -- symbol used between a key and it"s label
+        breadcrumb = "", -- symbol used in the command line area that shows your active key combo
+        separator = "", -- symbol used between a key and it's label
         group = "", -- symbol prepended to a group 
       },
       window = {
@@ -71,7 +71,7 @@ return {
     wk.register({
       ["<leader>"] = {
         S = {
-          "z=", "[S]pelling", remap = true
+          "z=", "[S]pelling", noremap = false
         },
         b = {
           name = "[b]uffer", _ = "which_key_ignore"

@@ -91,11 +91,11 @@ autocmd({ "VimResized" }, {
   end,
 })
 
-autocmd("BufWinEnter", {
-  desc = "Open help window in a vertical split to the left",
-  group = general,
-  pattern = { "*.txt" },
-  callback = function()
-    if vim.o.filetype == "help" then vim.cmd.wincmd("H") end --"HJKL"
-  end
-})
+-- autocmd("BufWinEnter", {
+--   desc = "Open help window in a vertical split to the left",
+--   group = general,
+--   pattern = { "*.txt" },
+--   callback = function()
+--     if vim.o.filetype == "help" then vim.cmd.wincmd("H") end --"HJKL"
+--   end
+-- })
