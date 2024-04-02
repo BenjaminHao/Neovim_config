@@ -8,8 +8,11 @@ return {
   "nvim-pack/nvim-spectre",
   cmd = "Spectre",
   keys = {
-    { "<leader>s", "<cmd>Spectre<cr>", desc = "[s]earch/Replace" }
+    { "<leader>r", "<cmd>Spectre<cr>", desc = "[r]eplace" }
   },
+  --━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
+  --                          ┃ Config Function ┃
+  --                          ┗━━━━━━━━━━━━━━━━━┛
   config = function ()
     require("spectre").setup({
       open_cmd = "noswapfile vnew",
@@ -72,4 +75,7 @@ return {
       },
     })
   end
+  --                            ┏━━━━━━━━━━━━━┓
+  --                            ┃ Config Ends ┃
+  --━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 }
