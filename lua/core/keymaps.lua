@@ -66,6 +66,9 @@ map("n", "<C-f>", "<C-f>zz")
 map("n", "<C-b>", "<C-b>zz")
 map("n", "N", "Nzzzv")
 map("n", "n", "nzzzv")
+
+map("n", "<leader>Q", "<cmd>qa!<cr>", { desc = "[Q]uit"})
+map("n", "<leader>w", "<cmd>w<cr>", { desc = "[w]rite"})
 --━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 --                                ┃ BUFFERS ┃
 --                                ┗━━━━━━━━━┛
@@ -89,24 +92,6 @@ map("n", "<C-up>", ":resize +2<CR>")
 map("n", "<C-down>", ":resize -2<CR>")
 map("n", "<C-right>", ":vertical resize +2<CR>")
 map("n", "<C-left>", ":vertical resize -2<CR>")
---━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
---                                  ┃ LSP ┃
---                                  ┗━━━━━┛
--- TODO:Move to lsp-config
-map("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", { desc = "[D]eclaration" })
-map("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", { desc = "[d]efinition" })
-map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", { desc = "[i]mplementation" })
-map("n", "M", "<cmd>lua vim.lsp.buf.hover()<CR>", { desc = "[M]ore Info" })
-map("n", "<C-m>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", { desc = "Signature Help" })
-map("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", { desc = "[r]eferences" })
-map("n", "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<CR>", { desc = "[r]ename" })
---━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
---                              ┃ DIAGNOSTICS ┃
---                              ┗━━━━━━━━━━━━━┛
-map("n", "]d", vim.diagnostic.goto_next, { desc = "Next [d]iagnostic message" })
-map("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous [d]iagnostic message" })
-map("n", "<leader>de", vim.diagnostic.open_float, { desc = "Show diagnostic [e]rror messages" })
-map("n", "<leader>dl", vim.diagnostic.setloclist, { desc = "Open diagnostic quickfix [l]ist" })
 --━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 --                                ┃ TOGGLES ┃
 --                                ┗━━━━━━━━━┛
