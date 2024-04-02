@@ -60,16 +60,26 @@ return {
         selection_strategy = "reset",
         sorting_strategy = "descending",
         scroll_strategy = "cycle",
-        dynamic_preview_title = true,
-        layout_strategy = "horizontal",
-        layout_config = {
-          -- prompt_position = "bottom",
-          horizontal = { preview_width = 0.6, width = 0.95 },
-          preview_cutoff = 120,
-        },
         file_ignore_patterns = { "node_modules", "^.git/" },
+        dynamic_preview_title = true,
         winblend = 0,
         color_devicons = true,
+        set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
+        layout_strategy = "horizontal",
+        layout_config = {
+          horizontal = {
+            preview_width = 0.55,
+            width = 0.80,
+            preview_cutoff = 120,
+            prompt_position = "bottom",
+          },
+          vertical = {
+            height = 0.80,
+            preview_cutoff = 40,
+            mirror = true,
+            prompt_position = "bottom",
+          },
+        },
         mappings = {
           i = {
             ["<C-j>"] = actions.move_selection_next,     -- also: <C-n>
@@ -82,6 +92,16 @@ return {
             ["?"] = actions.which_key,
           },
         },
+      },
+      pickers = {
+        -- find_files = {
+        --   theme = "dropdown",
+        --   borderchars = {
+        --     prompt = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+        --     results = { "─", "│", "─", "│", "╭", "╮", "┤", "├" },
+        --     preview = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+        --   }
+        -- }
       },
       ---------------------------- extensions ----------------------------------
       load_extension = {

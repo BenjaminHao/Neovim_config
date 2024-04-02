@@ -77,7 +77,14 @@ return {
         ufo = true,
         which_key = true,
       },
+      -- custom_highlights = function(colors)
+      --   -- Check :highlight
+      --   return {
+      --     FloatBorder = { fg = colors.surface2 },
+      --   }
+      -- end
     })
+    --------------------------- Set Colorscheme --------------------------------
     vim.cmd.colorscheme("catppuccin")
   end
   --                            ┏━━━━━━━━━━━━━┓

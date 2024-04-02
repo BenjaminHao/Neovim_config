@@ -35,7 +35,7 @@ return {
           search_down = { title = " Search Downwards ", kind = "search", pattern = "^/", icon = " ", lang = "regex" },
           search_up = { title = " Search Upwards ", kind = "search", pattern = "^%?", icon = " ", lang = "regex" },
           lua = { title = " Lua ", pattern = { "^:%s*lua%s+", "^:%s*lua%s*=%s*", "^:%s*=%s*" }, icon = "", lang = "lua" },
-          help = { title = " Help ", pattern = "^:%s*he?l?p?%s+", icon = "󰮥" },
+          help = { title = " Help ", pattern = "^:%s*he?l?p?%s+", icon = "" },
           filter = { title = " Shell ", pattern = "^:%s*!", icon = "", lang = "bash" },
           input = {}, -- Used by input()
           -- lua = false, -- to disable a format, set to `false`

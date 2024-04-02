@@ -25,6 +25,7 @@ return {
     treesitter.setup({
       highlight = {
         enable = true,            -- enable syntax highlighting
+        additional_vim_regex_highlighting = false, -- prevent wrong highlighting
         disable = {},             -- list of language that will be disabled
       },
       indent = {
