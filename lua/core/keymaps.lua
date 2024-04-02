@@ -35,8 +35,6 @@ map({ "n", "x", "o" }, "L", "g_") -- $: end of line, g_: last non-blank characte
 -- Move the line up or down in Visual mode
 map("x", "J", [[:m '>+1<cr><cr>gv=gv]], { desc = "Move line down" })
 map("x", "K", [[:m '<-2<cr><cr>gv=gv]], { desc = "Move line up" })
--- Move text to next line, corresponding key bind for <J>
-map("n", "K", "i<cr><esc>")
 -- Emacs like key binds in insert mode for better typing experience
 map("i", "<C-a>", "<home>")
 map("i", "<C-e>", "<end>")
