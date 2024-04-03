@@ -153,9 +153,9 @@ return {
           })
         end
         -- TODO: add toggle function, change highlight color
-        vim.cmd.hi("LspReferenceText cterm=bold,italic gui=bold,italic")
-        vim.cmd.hi("LspReferenceRead cterm=bold,italic gui=bold,italic")
-        vim.cmd.hi("LspReferenceWrite cterm=bold gui=bold")
+        -- vim.cmd.hi("LspReferenceText guibg=NONE")
+        -- vim.cmd.hi("LspReferenceRead guibg=NONE")
+        -- vim.cmd.hi("LspReferenceWrite guibg=NONE")
       end,
     })
 

@@ -44,7 +44,7 @@ return {
       popupmenu = {
         enabled = true, -- enables the Noice popupmenu UI
         -- @type "nui"|"cmp"
-        backend = "nui", -- backend to use to show regular cmdline completions
+        backend = "cmp", -- backend to use to show regular cmdline completions
         -- @type NoicePopupmenuItemKind|false
         -- Icons for completion item kinds (see defaults at noice.config.icons.kinds)
         kind_icons = {}, -- set to `false` to disable icons
@@ -54,57 +54,57 @@ return {
         filter = { event = "msg_show" },
       },
       lsp = {
-          progress = {
+        progress = {
+          enabled = true,
+          -- See config.format.builtin
+          -- See the section on formatting for more details on how to customize.
+          format = "lsp_progress",
+          format_done = "lsp_progress_done",
+          throttle = 1000 / 30,
+          view = "mini"
+        },
+        override = {
+          -- override the default lsp markdown formatter with Noice
+          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+          -- override the lsp markdown formatter with Noice
+          ["vim.lsp.util.stylize_markdown"] = true,
+          -- override cmp documentation with Noice (needs the other options to work)
+          ["cmp.entry.get_documentation"] = true,
+        },
+        hover = {
+          enabled = true,
+          silent = false, -- set to true to not show a message if hover is not available
+          view = nil, -- when nil, use defaults from documentation
+          opts = {}, -- merged with defaults from documentation
+        },
+        signature = {
+          enabled = true,
+          auto_open = {
             enabled = true,
-            -- See config.format.builtin
-            -- See the section on formatting for more details on how to customize.
-            format = "lsp_progress",
-            format_done = "lsp_progress_done",
-            throttle = 1000 / 30,
-            view = "mini"
+            trigger = true, -- Automatically show signature help when typing a trigger character from the LSP
+            luasnip = true, -- Will open signature help when jumping to Luasnip insert nodes
+            throttle = 50, -- Debounce lsp signature help request by 50ms
           },
-          override = {
-            -- override the default lsp markdown formatter with Noice
-            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-            -- override the lsp markdown formatter with Noice
-            ["vim.lsp.util.stylize_markdown"] = true,
-            -- override cmp documentation with Noice (needs the other options to work)
-            ["cmp.entry.get_documentation"] = true,
+          view = nil, -- when nil, use defaults from documentation
+          opts = {}, -- merged with defaults from documentation
+        },
+        message = {
+          -- Messages shown by lsp servers
+          enabled = true,
+          view = "notify",
+          opts = {},
+        },
+        -- defaults for hover and signature help
+        documentation = {
+          view = "hover",
+          opts = {
+            lang = "markdown",
+            replace = true,
+            render = "plain",
+            format = { "{message}" },
+            win_options = { concealcursor = "n", conceallevel = 3 },
           },
-          hover = {
-            enabled = true,
-            silent = false, -- set to true to not show a message if hover is not available
-            view = nil, -- when nil, use defaults from documentation
-            opts = {}, -- merged with defaults from documentation
-          },
-          signature = {
-            enabled = true,
-            auto_open = {
-              enabled = true,
-              trigger = true, -- Automatically show signature help when typing a trigger character from the LSP
-              luasnip = true, -- Will open signature help when jumping to Luasnip insert nodes
-              throttle = 50, -- Debounce lsp signature help request by 50ms
-            },
-            view = nil, -- when nil, use defaults from documentation
-            opts = {}, -- merged with defaults from documentation
-          },
-          message = {
-            -- Messages shown by lsp servers
-            enabled = true,
-            view = "notify",
-            opts = {},
-          },
-          -- defaults for hover and signature help
-          documentation = {
-            view = "hover",
-            opts = {
-              lang = "markdown",
-              replace = true,
-              render = "plain",
-              format = { "{message}" },
-              win_options = { concealcursor = "n", conceallevel = 3 },
-            },
-          },
+        },
       },
       routes = {
         -- { -- show @recording message
@@ -113,14 +113,16 @@ return {
         -- },
         {
           filter = {
+            event = "msg_show",
             any = {
-              -- { find = "%d+L, %d+B" }, -- for written messages
-              { find = "; after #%d+" }, -- for redo messages
+              { find = "%d+L, %d+B" }, -- for written messages
               { find = "; before #%d+" }, -- for undo messages
-              { find = "%d+ lines" }, -- for line move/indent messages
+              { find = "; after #%d+" }, -- for redo messages
+              { find = "fewer lines" },
             },
           },
-          opts = { skip = true }, -- hide messages
+          view = "mini",
+          -- opts = { skip = true }, -- hide messages
         },
       },
       presets = {
@@ -150,7 +152,7 @@ return {
 
     -------------------------- Noice Key Binds ---------------------------------
     -- for Noice messages
-    map("n", "<leader>fm", "<cmd>Telescope notify<cr>", { desc = "[m]essage" })
+    map("n", "<leader>fm", "<cmd>telescope notify<cr>", { desc = "[m]essage" })
     map("n", "<leader>mn", "<cmd>Notifications<cr>", { desc = "[n]otifications" })
     map("n", "<leader>ml", function() noice.cmd("last") end, { desc = "[l]ast Message" })
     map("n", "<leader>me", function() noice.cmd("errors") end, { desc = "[e]rror Messages" })
