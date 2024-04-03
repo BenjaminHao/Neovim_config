@@ -113,8 +113,6 @@ return {
         -- },
         {
           filter = {
-            event = "msg_show",
-            kind = "",
             any = {
               -- { find = "%d+L, %d+B" }, -- for written messages
               { find = "; after #%d+" }, -- for redo messages

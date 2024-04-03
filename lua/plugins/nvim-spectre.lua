@@ -13,6 +13,7 @@ return {
   --━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
   --                          ┃ Config Function ┃
   --                          ┗━━━━━━━━━━━━━━━━━┛
+  -- TODO: Config spectre
   config = function ()
     require("spectre").setup({
       open_cmd = "noswapfile vnew",

@@ -26,8 +26,8 @@ return {
         },
         presets = {
           operators = false,    -- adds help for operators like d, y, ...
-          motions = true,       -- adds help for motions
-          text_objects = true,  -- help for text objects triggered after entering an operator
+          motions = false,       -- adds help for motions
+          text_objects = false,  -- help for text objects triggered after entering an operator
           windows = false,      -- default bindings on <c-w>
           nav = false,          -- misc bindings to work with windows
           z = false,            -- bindings for folds, spelling and others prefixed with z
@@ -61,7 +61,7 @@ return {
         align = "center",
       },
       ignore_missing = false, -- enable this to hide mappings for which you didn't specify a label
-      hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "^:", "^ ", "^call ", "^lua " }, -- hide mapping boilerplate
+      hidden = { "<silent>", "<cmd>", "<CMD>", "<cr>", "<CR>", "^:", "^ ", "^call ", "^lua " }, -- hide mapping boilerplate
       show_help = true, -- show help message on the command line when the popup is visible
       show_keys = true, -- show the currently pressed key on the command line
       triggers = "auto", -- automatically setup triggers
@@ -91,8 +91,8 @@ return {
         m = {
           name = "[m]essage", _ = "which_key_ignore"
         },
-        T = {
-          name = "[T]oggle", _ = "which_key_ignore"
+        t = {
+          name = "[t]oggle", _ = "which_key_ignore"
         },
       }
     })

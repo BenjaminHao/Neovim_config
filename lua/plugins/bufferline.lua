@@ -7,13 +7,17 @@
 return {
   "akinsho/bufferline.nvim",
   event = "VeryLazy",
-  dependencies = { "nvim-tree/nvim-web-devicons" },
+  dependencies = {
+    "nvim-tree/nvim-web-devicons",
+		"echasnovski/mini.bufremove",
+  },
   version = "*",
   --━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
   --                          ┃ Config Function ┃
   --                          ┗━━━━━━━━━━━━━━━━━┛
   config = function()
     local bufferline = require("bufferline")
+    local bufremove = require("mini.bufremove")
     local map = require("core.utils").set_vim_keymap
 
     bufferline.setup({
@@ -27,6 +31,7 @@ return {
         --[[ numbers = function(opts)
           return string.format("%s", opts.raise(opts.ordinal))
         end, ]]
+        close_command = function(n) bufremove.delete(n, false) end,
         diagnostics = false,           -- OR: | "nvim_lsp" 
         diagnostics_update_in_insert = false,
         always_show_bufferline = true,
@@ -50,7 +55,9 @@ return {
       }
     })
     ------------------------ bufferline key binds ------------------------------
-    map("n", "<leader>bD", "<cmd>BufferLineCloseOthers<cr>", { desc = "[D]elete other buffers" })
+    map("n", "<leader>bd", function() bufremove.delete(0, false) end , { desc = "[d]elete Current Buffer" })
+    map("n", "<leader>bD", function() bufremove.delete(0, true) end, { desc = "[D]elete Buffer (Force)" })
+    map("n", "<leader>bk", "<cmd>BufferLineCloseOthers<cr>", { desc = "[k]ill other buffers" })
   end
   --                            ┏━━━━━━━━━━━━━┓
   --                            ┃ Config Ends ┃

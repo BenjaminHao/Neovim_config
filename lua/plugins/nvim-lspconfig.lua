@@ -68,11 +68,6 @@ return {
     -- map("n", "gr", vim.lsp.buf.references, { desc = "[r]eferences" })
     -- map("n", "<leader>lr", vim.lsp.buf.rename, { desc = "[r]ename Keyword" })
     -- map("n", "<leader>lc", vim.lsp.buf.code_action, { desc = "[c]ode Action" })
-    -- Diagnostics
-    map("n", "]d", vim.diagnostic.goto_next, { desc = "Next [d]iagnostic message" })
-    map("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous [d]iagnostic message" })
-    map("n", "<leader>de", vim.diagnostic.open_float, { desc = "Show diagnostic [e]rror messages" })
-    map("n", "<leader>dl", vim.diagnostic.setloclist, { desc = "Open diagnostic quickfix [l]ist" })
 
     -- kickstart.nvim, so good
     vim.api.nvim_create_autocmd("LspAttach", {
@@ -103,11 +98,11 @@ return {
 
         -- Jump to the implementation of the word under your cursor.
         --  Useful when your language has ways of declaring types without an actual implementation.
-        map("n", "gI", function ()
+        map("n", "gi", function ()
           if ok then ts_builtin.lsp_implementations()
           else vim.lsp.buf.implementation()
           end
-        end, opts("Goto [I]mplementation"))
+        end, opts("Goto [i]mplementation"))
 
         --  This is not Goto Definition, this is Goto Declaration.
         --  For example, in C this would take you to the header.
@@ -156,9 +151,11 @@ return {
             buffer = event.buf,
             callback = vim.lsp.buf.clear_references,
           })
-
-          -- TODO: add toggle function, change highlight color
         end
+        -- TODO: add toggle function, change highlight color
+        vim.cmd.hi("LspReferenceText cterm=bold,italic gui=bold,italic")
+        vim.cmd.hi("LspReferenceRead cterm=bold,italic gui=bold,italic")
+        vim.cmd.hi("LspReferenceWrite cterm=bold gui=bold")
       end,
     })
 

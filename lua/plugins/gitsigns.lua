@@ -91,8 +91,8 @@ return {
         map("n", "<leader>gd", gs.diffthis, opts("[d]iff this"))
         map("n", "<leader>gD", function() gs.diffthis("~") end, opts("[D]iff this against parent"))
 
-        map("n", "<leader>Tb", gs.toggle_current_line_blame, opts("[b]lame line"))
-        map("n", "<leader>Td", gs.toggle_deleted, opts("git [d]eleted"))
+        map("n", "<leader>tb", gs.toggle_current_line_blame, opts("[b]lame line"))
+        map("n", "<leader>td", gs.toggle_deleted, opts("git [d]eleted"))
       end,
     })
   end

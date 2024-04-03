@@ -9,7 +9,7 @@ return {
   version = "*",
   cmd = "ToggleTerm",
   keys = {  -- lazy-load on key binds
-    { "<leader>t", "<cmd>ToggleTerm direction=float<cr>", desc = "[t]erminal" },
+    { "<leader>T", "<cmd>ToggleTerm direction=float<cr>", desc = "[T]erminal" },
     { "<C-`>", "<cmd>ToggleTerm<CR>", mode = "n", desc = "Toggle terminal" },
   },
   --━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--

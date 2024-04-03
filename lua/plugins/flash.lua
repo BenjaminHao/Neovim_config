@@ -4,7 +4,7 @@
 --│ DESC: better search motion plugin                                        │--
 --│                                                                          │--
 --╰──────────────────────────────────────────────────────────────────────────╯--
--- TODO: explore flash
+-- TODO: Config flash
 return {
   "folke/flash.nvim",
   event = { "BufReadPost", "BufNewFile" },
