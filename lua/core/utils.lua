@@ -4,9 +4,11 @@
 --│ DESC: util functions                                                     │--
 --│                                                                          │--
 --╰──────────────────────────────────────────────────────────────────────────╯--
--- TODO: https://dev.to/voyeg3r/my-lazy-neovim-config-3h6o
+-- NOTE: https://dev.to/voyeg3r/my-lazy-neovim-config-3h6o
 local utils = {}
-
+--━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
+--                           ┃ Utility Functions ┃
+--                           ┗━━━━━━━━━━━━━━━━━━━┛
 utils.set_vim_keymap = function(mode, lhs, rhs, opts)
   local options = { noremap = true, silent = true }
   if opts then
@@ -33,7 +35,7 @@ end
 
 utils.toggle_set_color_column = function()
   if vim.o.colorcolumn == "" then
-    vim.ui.input({ prompt = "Enter a column number: (default 80)"},
+    vim.ui.input({ prompt = "Enter a column number: (default 80)" },
       function (input)
         if input == "" then
           vim.o.colorcolumn = "80"
@@ -46,6 +48,18 @@ utils.toggle_set_color_column = function()
   else
     vim.o.colorcolumn = ""
   end
+end
+
+utils.safeRequire = function(module)
+  local success, loadedModule = pcall(require, module)
+  if success then return loadedModule
+  else vim.notify_once("Error Loading " .. module, vim.log.levels.WARN)
+  end
+end
+
+utils.is_empty_line = function()
+  local current_line = vim.api.nvim_get_current_line()
+  return current_line:match('^%s*$') ~= nil
 end
 
 utils.invert_term = function()
@@ -78,8 +92,11 @@ utils.invert_term = function()
     vim.cmd(vim.tbl_get(commands, vim.api.nvim_get_mode().mode) .. inverted)
   end, function()
       -- vim.notify("This term cannot be inverted.", vim.log.levels.WARN)
-      vim.cmd("norm! ~") -- toggle case as fallback
+      vim.cmd("norm! ~") -- toggle case if the term cannot be inverted
     end)
 end
 
+--                               ┏━━━━━━━━━━━┓
+--                               ┃ Utils End ┃
+--━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 return utils
