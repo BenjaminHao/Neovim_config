@@ -1,2 +1,2 @@
-# Vault For Plugins
-### This is the folder for plugins that temporary deleted/no longer used.
+## Vault For Plugins
+### This directory is for plugins that temporary deleted/no longer used.
