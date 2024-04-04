@@ -86,7 +86,7 @@ return {
         local version = " eovim -  " .. vim.version().major .. "." .. vim.version().minor .. "." .. vim.version().patch
         -- local fortune = require "alpha.fortune"
         -- local quote = table.concat(fortune(), "\n")
-        local plugins = "loaded " .. stats.count .. " plugins in " .. ms .. "ms"
+        local plugins = "lazy-loaded " .. stats.count .. " plugins in " .. ms .. "ms"
         local footer = version .. "\t" .. plugins -- .. "\n" .. quote
         dashboard.section.footer.val = footer
         pcall(vim.cmd.AlphaRedraw)
