@@ -108,7 +108,8 @@ return {
         --  For example, in C this would take you to the header.
         map("n", "gD", vim.lsp.buf.declaration, opts("Goto [D]eclaration"))
 
-        map("n", "<C-k>", vim.lsp.buf.signature_help, opts("Signature Help"))
+        -- map("n", "<C-k>", vim.lsp.buf.signature_help, opts("Signature Help"))
+
         -- Jump to the type of the word under your cursor.
         --  Useful when you're not sure what type a variable is and you want to see
         --  the definition of its *type*, not where it was *defined*.

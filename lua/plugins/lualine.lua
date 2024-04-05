@@ -96,7 +96,7 @@ return {
         lualine_z = {},
       },
       tabline = {},
-      extensions = { "nvim-tree", "lazy", "mason" },
+      extensions = { "quickfix", "toggleterm", "nvim-tree", "lazy", "mason" },
     }
   end,
   --                            ┏━━━━━━━━━━━━━┓

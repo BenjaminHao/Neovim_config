@@ -118,7 +118,8 @@ return {
               { find = "%d+L, %d+B" }, -- for written messages
               { find = "; before #%d+" }, -- for undo messages
               { find = "; after #%d+" }, -- for redo messages
-              { find = "fewer lines" },
+              { find = "more lines" }, -- for yanking messages
+              { find = "fewer lines" }, -- for deleting messages
             },
           },
           view = "mini",
