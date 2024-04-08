@@ -1,9 +1,3 @@
---╭──────────────────────────────────────────────────────────────────────────╮--
---│                                                                          │--
---│ FILE: plugins/nvim-cmp.lua                                               │--
---│ DESC: Auto-completion plugin, engine for LSP, etc.                       │--
---│                                                                          │--
---╰──────────────────────────────────────────────────────────────────────────╯--
 return {
   "hrsh7th/nvim-cmp",
   event = { "InsertEnter", "CmdlineEnter" },
@@ -15,142 +9,122 @@ return {
     "L3MON4D3/LuaSnip", -- snippet engine
     "rafamadriz/friendly-snippets",  -- some snippets collection
   },
-  --━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
-  --                          ┃ Config Function ┃
-  --                          ┗━━━━━━━━━━━━━━━━━┛
   config = function()
-    local kind_icons = {
-      Class = "",
-      Color = "",
-      Constant = "󰏿",
-      Constructor = "",
-      Enum = "",
-      EnumMember = "",
-      Event = "",
-      Field = "󰐣",
-      File = "",
-      Folder = "",
-      Function = "󰊕",
-      Interface = "",
-      Keyword = "󰌋",
-      Method = "󰆧",
-      Module = "",
-      Operator = "󰆕",
-      Property = "󰜢",
-      Reference = "",
-      Snippet = "",
-      Struct = "",
-      Text = "󰦨",
-      TypeParameter = "",
-      Unit = "",
-      Value = "󰎠",
-      Variable = "󱃮",
+    local cmp = require "cmp"
+
+    dofile(vim.g.base46_cache .. "cmp")
+
+    local cmp_ui = require("nvconfig").ui.cmp
+    local cmp_style = cmp_ui.style
+
+    local field_arrangement = {
+      atom = { "kind", "abbr", "menu" },
+      atom_colored = { "kind", "abbr", "menu" },
     }
 
-    local cmp = require("cmp")
-    local luasnip = require("luasnip")
+    local formatting_style = {
+      -- default fields order i.e completion word + item.kind + item.kind icons
+      fields = field_arrangement[cmp_style] or { "abbr", "kind", "menu" },
 
-    require("luasnip/loaders/from_vscode").lazy_load()  -- load snippets collection from plugins
+      format = function(_, item)
+        local icons = require "nvchad.icons.lspkind"
+        local icon = (cmp_ui.icons and icons[item.kind]) or ""
 
-    ------------------------------ cmp setup -----------------------------------
-    cmp.setup({
+        if cmp_style == "atom" or cmp_style == "atom_colored" then
+          icon = " " .. icon .. " "
+          item.menu = cmp_ui.lspkind_text and "   (" .. item.kind .. ")" or ""
+          item.kind = icon
+        else
+          icon = cmp_ui.lspkind_text and (" " .. icon .. " ") or icon
+          item.kind = string.format("%s %s", icon, cmp_ui.lspkind_text and item.kind or "")
+        end
+
+        return item
+      end,
+    }
+
+    local function border(hl_name)
+      return {
+        { "╭", hl_name },
+        { "─", hl_name },
+        { "╮", hl_name },
+        { "│", hl_name },
+        { "╯", hl_name },
+        { "─", hl_name },
+        { "╰", hl_name },
+        { "│", hl_name },
+      }
+    end
+
+    local options = {
       completion = {
-        completeopt = "menu,menuone,preview,noselect", -- see :h completeopt 
+        completeopt = "menu,menuone",
       },
-      snippet = { -- configure how nvim-cmp interacts with snippet engine
-        expand = function(args)
-          luasnip.lsp_expand(args.body)
-        end,
-      },
-      sources = cmp.config.sources({  -- sources for autocompletion
-        { name = "nvim_lsp" },  -- lsp
-        { name = "luasnip" }, -- snippets
-        { name = "buffer" }, -- text within current buffer
-        { name = "path" }, -- file system paths
-      }),
-      formatting = {
-        fields = { "kind", "abbr", "menu" },
-        format = function(entry, vim_item)
-          vim_item.kind = string.format("%s", kind_icons[vim_item.kind]) -- Kind icons
-          vim_item.menu = ({
-            buffer = "[Buffer]",
-            luasnip = "[Snippet]",
-            nvim_lsp = "[LSP]",
-            path = "[Path]",
-            cmdline = "[CMD]"
-          })[entry.source.name]
-          return vim_item
-        end,
-      },
+
       window = {
-        completion = cmp.config.window.bordered(),
-        documentation = cmp.config.window.bordered(),
+        completion = {
+          side_padding = (cmp_style ~= "atom" and cmp_style ~= "atom_colored") and 1 or 0,
+          winhighlight = "Normal:CmpPmenu,CursorLine:CmpSel,Search:None",
+          scrollbar = false,
+        },
+        documentation = {
+          border = border "CmpDocBorder",
+          winhighlight = "Normal:CmpDoc",
+        },
       },
-      --             performance = {
-      --                 trigger_debounce_time = 500,
-      --                 throttle = 550,
-      --                 fetching_timeout = 80,
-      --             },
-      mapping = cmp.mapping.preset.insert({
-        ["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
-        ["<C-h>"] = cmp.mapping.abort(), -- close completion window
-        ["<C-l>"] = cmp.mapping.confirm({ select = true }),  -- confirm, no need to select first
-        ["<C-j>"] = cmp.mapping.select_next_item(), -- next suggestion
-        ["<C-k>"] = cmp.mapping.select_prev_item(), -- previous suggestion
-        ["<C-d>"] = cmp.mapping.scroll_docs(4),  -- scroll down docs(check backwards)
-        ["<C-u>"] = cmp.mapping.scroll_docs(-4),  -- scroll up docs(check forwards)
-        -- ["<C-f>"] = cmp.mapping.scroll_docs(8),  -- scroll down docs(check forwards)
-        -- ["<C-b>"] = cmp.mapping.scroll_docs(-8),  -- scroll up docs(check backwards)
-        ["<CR>"] = cmp.mapping.confirm({ select = false }),
-        ["<S-CR>"] = cmp.mapping.confirm({
-          behavior = cmp.ConfirmBehavior.Replace,
+      snippet = {
+        expand = function(args)
+          require("luasnip").lsp_expand(args.body)
+        end,
+      },
+
+      formatting = formatting_style,
+
+      mapping = {
+        ["<C-p>"] = cmp.mapping.select_prev_item(),
+        ["<C-n>"] = cmp.mapping.select_next_item(),
+        ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-f>"] = cmp.mapping.scroll_docs(4),
+        ["<C-Space>"] = cmp.mapping.complete(),
+        ["<C-e>"] = cmp.mapping.close(),
+
+        ["<CR>"] = cmp.mapping.confirm {
+          behavior = cmp.ConfirmBehavior.Insert,
           select = true,
-        }),
+        },
+
         ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
-            cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+            cmp.select_next_item()
+          elseif require("luasnip").expand_or_jumpable() then
+            vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
           else
             fallback()
           end
         end, { "i", "s" }),
+
         ["<S-Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
-            cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+            cmp.select_prev_item()
+          elseif require("luasnip").jumpable(-1) then
+            vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
           else
             fallback()
           end
-          end, { "i", "s" }),
-        ["<C-n>"] = cmp.mapping(function()  -- jump to the next part of snippets
-          if luasnip.expand_or_locally_jumpable() then
-            luasnip.expand_or_jump()
-          end
         end, { "i", "s" }),
-        ["<C-p>"] = cmp.mapping(function()  -- jump to the previous part of snippets
-          if luasnip.locally_jumpable(-1) then
-            luasnip.jump(-1)
-          end
-        end, { "i", "s" }),
-      }),
-    })
-    --------------------------- Cmd-line Config --------------------------------
-    -- TODO: cmdline mapping
-    -- `/` cmdline setup.
-    cmp.setup.cmdline("/", {
-      mapping = cmp.mapping.preset.cmdline(),
+      },
       sources = {
-        {name = "buffer"}
-      }
-    })
-    -- `:` cmdline setup.
-    cmp.setup.cmdline(":", {
-      mapping = cmp.mapping.preset.cmdline(),
-      sources = {
-        {name = "path"},
-        {name = "cmdline"}
-      }
-    })
-  end,
-  --                            ┏━━━━━━━━━━━━━┓
-  --                            ┃ Config Ends ┃
-  --━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
+        { name = "nvim_lsp" },
+        { name = "luasnip" },
+        { name = "buffer" },
+        { name = "nvim_lua" },
+        { name = "path" },
+      },
+    }
+
+    if cmp_style ~= "atom" and cmp_style ~= "atom_colored" then
+      options.window.completion.border = border "CmpBorder"
+    end
+  end
 }
+

@@ -60,13 +60,13 @@ return {
     }
 
     -- Set color
-    dashboard.section.header.opts.hl = "Keyword"               -- header
-    for _, button in ipairs(dashboard.section.buttons.val) do  -- buttons
-      button.opts.hl = "AlphaButtons"
-      button.opts.hl_shortcut = "AlphaShortcut"
-    end
-    dashboard.section.footer.opts.hl = "AlphaFooter"           -- footer
-    dashboard.opts.layout[1].val = 6
+    -- dashboard.section.header.opts.hl = "Keyword"               -- header
+    -- for _, button in ipairs(dashboard.section.buttons.val) do  -- buttons
+    --   button.opts.hl = "AlphaButtons"
+    --   button.opts.hl_shortcut = "AlphaShortcut"
+    -- end
+    -- dashboard.section.footer.opts.hl = "AlphaFooter"           -- footer
+    -- dashboard.opts.layout[1].val = 6
 
     -- Send config to alpha
     alpha.setup(dashboard.opts)
