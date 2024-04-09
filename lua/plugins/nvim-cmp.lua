@@ -1,7 +1,7 @@
 --╭──────────────────────────────────────────────────────────────────────────╮--
 --│                                                                          │--
 --│ FILE: plugins/nvim-cmp.lua                                               │--
---│ DESC: Auto-completion plugin, engine for LSP, etc.                       │--
+--│ DESC: Auto-completion plugin, engine for LSP.                            │--
 --│                                                                          │--
 --╰──────────────────────────────────────────────────────────────────────────╯--
 return {
@@ -20,51 +20,10 @@ return {
   --                          ┃ Config Function ┃
   --                          ┗━━━━━━━━━━━━━━━━━┛
   config = function()
-    -- local kind_icons = {
-    --   Class = "",
-    --   Color = "",
-    --   Constant = "󰏿",
-    --   Constructor = "",
-    --   Enum = "",
-    --   EnumMember = "",
-    --   Event = "",
-    --   Field = "󰐣",
-    --   File = "",
-    --   Folder = "",
-    --   Function = "󰊕",
-    --   Interface = "",
-    --   Keyword = "󰌋",
-    --   Method = "󰆧",
-    --   Module = "",
-    --   Operator = "󰆕",
-    --   Property = "󰜢",
-    --   Reference = "",
-    --   Snippet = "",
-    --   Struct = "",
-    --   Text = "󰦨",
-    --   TypeParameter = "",
-    --   Unit = "",
-    --   Value = "󰎠",
-    --   Variable = "󱃮",
-    -- }
-
-    local function border(hl_name)
-      return {
-        { "╭", hl_name },
-        { "─", hl_name },
-        { "╮", hl_name },
-        { "│", hl_name },
-        { "╯", hl_name },
-        { "─", hl_name },
-        { "╰", hl_name },
-        { "│", hl_name },
-      }
-    end
-
     local cmp = require("cmp")
     local luasnip = require("luasnip")
-
-    require("luasnip/loaders/from_vscode").lazy_load()  -- load snippets collection from plugins
+    local lspkind = require("lspkind")
+    local util = require("core.utils")
 
     ------------------------------ cmp setup -----------------------------------
     cmp.setup({
@@ -85,24 +44,29 @@ return {
       formatting = {
         fields = { "kind", "abbr", "menu" },
         format = function(entry, vim_item)
-          local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
+          local kind = lspkind.cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
           local strings = vim.split(kind.kind, "%s", { trimempty = true })
-          kind.kind = " " .. (strings[1] or "") .. " "
-          kind.menu = "    (" .. (strings[2] or "") .. ")"
-          return kind
+          vim_item.kind = " " .. (strings[1] or "") .. " "
+          vim_item.menu = " " .. (strings[2] or "")
+          return vim_item
         end,
       },
       window = {
         completion = {
-          -- border = border("CmpBorder"),
+          -- border = util.set_colorborder("CmpBorder"),
           side_padding = 0,
           col_offset = -3,
           scrollbar = true,
           winhighlight = "Normal:CmpPmenu,CursorLine:CmpSel,Search:None",
         },
         documentation = {
-          border = border("CmpDocBorder"),
+          border = util.set_colorborder("CmpDocBorder"),
           winhighlight = "Normal:CmpDoc",
+        },
+      },
+      experimental = { -- enable ghost text when using cmp
+        ghost_text = {
+          hl_group = "Comment",
         },
       },
       mapping = {
@@ -123,43 +87,44 @@ return {
             luasnip.jump(-1)
           end
         end, { "i", "s" }),
-        -- add 'regular' editor keymap
+        -- regular tab completion
         ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+          elseif luasnip.expand_or_jumpable() then
+            luasnip.expand_or_jump()
           else
             fallback()
           end
-        end),
+        end, { "i", "s" }),
         ["<S-Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+          elseif luasnip.jumpable(-1) then
+            luasnip.jump(-1)
           else
             fallback()
           end
-        end),
+        end, { "i", "s" }),
         ["<CR>"] = cmp.mapping.confirm({
           behavior = cmp.ConfirmBehavior.Replace,
           select = true,
         }),
       }
     })
-    --------------------------- Cmd-line Config --------------------------------
-    -- `/` cmdline setup.
-    cmp.setup.cmdline("/", {
+    ---------------------------- luasnip setup ---------------------------------
+    require("luasnip/loaders/from_vscode").lazy_load()  -- load snippets collection from plugins
+
+    -------------------------- cmp-cmdline setup -------------------------------
+    -- "/", "?" cmdline setup.
+    cmp.setup.cmdline({ "/", "?" }, {
       mapping = cmp.mapping.preset.cmdline(),
       sources = {
         { name = "buffer" }
       }
     })
-    -- '?' cmdline setup
-    cmp.setup.cmdline("?", {
-      mapping = cmp.mapping.preset.cmdline(),
-      sources = {
-        { name = "buffer" }
-      }
-    })
-    -- `:` cmdline setup.
+
+    -- ":" cmdline setup.
     cmp.setup.cmdline(":", {
       mapping = cmp.mapping.preset.cmdline(),
       sources = {
