@@ -35,11 +35,13 @@ map({ "n", "x", "o" }, "L", "g_") -- $: end of line, g_: last non-blank characte
 -- Move the line up or down in Visual mode
 map("x", "J", [[:m '>+1<cr><cr>gv=gv]], { desc = "Move line down" })
 map("x", "K", [[:m '<-2<cr><cr>gv=gv]], { desc = "Move line up" })
--- Emacs like key binds in insert mode for better typing experience
-map("i", "<C-a>", "<home>")
-map("i", "<C-e>", "<end>")
-map("i", "<C-f>", "<right>")
-map("i", "<C-b>", "<left>")
+-- vim motion in insert/command mode
+map({ "i", "c" }, "<C-h>", "<left>")
+map({ "i", "c" }, "<C-j>", "<down>")
+map({ "i", "c" }, "<C-k>", "<up>")
+map({ "i", "c" }, "<C-l>", "<right>")
+map({ "i", "c" }, "<C-a>", "<home>")
+map({ "i", "c" }, "<C-e>", "<end>")
 -- Super colon/semicolon
 map("i", "<C-,>", "<end>,")
 map("i", "<C-;>", "<end>;")

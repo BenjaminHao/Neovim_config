@@ -1,3 +1,9 @@
+--╭──────────────────────────────────────────────────────────────────────────╮--
+--│                                                                          │--
+--│ FILE: plugins/nvim-cmp.lua                                               │--
+--│ DESC: Auto-completion plugin, engine for LSP, etc.                       │--
+--│                                                                          │--
+--╰──────────────────────────────────────────────────────────────────────────╯--
 return {
   "hrsh7th/nvim-cmp",
   event = { "InsertEnter", "CmdlineEnter" },
@@ -8,40 +14,39 @@ return {
     "saadparwaiz1/cmp_luasnip", -- for autocompletion
     "L3MON4D3/LuaSnip", -- snippet engine
     "rafamadriz/friendly-snippets",  -- some snippets collection
+    "onsails/lspkind.nvim", -- vs-code like pictograms
   },
+  --━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
+  --                          ┃ Config Function ┃
+  --                          ┗━━━━━━━━━━━━━━━━━┛
   config = function()
-    local cmp = require "cmp"
-
-    dofile(vim.g.base46_cache .. "cmp")
-
-    local cmp_ui = require("nvconfig").ui.cmp
-    local cmp_style = cmp_ui.style
-
-    local field_arrangement = {
-      atom = { "kind", "abbr", "menu" },
-      atom_colored = { "kind", "abbr", "menu" },
-    }
-
-    local formatting_style = {
-      -- default fields order i.e completion word + item.kind + item.kind icons
-      fields = field_arrangement[cmp_style] or { "abbr", "kind", "menu" },
-
-      format = function(_, item)
-        local icons = require "nvchad.icons.lspkind"
-        local icon = (cmp_ui.icons and icons[item.kind]) or ""
-
-        if cmp_style == "atom" or cmp_style == "atom_colored" then
-          icon = " " .. icon .. " "
-          item.menu = cmp_ui.lspkind_text and "   (" .. item.kind .. ")" or ""
-          item.kind = icon
-        else
-          icon = cmp_ui.lspkind_text and (" " .. icon .. " ") or icon
-          item.kind = string.format("%s %s", icon, cmp_ui.lspkind_text and item.kind or "")
-        end
-
-        return item
-      end,
-    }
+    -- local kind_icons = {
+    --   Class = "",
+    --   Color = "",
+    --   Constant = "󰏿",
+    --   Constructor = "",
+    --   Enum = "",
+    --   EnumMember = "",
+    --   Event = "",
+    --   Field = "󰐣",
+    --   File = "",
+    --   Folder = "",
+    --   Function = "󰊕",
+    --   Interface = "",
+    --   Keyword = "󰌋",
+    --   Method = "󰆧",
+    --   Module = "",
+    --   Operator = "󰆕",
+    --   Property = "󰜢",
+    --   Reference = "",
+    --   Snippet = "",
+    --   Struct = "",
+    --   Text = "󰦨",
+    --   TypeParameter = "",
+    --   Unit = "",
+    --   Value = "󰎠",
+    --   Variable = "󱃮",
+    -- }
 
     local function border(hl_name)
       return {
@@ -56,75 +61,114 @@ return {
       }
     end
 
-    local options = {
-      completion = {
-        completeopt = "menu,menuone",
-      },
+    local cmp = require("cmp")
+    local luasnip = require("luasnip")
 
+    require("luasnip/loaders/from_vscode").lazy_load()  -- load snippets collection from plugins
+
+    ------------------------------ cmp setup -----------------------------------
+    cmp.setup({
+      completion = {
+        completeopt = "menu,menuone", -- see :h completeopt 
+      },
+      sources = cmp.config.sources({  -- sources for autocompletion
+        { name = "nvim_lsp" },  -- lsp
+        { name = "luasnip" }, -- snippets
+        { name = "buffer" }, -- text within current buffer
+        { name = "path" }, -- file system paths
+      }),
+      snippet = { -- configure how nvim-cmp interacts with snippet engine
+        expand = function(args)
+          luasnip.lsp_expand(args.body)
+        end,
+      },
+      formatting = {
+        fields = { "kind", "abbr", "menu" },
+        format = function(entry, vim_item)
+          local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
+          local strings = vim.split(kind.kind, "%s", { trimempty = true })
+          kind.kind = " " .. (strings[1] or "") .. " "
+          kind.menu = "    (" .. (strings[2] or "") .. ")"
+          return kind
+        end,
+      },
       window = {
         completion = {
-          side_padding = (cmp_style ~= "atom" and cmp_style ~= "atom_colored") and 1 or 0,
+          -- border = border("CmpBorder"),
+          side_padding = 0,
+          col_offset = -3,
+          scrollbar = true,
           winhighlight = "Normal:CmpPmenu,CursorLine:CmpSel,Search:None",
-          scrollbar = false,
         },
         documentation = {
-          border = border "CmpDocBorder",
+          border = border("CmpDocBorder"),
           winhighlight = "Normal:CmpDoc",
         },
       },
-      snippet = {
-        expand = function(args)
-          require("luasnip").lsp_expand(args.body)
-        end,
-      },
-
-      formatting = formatting_style,
-
       mapping = {
-        ["<C-p>"] = cmp.mapping.select_prev_item(),
-        ["<C-n>"] = cmp.mapping.select_next_item(),
-        ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-        ["<C-f>"] = cmp.mapping.scroll_docs(4),
-        ["<C-Space>"] = cmp.mapping.complete(),
-        ["<C-e>"] = cmp.mapping.close(),
-
-        ["<CR>"] = cmp.mapping.confirm {
-          behavior = cmp.ConfirmBehavior.Insert,
-          select = true,
-        },
-
+        ["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
+        ["<C-q>"] = cmp.mapping.abort(), -- quit completion window
+        ["<C-y>"] = cmp.mapping.confirm({ select = true }),
+        ["<C-n>"] = cmp.mapping.select_next_item(), -- next suggestion
+        ["<C-p>"] = cmp.mapping.select_prev_item(), -- previous suggestion
+        ["<C-d>"] = cmp.mapping.scroll_docs(4),  -- scroll down docs(check backwards)
+        ["<C-u>"] = cmp.mapping.scroll_docs(-4),  -- scroll up docs(check forwards)
+        ["<C-f>"] = cmp.mapping(function()  -- jump forward inside snippets
+          if luasnip.expand_or_locally_jumpable() then
+            luasnip.expand_or_jump()
+          end
+        end, { "i", "s" }),
+        ["<C-b>"] = cmp.mapping(function()  -- jump backward inside snippets
+          if luasnip.locally_jumpable(-1) then
+            luasnip.jump(-1)
+          end
+        end, { "i", "s" }),
+        -- add 'regular' editor keymap
         ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
-            cmp.select_next_item()
-          elseif require("luasnip").expand_or_jumpable() then
-            vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
+            cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
           else
             fallback()
           end
-        end, { "i", "s" }),
-
+        end),
         ["<S-Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
-            cmp.select_prev_item()
-          elseif require("luasnip").jumpable(-1) then
-            vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
+            cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
           else
             fallback()
           end
-        end, { "i", "s" }),
-      },
+        end),
+        ["<CR>"] = cmp.mapping.confirm({
+          behavior = cmp.ConfirmBehavior.Replace,
+          select = true,
+        }),
+      }
+    })
+    --------------------------- Cmd-line Config --------------------------------
+    -- `/` cmdline setup.
+    cmp.setup.cmdline("/", {
+      mapping = cmp.mapping.preset.cmdline(),
       sources = {
-        { name = "nvim_lsp" },
-        { name = "luasnip" },
-        { name = "buffer" },
-        { name = "nvim_lua" },
+        { name = "buffer" }
+      }
+    })
+    -- '?' cmdline setup
+    cmp.setup.cmdline("?", {
+      mapping = cmp.mapping.preset.cmdline(),
+      sources = {
+        { name = "buffer" }
+      }
+    })
+    -- `:` cmdline setup.
+    cmp.setup.cmdline(":", {
+      mapping = cmp.mapping.preset.cmdline(),
+      sources = {
         { name = "path" },
-      },
-    }
-
-    if cmp_style ~= "atom" and cmp_style ~= "atom_colored" then
-      options.window.completion.border = border "CmpBorder"
-    end
-  end
+        { name = "cmdline" }
+      }
+    })
+  end,
+  --                            ┏━━━━━━━━━━━━━┓
+  --                            ┃ Config Ends ┃
+  --━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 }
-

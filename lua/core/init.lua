@@ -46,9 +46,6 @@ local options = {             -- for conciseness and readability
     notify = false,
   },
   ui = {
-    border = "rounded",
-    title = " Plugin Manager ", -- only works when border is not "none"
-    title_pos = "center",
     icons = {
       source = "󰏗 ",
       ft = " ",

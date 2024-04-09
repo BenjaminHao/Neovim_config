@@ -12,12 +12,10 @@ return {
       ui = {
         theme = "catppuccin",
         transparency = false,
-        cmp = {
-          icons = true,
-          lspkind_text = true,
-          style = "atom_colored", -- default/flat_light/flat_dark/atom/atom_colored
-        },
         telescope = { style = "borderless" }, -- borderless / bordered
+        cmp = {
+          style = "atom_colored",
+        },
       },
       base46 = {
         integrations = {

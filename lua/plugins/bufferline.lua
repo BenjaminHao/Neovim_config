@@ -23,10 +23,10 @@ return {
     bufferline.setup({
       options = {
         mode = "buffers",
-        style_preset = bufferline.style_preset.no_italic,
+        -- style_preset = bufferline.style_preset.no_italic,
         themable = true,
-        color_icons = true,
-        separator_style = "slant",
+        -- color_icons = true,
+        -- separator_style = "slant",
         -- indicator = { style = "underline" },
         --[[ numbers = function(opts)
           return string.format("%s", opts.raise(opts.ordinal))
@@ -34,7 +34,7 @@ return {
         close_command = function(n) bufremove.delete(n, false) end,
         diagnostics = false,           -- OR: | "nvim_lsp" 
         diagnostics_update_in_insert = false,
-        always_show_bufferline = true,
+        -- always_show_bufferline = true,
         show_buffer_icons = true,
         show_buffer_close_icons = false,
         show_close_icon = false,
