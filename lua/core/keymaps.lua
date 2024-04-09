@@ -42,11 +42,11 @@ map({ "i", "c" }, "<C-k>", "<up>")
 map({ "i", "c" }, "<C-l>", "<right>")
 map({ "i", "c" }, "<C-a>", "<home>")
 map({ "i", "c" }, "<C-e>", "<end>")
+-- input in next line
+map("i", "<C-cr>", "<end><cr>")
 -- Super colon/semicolon
 map("i", "<C-,>", "<end>,")
 map("i", "<C-;>", "<end>;")
--- input in next line
-map("i", "<C-cr>", "<end><cr>")
 -- Super tilde
 map({ "n", "x" }, "~", function() util.invert_term() end)
 -- Clear search highlights

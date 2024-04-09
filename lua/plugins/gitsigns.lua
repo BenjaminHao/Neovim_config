@@ -13,12 +13,12 @@ return {
   config = function ()
     require("gitsigns").setup({
       signs = {
-        add = { text = "▍" },
-        change = { text = "▍" },
-        delete = { text = "◢" },
-        topdelete = { text = "◥" },
-        changedelete = { text = "▍" },
-        untracked = { hl = "Title", text = "▍" },
+        add = { text = "┃" },
+        change = { text = "┃"},
+        delete = { text = "┃" },
+        topdelete = { text = "┋" },
+        changedelete = { text = "┋" },
+        untracked = { text = "╏" },
       },
       signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
       numhl = false,     -- Toggle with `:Gitsigns toggle_numhl`
@@ -48,7 +48,7 @@ return {
       max_file_length = 40000,
       preview_config = {
         -- Options passed to nvim_open_win
-        border = "rounded",
+        -- border = "rounded",
         style = "minimal",
         relative = "cursor",
         row = 0,

@@ -22,15 +22,16 @@ return {
   config = function()
     local nvimtree = require("nvim-tree")
 
+    -------------------------- nvimtree key binds ------------------------------
     local function on_attach(bufnr)
       local api = require "nvim-tree.api"
       local map = require("core.utils").set_vim_keymap
       local function opts(desc)
         return { desc = "nvim-tree: " .. desc, buffer = bufnr }
       end
-      map("n", "?", api.tree.toggle_help, opts "Help")
-      map("n", "l", api.node.open.edit, opts "Open")
-      map("n", "<cr>", api.node.open.edit, opts "Open")
+      map("n", "?", api.tree.toggle_help, opts("Help"))
+      map("n", "l", api.node.open.edit, opts("Open"))
+      map("n", "<cr>", api.node.open.edit, opts("Open"))
       map("n", "<Tab>", api.node.open.preview, opts("Open (Preview)"))
       map("n", "s", api.node.open.horizontal, opts("Open (Horizontal)"))
       map("n", "v", api.node.open.vertical, opts("Open (Vertical)"))
@@ -60,7 +61,7 @@ return {
       map('n', 'M', api.tree.toggle_no_bookmark_filter, opts('Toggle Bookmarks'))
       map('n', 'e', api.node.run.cmd, opts('Execute Command'))
     end
-
+    ---------------------------- nvimtree setup --------------------------------
     nvimtree.setup({
       on_attach = on_attach,
       disable_netrw = true,
@@ -159,9 +160,10 @@ return {
             bookmarks = true,
           },
           glyphs = {
+            default = "",
             symlink = "",
-            bookmark = "",
-            modified = "●",
+            bookmark = "󱝵",
+            modified = "󱇨",
             folder = {
               arrow_closed = "",
               arrow_open = "",

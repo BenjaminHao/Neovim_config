@@ -44,15 +44,15 @@ return {
   --━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
   --                          ┃ Config Function ┃
   --                          ┗━━━━━━━━━━━━━━━━━┛
-  -- TODO: Telescope Style
   config = function()
     local telescope = require("telescope")
     local actions = require("telescope.actions")
     local undo = require("telescope-undo.actions")
+
     telescope.setup({
       ----------------------------- builtin ---------------------------------------
       defaults = {
-        path_display = { "smart" },
+        path_display = { "truncate" },
         prompt_prefix = "󰭎 ",
         selection_caret = " ",
         entry_prefix = " ",
@@ -84,24 +84,14 @@ return {
           i = {
             ["<C-j>"] = actions.move_selection_next,     -- also: <C-n>
             ["<C-k>"] = actions.move_selection_previous, -- also: <C-p>
-            ["<C-f>"] = actions.preview_scrolling_down,  -- also: <C-d>
-            ["<C-b>"] = actions.preview_scrolling_up,    -- also: <C-u>
+            ["<C-d>"] = actions.preview_scrolling_down,  -- also: <C-d>
+            ["<C-u>"] = actions.preview_scrolling_up,    -- also: <C-u>
           },
           n = {
             ["q"] = actions.close,
             ["?"] = actions.which_key,
           },
         },
-      },
-      pickers = {
-        -- find_files = {
-        --   theme = "dropdown",
-        --   borderchars = {
-        --     prompt = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-        --     results = { "─", "│", "─", "│", "╭", "╮", "┤", "├" },
-        --     preview = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-        --   }
-        -- }
       },
       ---------------------------- extensions ----------------------------------
       load_extension = {
@@ -110,7 +100,14 @@ return {
         "undo",
         "lazygit"
       },
+      extensions_list = { "themes" },
       extensions = {
+        fzf = {
+          fuzzy = true,
+          override_generic_sorter = true,
+          override_file_sorter = true,
+          case_mode = "smart_case",
+        },
         undo = {
           mappings = {
             i = {

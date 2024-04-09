@@ -23,8 +23,8 @@ return {
     bufferline.setup({
       options = {
         mode = "buffers",
-        -- style_preset = bufferline.style_preset.no_italic,
         themable = true,
+        -- style_preset = bufferline.style_preset.no_italic,
         -- color_icons = true,
         -- separator_style = "slant",
         -- indicator = { style = "underline" },

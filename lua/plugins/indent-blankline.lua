@@ -14,9 +14,8 @@ return {
   config = function()
     require("ibl").setup({
       indent = {
-        char = "│",
-        tab_char = "│",
-        highlight = "IblIndent",
+        char = "╏",
+        tab_char = "╏",
         smart_indent_cap = true,
         priority = 1,
         repeat_linebreak = true,
@@ -28,7 +27,6 @@ return {
         show_end = false,
         show_exact_scope = false,
         injected_languages = true,
-        highlight = "IblScope",
         priority = 1024,
         include = {
           node_type = { ["*"] = { "*" } }, -- makes lines show on all blocks

@@ -16,6 +16,10 @@ return {
         cmp = {
           style = "atom_colored",
         },
+        hl_override = {
+          visual = { bg = "grey" },
+          DiffChange = { fg = "yellow" },
+        },
       },
       base46 = {
         integrations = {
@@ -29,8 +33,9 @@ return {
           "lsp",
           "mason",
           "nvimtree",
-          "statusline",
+          "notify",
           "syntax",
+          "tbline",
           "telescope",
           "todo",
           "treesitter",
