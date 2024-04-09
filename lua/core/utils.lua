@@ -9,6 +9,13 @@ local utils = {}
 --━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 --                           ┃ Utility Functions ┃
 --                           ┗━━━━━━━━━━━━━━━━━━━┛
+utils.safeRequire = function(module)
+  local success, loadedModule = pcall(require, module)
+  if success then return loadedModule
+  else vim.notify_once("Error Loading " .. module, vim.log.levels.WARN)
+  end
+end
+
 utils.set_vim_keymap = function(mode, lhs, rhs, opts)
   local options = { noremap = true, silent = true }
   if opts then
@@ -50,16 +57,22 @@ utils.toggle_set_color_column = function()
   end
 end
 
-utils.safeRequire = function(module)
-  local success, loadedModule = pcall(require, module)
-  if success then return loadedModule
-  else vim.notify_once("Error Loading " .. module, vim.log.levels.WARN)
-  end
-end
-
 utils.is_empty_line = function()
   local current_line = vim.api.nvim_get_current_line()
   return current_line:match('^%s*$') ~= nil
+end
+
+utils.set_colorborder = function(hl_name)
+  return {
+    { "╭", hl_name },
+    { "─", hl_name },
+    { "╮", hl_name },
+    { "│", hl_name },
+    { "╯", hl_name },
+    { "─", hl_name },
+    { "╰", hl_name },
+    { "│", hl_name },
+  }
 end
 
 utils.invert_term = function()
