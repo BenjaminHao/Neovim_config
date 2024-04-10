@@ -47,7 +47,7 @@ return {
         group = "", -- symbol prepended to a group 
       },
       window = {
-        border = "rounded", -- none, single, double, shadow
+        border = "none", -- none, single, double, shadow
         position = "bottom", -- bottom, top
         margin = { 1, 2, 1, 2 }, -- extra window margin [top, right, bottom, left]
         padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]

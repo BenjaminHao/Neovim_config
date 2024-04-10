@@ -46,6 +46,7 @@ local options = {             -- for conciseness and readability
     notify = false,
   },
   ui = {
+    border = "none",
     icons = {
       event = " ",
       ft = " ",

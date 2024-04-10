@@ -72,7 +72,7 @@ return {
       mapping = {
         ["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
         ["<C-q>"] = cmp.mapping.abort(), -- quit completion window
-        ["<C-y>"] = cmp.mapping.confirm({ select = true }),
+        ["<C-o>"] = cmp.mapping.confirm({ select = true }),
         ["<C-n>"] = cmp.mapping.select_next_item(), -- next suggestion
         ["<C-p>"] = cmp.mapping.select_prev_item(), -- previous suggestion
         ["<C-d>"] = cmp.mapping.scroll_docs(4),  -- scroll down docs(check backwards)

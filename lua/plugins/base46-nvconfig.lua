@@ -10,7 +10,7 @@ return {
       -- configs from nvchad/nvconfig
       -- https://github.com/NvChad/NvChad/blob/v2.5/lua/nvconfig.lua
       ui = {
-        theme = "catppuccin",
+        theme = "onedark",
         transparency = false,
         telescope = { style = "borderless" }, -- borderless / bordered
         cmp = {
@@ -18,7 +18,6 @@ return {
         },
         hl_override = {
           visual = { bg = "grey" },
-          DiffChange = { fg = "yellow" },
         },
       },
       base46 = {
@@ -32,8 +31,8 @@ return {
           "git",
           "lsp",
           "mason",
-          "nvimtree",
           "notify",
+          "nvimtree",
           "syntax",
           "tbline",
           "telescope",
