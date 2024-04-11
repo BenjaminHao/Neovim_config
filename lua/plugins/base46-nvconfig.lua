@@ -1,6 +1,6 @@
 return {
   "BenjaminHao/base46-nvconfig",
-  lazy = false,
+  event = "VeryLazy",
   dependencies = {
     { "NvChad/base46", branch = "v2.5" },
     "nvim-lua/plenary.nvim",
