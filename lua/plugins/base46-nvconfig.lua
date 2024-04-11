@@ -10,7 +10,7 @@ return {
       -- configs from nvchad/nvconfig
       -- https://github.com/NvChad/NvChad/blob/v2.5/lua/nvconfig.lua
       ui = {
-        theme = "onedark",
+        theme = "catppuccin",
         transparency = false,
         telescope = { style = "borderless" }, -- borderless / bordered
         cmp = {
@@ -22,7 +22,6 @@ return {
       },
       base46 = {
         integrations = {
-          "alpha",
           "blankline",
           "bufferline",
           "cmp",

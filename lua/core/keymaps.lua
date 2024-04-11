@@ -80,7 +80,6 @@ map("n", "<leader>W", "<cmd>wa!<cr>", { desc = "[W]rite All"})
 --                                ┃ BUFFERS ┃
 --                                ┗━━━━━━━━━┛
 -- For other buffer key binds, see plugins/bufferline.lua
--- TODO: Try alt key for buffers and windows
 map("n", "<leader>bn",  "<cmd>bn<CR>", { desc = "[n]ext Buffer"})
 map("n", "<leader>bp", "<cmd>bp<CR>", { desc = "[p]revious Buffer"})
 --━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
