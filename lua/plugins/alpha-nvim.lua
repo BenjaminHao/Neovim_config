@@ -51,22 +51,23 @@ return {
       dashboard.button("r", "󰈙 " .. " Recent file", "<cmd>Telescope oldfiles<cr>"),
       dashboard.button("n", "󰈔 " .. " New file", "<cmd>ene <bar> startinsert<cr>"),
       dashboard.button("f", "󰈞 " .. " Find file", "<cmd>Telescope find_files<cr>"),
-      dashboard.button("t", "󰺮 " .. " Find text", "<cmd>Telescope live_grep<cr>"),
+      dashboard.button("g", "󰺮 " .. " Find grep", "<cmd>Telescope live_grep<cr>"),
       dashboard.button("e", "󰙅 " .. " Explorer", "<cmd>NvimTreeOpen<cr>"),
       dashboard.button("c", " " .. " Config" , "<cmd>e $MYVIMRC|cd %:p:h|NvimTreeOpen<CR>"),
       dashboard.button("p", "󰦬 " .. " Plugins", "<cmd>Lazy<cr>"),
-      dashboard.button("h", "󰗶 " .. " Checkhealth", "<cmd>Lazy load all | checkhealth<cr>"),
+      dashboard.button("t", "󱥚 " .. " Themes", "<cmd>Telescope themes<cr>"),
+      -- dashboard.button("h", "󰗶 " .. " Checkhealth", "<cmd>Lazy load all | checkhealth<cr>"),
       dashboard.button("q", " " .. " Quit", "<cmd>qa!<cr>"),
     }
 
     -- Set color
-    -- dashboard.section.header.opts.hl = "Keyword"               -- header
-    -- for _, button in ipairs(dashboard.section.buttons.val) do  -- buttons
-    --   button.opts.hl = "AlphaButtons"
-    --   button.opts.hl_shortcut = "AlphaShortcut"
-    -- end
-    -- dashboard.section.footer.opts.hl = "AlphaFooter"           -- footer
-    -- dashboard.opts.layout[1].val = 6
+    dashboard.section.header.opts.hl = "Keyword"               -- header
+    for _, button in ipairs(dashboard.section.buttons.val) do  -- buttons
+      button.opts.hl = "Function"
+      button.opts.hl_shortcut = "String"
+    end
+    dashboard.section.footer.opts.hl = "Number"                -- footer
+    dashboard.opts.layout[1].val = 6
 
     -- Send config to alpha
     alpha.setup(dashboard.opts)

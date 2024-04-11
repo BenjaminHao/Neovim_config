@@ -17,7 +17,7 @@ return {
           style = "atom_colored",
         },
         hl_override = {
-          visual = { bg = "grey" },
+          -- visual = { bg = "grey" },
         },
       },
       base46 = {
