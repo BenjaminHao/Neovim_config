@@ -43,7 +43,7 @@ map({ "i", "c" }, "<C-l>", "<right>")
 map({ "i", "c" }, "<C-a>", "<home>")
 map({ "i", "c" }, "<C-e>", "<end>")
 -- input in next line
-map("i", "<C-cr>", "<end><cr>")
+map("i", "<C-cr>", "<esc>o")
 -- Super colon/semicolon
 map("i", "<C-,>", "<end>,")
 map("i", "<C-;>", "<end>;")
@@ -54,12 +54,14 @@ map("n", "<esc>","<cmd>noh<cr><esc>")
 -- Better indenting
 map("x", "<", "<gv")
 map("x", ">", ">gv")
--- Smart indenting when insert in an empty line
+-- Smart indenting when insert in an empty line (<a> keeps the same)
 map("n", "i", function() return util.is_empty_line() and "S" or "i" end, { expr = true })
 -- Do not copy empty line when dd
 map("n", "dd", function() return util.is_empty_line() and '"_dd' or "dd" end, { expr = true })
--- Do not copy on x. In Visual mode, d for cut, x for delete
-map({ "n", "x" }, "x", '"_x')
+-- Do not copy deleted character
+map("n" , "x", '"_x')
+-- In visual mode, d for delete, x for cut
+map("x", "d", '"_d')
 -- Visual overwrite paste
 map("x", "p", '"_dP')
 -- Keep window centered when going up/down
