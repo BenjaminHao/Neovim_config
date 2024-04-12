@@ -24,7 +24,15 @@ return {
       cmdline = {
         enabled = true, -- enables the Noice cmdline UI
         view = "cmdline_popup", -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
-        opts = {}, -- global options for the cmdline. See section on views
+        opts = {
+          win_options = {
+            winhighlight = {
+              Normal = "TelescopePromptNormal",
+              FloatBorder = "TelescopePromptBorder",
+              FloatTitle = "TelescopePromptTitle",
+            }
+          }
+        }, -- global options for the cmdline. See section on views
         format = {
           -- conceal: (default=true) This will hide the text in the cmdline that matches the pattern.
           -- view: (default is cmdline view)
@@ -37,6 +45,10 @@ return {
           lua = { title = " Lua ", pattern = { "^:%s*lua%s+", "^:%s*lua%s*=%s*", "^:%s*=%s*" }, icon = "", lang = "lua" },
           help = { title = " Help ", pattern = "^:%s*he?l?p?%s+", icon = "" },
           filter = { title = " Shell ", pattern = "^:%s*!", icon = "", lang = "bash" },
+          select = { title = " Select ", pattern = "^:'<,'>", icon = "󱊃", lang = "vim" },
+          substitute_line = { title = " Substitute in Line", pattern = "^:s/", icon = "", lang = "regex" },
+          substitute_range = { title = " Substitute in Range ", pattern = "^:'<,'>s/", icon = "", lang = "regex" },
+          substitute_all = { title = " Substitute All ", pattern = "^:%%s/", icon = "", lang = "regex" },
           input = {}, -- Used by input()
           -- lua = false, -- to disable a format, set to `false`
         },

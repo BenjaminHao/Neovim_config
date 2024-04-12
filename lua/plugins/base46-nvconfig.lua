@@ -1,6 +1,6 @@
 return {
   "BenjaminHao/base46-nvconfig",
-  event = "VeryLazy",
+  lazy = false,
   dependencies = {
     { "NvChad/base46", branch = "v2.5" },
     "nvim-lua/plenary.nvim",
@@ -18,6 +18,10 @@ return {
         },
         hl_override = {
           -- visual = { bg = "grey" },
+          -- FIX: link to hl
+          BufferLineDevIconLuaInactive = { bg = "red", fg = "green"},
+          BufferLineNumbersVisible = { link = "BufferLineBufferVisible" },
+          BufferLineNumbers = { link = "BufferLineBufferVisible" },
         },
       },
       base46 = {

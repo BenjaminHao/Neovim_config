@@ -52,7 +52,7 @@ return {
     telescope.setup({
       ----------------------------- builtin ---------------------------------------
       defaults = {
-        path_display = { "truncate" },
+        path_display = { "smart" },
         prompt_prefix = "󰭎 ",
         selection_caret = " ",
         entry_prefix = " ",

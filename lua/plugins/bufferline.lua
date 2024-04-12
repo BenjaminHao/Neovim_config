@@ -9,7 +9,7 @@ return {
   event = "VeryLazy",
   dependencies = {
     "nvim-tree/nvim-web-devicons",
-		"echasnovski/mini.bufremove",
+    "echasnovski/mini.bufremove",
   },
   version = "*",
   --━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
@@ -32,6 +32,10 @@ return {
         numbers = function(opts)
           return string.format("%s", opts.raise(opts.ordinal))
         end,
+        get_element_icon = function(element)
+          local icon, hl = require('nvim-web-devicons').get_icon_by_filetype(element.filetype, { default = false })
+          return icon, hl
+        end,
         close_command = function(n) bufremove.delete(n, false) end,
         diagnostics = false,           -- OR: | "nvim_lsp" 
         diagnostics_update_in_insert = false,
@@ -47,9 +51,9 @@ return {
             highlight = "Directory",
             -- separator = "", -- use a "true" to enable the default, or set your own character
             -- padding = 1
-          }
+          },
         },
-      }
+      },
     })
     ------------------------ bufferline key binds ------------------------------
     map("n", "<leader>bd", function() bufremove.delete(0, false) end , { desc = "[d]elete Current Buffer" })
