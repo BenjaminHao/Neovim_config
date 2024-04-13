@@ -51,12 +51,12 @@ return {
       dashboard.button("r", "󰈙 " .. " Recent file", "<cmd>Telescope oldfiles<cr>"),
       dashboard.button("n", "󰈔 " .. " New file", "<cmd>ene <bar> startinsert<cr>"),
       dashboard.button("f", "󰈞 " .. " Find file", "<cmd>Telescope find_files<cr>"),
-      dashboard.button("g", "󰺮 " .. " Find grep", "<cmd>Telescope live_grep<cr>"),
+      dashboard.button("g", "󱎸 " .. " Find grep", "<cmd>Telescope live_grep<cr>"),
       dashboard.button("e", "󰙅 " .. " Explorer", "<cmd>NvimTreeOpen<cr>"),
       dashboard.button("c", " " .. " Config" , "<cmd>e $MYVIMRC|cd %:p:h|NvimTreeOpen<CR>"),
       dashboard.button("p", "󰦬 " .. " Plugins", "<cmd>Lazy<cr>"),
-      dashboard.button("t", "󱥚 " .. " Themes", "<cmd>Telescope themes<cr>"),
-      -- dashboard.button("h", "󰗶 " .. " Checkhealth", "<cmd>Lazy load all | checkhealth<cr>"),
+      -- dashboard.button("t", " " .. " Themes", "<cmd>Telescope themes<cr>"),
+      dashboard.button("h", "󰗶 " .. " Checkhealth", "<cmd>Lazy load all | checkhealth<cr>"),
       dashboard.button("q", " " .. " Quit", "<cmd>qa!<cr>"),
     }
 

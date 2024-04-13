@@ -153,10 +153,9 @@ return {
             callback = vim.lsp.buf.clear_references,
           })
         end
-        -- TODO: add toggle function, change highlight color
-        -- vim.cmd.hi("LspReferenceText guibg=NONE")
-        -- vim.cmd.hi("LspReferenceRead guibg=NONE")
-        -- vim.cmd.hi("LspReferenceWrite guibg=NONE")
+        -- vim.cmd.hi({ "link", "LspReferenceText", "Underlined" })
+        -- vim.cmd.hi({ "link", "LspReferenceRead", "Underlined" })
+        -- vim.cmd.hi({ "link", "LspReferenceWrite", "Underlined" })
       end,
     })
 

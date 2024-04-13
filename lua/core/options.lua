@@ -21,6 +21,9 @@ local options = {
   jumpoptions = "stack",          -- Make Ctrl-o consistent
 
   -- APPEARANCE
+  statusline =                    -- Set custom statusline
+    "%!v:lua.require('core.statusline')()",
+  laststatus = 3,                 -- have a global statusline, see :h laststatus
   guifont =
     "JetBrainsMono Nerd Font:h16",-- Font for GUI NVIM (eg. Neovide)
   number = true,                  -- Set numbered lines

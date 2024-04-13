@@ -27,7 +27,8 @@ return {
         show_buffer_icons = true,
         show_buffer_close_icons = false,
         show_close_icon = false,
-        -- always_show_bufferline = true,
+        always_show_bufferline = true,
+        style_preset = bufferline.style_preset.minimal,
         -- separator_style = "slant",
         numbers = function(opts)
           return string.format("%s", opts.raise(opts.ordinal))
@@ -40,17 +41,22 @@ return {
         diagnostics = false,           -- OR: | "nvim_lsp" 
         diagnostics_update_in_insert = false,
         sort_by = "insert_at_end",
+        hover = {
+          enabled = true,
+          delay = 30,
+          reveal = { 'close' }
+        },
         offsets = {
           {
             filetype = "NvimTree",
             text = "NvimTree",
-            --[[ text = function()
-              return vim.fn.fnamemodify(".", ":p:h:t")
-              -- return vim.fn.getcwd()
-            end, ]]
-            highlight = "Directory",
-            -- separator = "", -- use a "true" to enable the default, or set your own character
-            -- padding = 1
+            -- text = function()
+            --   return vim.fn.fnamemodify(".", ":p:h:t")
+            --   -- return vim.fn.getcwd()
+            -- end,
+            -- highlight = "Directory",
+            separator = false, -- use a "true" to enable the default, or set your own character
+            padding = 1,
           },
         },
       },
@@ -61,7 +67,7 @@ return {
     map("n", "<leader>bk", "<cmd>BufferLinePickClose<cr>", { desc = "[k]ill Picked Buffer" })
     map("n", "<leader>bK", "<cmd>BufferLineCloseOthers<cr>", { desc = "[K]ill Other Buffers" })
     map("n", "<leader>bs", "<cmd>BufferLineSortByDirectory<cr>", { desc = "[s]ort Buffers" })
-    map("n", "g1", "<cmd>BufferLineGoToBuffer 1<cr>", { desc = "Goto buffer 1-9" })
+    map("n", "g1", "<cmd>BufferLineGoToBuffer 1<cr>", { desc = "Goto Buffer 1-9" })
     map("n", "g2", "<cmd>BufferLineGoToBuffer 2<cr>", { desc = "which_key_ignore" })
     map("n", "g3", "<cmd>BufferLineGoToBuffer 3<cr>", { desc = "which_key_ignore" })
     map("n", "g4", "<cmd>BufferLineGoToBuffer 4<cr>", { desc = "which_key_ignore" })

@@ -7,7 +7,7 @@
 return {
   "lukas-reineke/indent-blankline.nvim",
   version = "*",
-  event = { "BufReadPost", "BufNewFile" },
+  event = { "BufReadPre", "BufNewFile" },
   --━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
   --                          ┃ Config Function ┃
   --                          ┗━━━━━━━━━━━━━━━━━┛
@@ -34,29 +34,30 @@ return {
       },
       exclude = {
         filetypes = {
-          "help",
+          "",
           "alpha",
+          "checkhealth",
           "dashboard",
-          "NvimTree",
-          "Trouble",
-          "trouble",
+          "gitcommit",
+          "help",
           "lazy",
+          "lspinfo",
+          "man",
           "mason",
           "notify",
-          "toggleterm",
-          "lspinfo",
-          "checkhealth",
-          "man",
-          "gitcommit",
+          "NvimTree",
+          "spectre_panel",
           "TelescopePrompt",
           "TelescopeResults",
-          "",
+          "toggleterm",
+          "Trouble",
+          "trouble",
         },
         buftypes = {
-          "terminal",
           "nofile",
-          "quickfix",
           "prompt",
+          "quickfix",
+          "terminal",
         },
       },
     })

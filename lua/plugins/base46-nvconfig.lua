@@ -1,3 +1,9 @@
+--╭──────────────────────────────────────────────────────────────────────────╮--
+--│                                                                          │--
+--│ FILE: plugins/base46-nvconfig.lua                                        │--
+--│ DESC: a adapter plugin to use base46 (theme plugin)                      │--
+--│                                                                          │--
+--╰──────────────────────────────────────────────────────────────────────────╯--
 return {
   "BenjaminHao/base46-nvconfig",
   lazy = false,
@@ -10,18 +16,27 @@ return {
       -- configs from nvchad/nvconfig
       -- https://github.com/NvChad/NvChad/blob/v2.5/lua/nvconfig.lua
       ui = {
+        hl_add = {
+          BufferLineNumbers = { link = "BufferLineBufferVisible" },
+          BufferLineNumbersVisible = { link = "BufferLineBufferVisible" },
+          BufferLineNumbersSelected = { link = "BufferLineBufferSelected" },
+          BufferLineDevIconLua = { link = "BufferLineBufferVisible" },
+          BufferLineDevIconLuaInactive = { link = "BufferLineBufferVisible" },
+        },
+        hl_override = {
+          Visual = { bg = "grey" },
+          LspReferenceText = { link = "Underlined" },
+          LspReferenceRead = { link = "Underlined" },
+          LspReferenceWrite = { link = "Underlined" },
+        },
         theme = "catppuccin",
         transparency = false,
         telescope = { style = "borderless" }, -- borderless / bordered
         cmp = {
           style = "atom_colored",
         },
-        hl_override = {
-          -- visual = { bg = "grey" },
-          -- FIX: link to hl
-          BufferLineDevIconLuaInactive = { bg = "red", fg = "green"},
-          BufferLineNumbersVisible = { link = "BufferLineBufferVisible" },
-          BufferLineNumbers = { link = "BufferLineBufferVisible" },
+        statusline = {
+          theme = "minimal",
         },
       },
       base46 = {
@@ -29,6 +44,7 @@ return {
           "blankline",
           "bufferline",
           "cmp",
+          "codeactionmenu",
           "defaults",
           "devicons",
           "git",
@@ -36,6 +52,7 @@ return {
           "mason",
           "notify",
           "nvimtree",
+          "statusline",
           "syntax",
           "tbline",
           "telescope",

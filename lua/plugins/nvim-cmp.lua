@@ -24,11 +24,12 @@ return {
     local luasnip = require("luasnip")
     local lspkind = require("lspkind")
     local util = require("core.utils")
-
+    ---------------------------- luasnip setup ---------------------------------
+    require("luasnip/loaders/from_vscode").lazy_load()  -- load snippets collection from plugins
     ------------------------------ cmp setup -----------------------------------
     cmp.setup({
       completion = {
-        completeopt = "menu,menuone", -- see :h completeopt 
+        completeopt = "menu,menuone,noselect", -- see :h completeopt 
       },
       sources = cmp.config.sources({  -- sources for autocompletion
         { name = "nvim_lsp" },  -- lsp
@@ -54,9 +55,10 @@ return {
       window = {
         completion = {
           -- border = util.set_colorborder("CmpBorder"),
+          border = "shadow",
           side_padding = 0,
           col_offset = -3,
-          scrollbar = true,
+          scrollbar = false,
           winhighlight = "Normal:CmpPmenu,CursorLine:CmpSel,Search:None",
         },
         documentation = {
@@ -64,25 +66,27 @@ return {
           winhighlight = "Normal:CmpDoc",
         },
       },
-      experimental = { -- enable ghost text when using cmp
-        ghost_text = {
-          hl_group = "Comment",
-        },
-      },
-      mapping = {
+      -- experimental = { -- enable ghost text when using cmp
+      --   ghost_text = {
+      --     hl_group = "Comment",
+      --   },
+      -- },
+      mapping = cmp.mapping.preset.insert({
+        ["<C-y>"] = cmp.config.disable,
+        ["<C-e>"] = cmp.config.disable,
         ["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
-        ["<C-q>"] = cmp.mapping.abort(), -- quit completion window
-        ["<C-o>"] = cmp.mapping.confirm({ select = true }),
-        ["<C-n>"] = cmp.mapping.select_next_item(), -- next suggestion
-        ["<C-p>"] = cmp.mapping.select_prev_item(), -- previous suggestion
-        ["<C-d>"] = cmp.mapping.scroll_docs(4),  -- scroll down docs(check backwards)
-        ["<C-u>"] = cmp.mapping.scroll_docs(-4),  -- scroll up docs(check forwards)
-        ["<C-f>"] = cmp.mapping(function()  -- jump forward inside snippets
+        ["<C-h>"] = cmp.mapping.abort(), -- close completion window
+        ["<C-l>"] = cmp.mapping.confirm({ select = true }), -- confirm suggestions
+        ["<C-j>"] = cmp.mapping.select_next_item(), -- next suggestion
+        ["<C-k>"] = cmp.mapping.select_prev_item(), -- previous suggestion
+        ["<C-d>"] = cmp.mapping.scroll_docs(4), -- scroll down docs
+        ["<C-u>"] = cmp.mapping.scroll_docs(-4), -- scroll up docs
+        ["<C-f>"] = cmp.mapping(function() -- jump forward inside snippets
           if luasnip.expand_or_locally_jumpable() then
             luasnip.expand_or_jump()
           end
         end, { "i", "s" }),
-        ["<C-b>"] = cmp.mapping(function()  -- jump backward inside snippets
+        ["<C-b>"] = cmp.mapping(function() -- jump backward inside snippets
           if luasnip.locally_jumpable(-1) then
             luasnip.jump(-1)
           end
@@ -106,27 +110,29 @@ return {
             fallback()
           end
         end, { "i", "s" }),
-        ["<CR>"] = cmp.mapping.confirm({
-          behavior = cmp.ConfirmBehavior.Replace,
-          select = true,
-        }),
-      }
+        ["<CR>"] = cmp.mapping.confirm({ select = false }),
+      })
     })
-    ---------------------------- luasnip setup ---------------------------------
-    require("luasnip/loaders/from_vscode").lazy_load()  -- load snippets collection from plugins
-
     -------------------------- cmp-cmdline setup -------------------------------
+    local cmdline_mapping = {
+      ["<C-z>"] = { c = cmp.config.disable, },
+      ["<C-y>"] = { c = cmp.config.disable, },
+      ["<C-e>"] = { c = cmp.config.disable, },
+      ["<C-h>"] = { c = cmp.mapping.abort() }, -- quit completion window
+      ["<C-l>"] = { c = cmp.mapping.confirm({ select = true }) }, -- insert suggestions
+      ["<C-j>"] = { c = cmp.mapping.select_next_item() }, -- next suggestion
+      ["<C-k>"] = { c = cmp.mapping.select_prev_item() }, -- previous suggestion
+    }
     -- "/", "?" cmdline setup.
     cmp.setup.cmdline({ "/", "?" }, {
-      mapping = cmp.mapping.preset.cmdline(),
+      mapping = cmp.mapping.preset.cmdline(cmdline_mapping),
       sources = {
         { name = "buffer" }
       }
     })
-
     -- ":" cmdline setup.
     cmp.setup.cmdline(":", {
-      mapping = cmp.mapping.preset.cmdline(),
+      mapping = cmp.mapping.preset.cmdline(cmdline_mapping),
       sources = {
         { name = "path" },
         { name = "cmdline" }

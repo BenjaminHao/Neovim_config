@@ -33,7 +33,7 @@ return {
       },
       merge_keywords = true, -- when true, custom keywords will be merged with the defaults
       highlight = {
-        multiline = true, -- enable multiline todo comments
+        multiline = false, -- disable multiline todo comments
         multiline_pattern = "^.", -- lua pattern to match the next multiline from the start of the matched keyword
         multiline_context = 10, -- extra lines that will be re-evaluated when changing a line
         before = "", -- "fg" or "bg" or empty

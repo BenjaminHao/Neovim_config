@@ -13,12 +13,12 @@ return {
   config = function ()
     require("gitsigns").setup({
       signs = {
-        add = { text = "┃", hl = "DiagnosticOk" },
-        change = { text = "┃", hl = "DiagnosticWarn" },
-        delete = { text = "┃", hl = "DiagnosticError" },
-        topdelete = { text = "╏", hl = "DiagnosticError" },
-        changedelete = { text = "╏", hl = "DiagnosticWarn" },
-        untracked = { text = "┃", hl = "DiagnosticInfo" },
+        add = { text = "┃", hl = "DiffAdded" },
+        change = { text = "┃", hl = "DiffModified" },
+        delete = { text = "┃", hl = "DiffDelete" },
+        topdelete = { text = "╏", hl = "DiffDelete" },
+        changedelete = { text = "╏", hl = "DiffModified" },
+        untracked = { text = "┃", hl = "DiffAdd" },
       },
       signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
       numhl = false,     -- Toggle with `:Gitsigns toggle_numhl`

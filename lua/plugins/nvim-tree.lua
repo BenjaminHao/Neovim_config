@@ -61,6 +61,7 @@ return {
       map('n', 'M', api.tree.toggle_no_bookmark_filter, opts('Toggle Bookmarks'))
       map('n', 'e', api.node.run.cmd, opts('Execute Command'))
     end
+
     ---------------------------- nvimtree setup --------------------------------
     nvimtree.setup({
       on_attach = on_attach,

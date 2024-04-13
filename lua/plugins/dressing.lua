@@ -14,7 +14,8 @@ return {
     require("dressing").setup({
       input = {
         default_prompt = "󰘎 Input",
-        prompt_align = "center",
+        title_pos = "center",
+        relative = "cursor",
         prefer_width = 30,
         width = nil,
         -- min_width and max_width can be a list of mixed types.

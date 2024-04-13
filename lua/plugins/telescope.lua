@@ -82,10 +82,11 @@ return {
         },
         mappings = {
           i = {
-            ["<C-j>"] = actions.move_selection_next,     -- also: <C-n>
-            ["<C-k>"] = actions.move_selection_previous, -- also: <C-p>
-            ["<C-d>"] = actions.preview_scrolling_down,  -- also: <C-d>
-            ["<C-u>"] = actions.preview_scrolling_up,    -- also: <C-u>
+            ["<C-j>"] = actions.move_selection_next,
+            ["<C-k>"] = actions.move_selection_previous,
+            ["<C-l>"] = actions.select_default,
+            ["<C-d>"] = actions.preview_scrolling_down,
+            ["<C-u>"] = actions.preview_scrolling_up,
           },
           n = {
             ["q"] = actions.close,

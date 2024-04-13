@@ -43,10 +43,10 @@ return {
           search_down = { title = " Search Downwards ", kind = "search", pattern = "^/", icon = " ", lang = "regex" },
           search_up = { title = " Search Upwards ", kind = "search", pattern = "^%?", icon = " ", lang = "regex" },
           lua = { title = " Lua ", pattern = { "^:%s*lua%s+", "^:%s*lua%s*=%s*", "^:%s*=%s*" }, icon = "", lang = "lua" },
-          help = { title = " Help ", pattern = "^:%s*he?l?p?%s+", icon = "" },
+          help = { title = " Help ", pattern = "^:%s*he?l?p?%s+", icon = "󱉟" },
           filter = { title = " Shell ", pattern = "^:%s*!", icon = "", lang = "bash" },
-          select = { title = " Select ", pattern = "^:'<,'>", icon = "󱊃", lang = "vim" },
-          substitute_line = { title = " Substitute in Line", pattern = "^:s/", icon = "", lang = "regex" },
+          select = { title = " CmdLine in Range ", pattern = "^:'<,'>", icon = "󱊀", lang = "vim" },
+          substitute_line = { title = " Substitute in Line ", pattern = "^:s/", icon = "", lang = "regex" },
           substitute_range = { title = " Substitute in Range ", pattern = "^:'<,'>s/", icon = "", lang = "regex" },
           substitute_all = { title = " Substitute All ", pattern = "^:%%s/", icon = "", lang = "regex" },
           input = {}, -- Used by input()
@@ -158,14 +158,15 @@ return {
         ERROR = "󰱮 ",
         INFO = "󰱱 ",
         TRACE = "󰱴 ",
-        WARN = "󰱶 "
+        WARN = "󰱶 ",
+        OFF = "󰱯",
       },
       timeout = 3000, -- default 5000
     })
 
     -------------------------- Noice Key Binds ---------------------------------
     -- for Noice messages
-    map("n", "<leader>fm", "<cmd>telescope notify<cr>", { desc = "[m]essage" })
+    map("n", "<leader>fm", "<cmd>Telescope notify<cr>", { desc = "[m]essage" })
     map("n", "<leader>mn", "<cmd>Notifications<cr>", { desc = "[n]otifications" })
     map("n", "<leader>ml", function() noice.cmd("last") end, { desc = "[l]ast Message" })
     map("n", "<leader>me", function() noice.cmd("errors") end, { desc = "[e]rror Messages" })

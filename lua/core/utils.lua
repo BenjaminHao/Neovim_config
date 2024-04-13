@@ -4,7 +4,6 @@
 --│ DESC: util functions                                                     │--
 --│                                                                          │--
 --╰──────────────────────────────────────────────────────────────────────────╯--
--- NOTE: https://dev.to/voyeg3r/my-lazy-neovim-config-3h6o
 local utils = {}
 --━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 --                           ┃ Utility Functions ┃
@@ -32,12 +31,11 @@ utils.toggle_vim_opt = function(opt, on, off, name)
   local message = name
   if vim.opt[opt]:get() == off then
     vim.opt[opt] = on
-    message = message .. " Enabled"
+    vim.notify("   " .. message .. " Enabled", vim.log.levels.INFO)
   else
     vim.opt[opt] = off
-    message = message .. " Disabled"
+    vim.notify("   " .. message .. " Disabled", vim.log.levels.OFF)
   end
-  vim.notify(message)
 end
 
 utils.toggle_set_color_column = function()
